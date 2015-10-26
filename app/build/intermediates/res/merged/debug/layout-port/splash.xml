@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/splash_background"
+    android:gravity="center_horizontal" >
+
+    <!--
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/splash_header_background"
+        android:padding="20sp"
+        android:text="@string/splash_header"
+        android:textColor="@color/splash_header_text"
+        android:textSize="30sp" />
+    -->
+
+    <ImageView
+        android:id="@+id/logo_splash"
+        android:layout_width="210sp"
+        android:layout_height="170sp"
+        android:layout_centerInParent="true"
+        android:layout_margin="20sp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/logo_splash_description"
+        android:src="@drawable/logo_splash" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo_splash"
+        android:layout_margin="20sp"
+        android:gravity="center"
+        android:text="@string/splash_message"
+        android:textColor="@color/splash_text" />
+
+</RelativeLayout><!-- From: file:/home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/res/layout-port/splash.xml -->

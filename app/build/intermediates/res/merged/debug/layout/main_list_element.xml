@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_element"
+    android:layout_width="match_parent"
+    android:layout_height="50sp"
+    android:layout_marginEnd="12sp"
+    android:layout_marginRight="12sp"
+    android:layout_marginTop="12sp"
+    android:paddingLeft="8sp"
+    android:paddingStart="8sp"
+    android:paddingTop="12sp"
+    android:textColor="#e6e6e6"
+    android:textSize="16sp" >
+
+</TextView><!-- From: file:/home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/res/layout/main_list_element.xml -->

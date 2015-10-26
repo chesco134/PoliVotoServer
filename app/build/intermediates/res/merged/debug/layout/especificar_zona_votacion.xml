@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/greeting_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="20sp"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginStart="20sp"
+            android:layout_marginTop="20sp"
+            android:layout_toLeftOf="@+id/confirmar"
+            android:layout_toStartOf="@+id/confirmar"
+            android:text="@string/define_zona_votacion"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/first_time_tag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/greeting_tag"
+            android:layout_margin="8sp"
+            android:text="@string/especifique_zona" />
+
+        <Button
+            android:id="@+id/confirmar"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="12sp"
+            android:layout_marginRight="12sp"
+            android:layout_marginTop="20sp"
+            android:background="@drawable/yeah" />
+
+        <EditText
+            android:id="@+id/psswd1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/first_time_tag"
+            android:layout_marginEnd="12sp"
+            android:layout_marginLeft="12sp"
+            android:layout_marginRight="12sp"
+            android:layout_marginStart="12sp"
+            android:layout_marginTop="12sp"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/load_gps_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/psswd1"
+            android:layout_margin="12sp"
+            android:onClick="fetchAddressButtonHandler"
+            android:text="@string/cargar_ubicacion_gps"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+</ScrollView><!-- From: file:/home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/res/layout/especificar_zona_votacion.xml -->

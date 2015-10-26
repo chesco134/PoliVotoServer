@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/header_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20sp"
+        android:text="@string/header_tag"
+        android:textSize="30sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header_tag" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" >
+
+            <TextView
+                android:id="@+id/Credenciales"
+                android:layout_width="match_parent"
+                android:layout_height="32sp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="12sp"
+                android:layout_marginLeft="12sp"
+                android:layout_marginRight="12sp"
+                android:layout_marginStart="12sp"
+                android:layout_marginTop="28sp"
+                android:onClick="fetchAddressButtonHandler"
+                android:text="@string/Credenciales"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/Votaciones"
+                android:layout_width="match_parent"
+                android:layout_height="32sp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/Credenciales"
+                android:layout_marginEnd="12sp"
+                android:layout_marginLeft="12sp"
+                android:layout_marginRight="12sp"
+                android:layout_marginStart="12sp"
+                android:layout_marginTop="28sp"
+                android:onClick="fetchAddressButtonHandler"
+                android:text="@string/Votaciones"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/Perfiles"
+                android:layout_width="match_parent"
+                android:layout_height="32sp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/Votaciones"
+                android:layout_marginEnd="12sp"
+                android:layout_marginLeft="12sp"
+                android:layout_marginRight="12sp"
+                android:layout_marginStart="12sp"
+                android:layout_marginTop="28sp"
+                android:onClick="fetchAddressButtonHandler"
+                android:text="@string/Perfiles"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/Zonas"
+                android:layout_width="match_parent"
+                android:layout_height="32sp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/Perfiles"
+                android:layout_marginEnd="12sp"
+                android:layout_marginLeft="12sp"
+                android:layout_marginRight="12sp"
+                android:layout_marginStart="12sp"
+                android:layout_marginTop="28sp"
+                android:onClick="fetchAddressButtonHandler"
+                android:text="@string/Zonas"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/Participantes"
+                android:layout_width="match_parent"
+                android:layout_height="32sp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/Zonas"
+                android:layout_marginEnd="12sp"
+                android:layout_marginLeft="12sp"
+                android:layout_marginRight="12sp"
+                android:layout_marginStart="12sp"
+                android:layout_marginTop="28sp"
+                android:onClick="fetchAddressButtonHandler"
+                android:text="@string/Participantes"
+                android:textSize="24sp" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

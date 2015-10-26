@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <Button
+        android:id="@+id/confirmar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="12sp"
+        android:layout_marginRight="12sp"
+        android:layout_marginBottom="12sp"
+        android:background="@drawable/cute_button"
+        android:text="@string/confirm"
+        android:textColor="@color/actionbar_color" />
+
+    <TextView
+        android:id="@+id/mensaje_de_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="12sp"
+        android:layout_marginLeft="12sp"
+        android:layout_marginRight="12sp"
+        android:layout_marginStart="12sp"
+        android:layout_marginTop="12sp" />
+
+    <TextView
+        android:id="@+id/first_time_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/mensaje_de_error"
+        android:layout_margin="8sp"
+        android:text="@string/escribir_contraseña" />
+
+    <EditText
+        android:id="@+id/psswd1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/first_time_tag"
+        android:layout_marginEnd="12sp"
+        android:layout_marginLeft="12sp"
+        android:layout_marginRight="12sp"
+        android:layout_marginStart="12sp"
+        android:layout_marginTop="12sp"
+        android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/confirmar_contraseña"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/psswd1"
+        android:layout_marginEnd="12sp"
+        android:layout_marginLeft="12sp"
+        android:layout_marginRight="12sp"
+        android:layout_marginStart="12sp"
+        android:layout_marginTop="12sp"
+        android:text="@string/confirmar_contraseña" />
+
+    <EditText
+        android:id="@+id/psswd2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/confirmar_contraseña"
+        android:layout_marginEnd="12sp"
+        android:layout_marginLeft="12sp"
+        android:layout_marginRight="12sp"
+        android:layout_marginStart="12sp"
+        android:layout_marginTop="12sp"
+        android:inputType="textPassword" />
+
+</RelativeLayout><!-- From: file:/home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/res/layout/escribe_credenciales_usuario.xml -->

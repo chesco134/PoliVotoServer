@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="actionbar_text">#e6e6e6</color>
+    <color name="splash_background">#fff2f2f2</color>
+    <color name="splash_header_background">#e3550000</color>
+    <color name="splash_header_text">#fff2f2f2</color>
+    <color name="splash_text">#88540000</color>
+    <color name="cute_button_text">#ffececec</color>
+    <color name="emerald">#ffa6d9b5</color>
+    <color name="fuente_2">#ff4d4d4d</color>
+    <color name="actionbar_color">#ff86241f</color>
+
+</resources>

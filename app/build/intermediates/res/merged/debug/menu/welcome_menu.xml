@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/next"
+        android:title="@string/next"
+        android:orderInCategory="100"
+        android:icon="@drawable/next"
+        android:showAsAction="ifRoom|collapseActionView"/>
+
+</menu>
+<!-- From: file:/home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/res/menu/welcome_menu.xml -->

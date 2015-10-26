@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PoliVotoServer</string>
+    <string name="splash_header">PoliVoto Electrónico</string>
+    <string name="title_section1">Pregunta 1</string>
+    <string name="title_section2">Pregunta 2</string>
+    <string name="title_section3">Pregunta 3</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="confirm">ACEPTAR</string>
+    <string name="hint_credenciales">Aquí se pueden configurar las credenciales que usan los usuarios del sistema. También es posible ver los usuarios existentes y sus contraseñas.</string>
+    <string name="hint_votaciones">En éste apartado se pueden configurar las votaciones a llevar a cabo. Se especifica lugar, fecha de inicio, fecha de fin, preguntas y respuestas.</string>
+    <string name="hint_perfiles">Aquí se encuentra la lista de tipo de participantes, es decir, se pueden incluir nombres como carrera, "PAAE" o "Docente".</string>
+    <string name="hint_zonas">Se muestran los lugares en los cuales se pueden hacer votaciones. También se pueden agregar o quitar dichos lugares.</string>
+    <string name="hint_participantes">Aquí se pueden cargar nuevos participantes y/o comprobar si alguien puede participar o no. Es la matrícula de participantes.</string>
+    <string name="greeting_tag">Bienvenido</string>
+    <string name="primera_apertura">Esta es la primera vez que se inicia la aplicación, por favor, escriba una contraseña para el administrador.</string>
+    <string name="instrucciones_contraseñas">A continuación, defina la contraseña para el usuario</string>
+    <string name="capturista">Capturista</string>
+    <string name="consultor">Consultor</string>
+    <string name="aceptar">ACEPTAR</string>
+    <string name="header_tag">Seleccione opción</string>
+    <string name="Credenciales">Credenciales</string>
+    <string name="Votaciones">Votaciones</string>
+    <string name="Perfiles">Perfiles</string>
+    <string name="Zonas">Zonas</string>
+    <string name="Participantes">Participantes</string>
+    <string name="participante">Participante</string>
+    <string name="submit">Acceder</string>
+    <string name="cambiar_contraseñas">Cambio contraseñas</string>
+    <string name="escribir_contraseña">Escriba contraseña</string>
+    <string name="casi_terminamos">¡Casi terminamos!</string>
+    <string name="define_zona_votacion">¿En qué lugar se llevará a cabo la auscultación?</string>
+    <string name="especifique_zona">Escriba la dirección de la escuela o el centro en donde se encuentra:</string>
+    <string name="confirmar_contraseña">Confirmar contraseña:</string>
+    <string name="cargar_ubicacion_gps">O cargue su ubicación con GPS</string>
+    <string name="service_not_available">Lo sentimos, el servicio no está disponible x.X</string>
+    <string name="invalid_lat_long_used">Latitud o longitud incorrecto(s) x.X</string>
+    <string name="no_address_found">Lo sentimos, la dirección no existe, favor de verificarla x.X</string>
+    <string name="address_found">Dirección encontrada =)</string>
+    <string name="no_geocoder_available">El dispositivo no tiene un codificador geográfico =)</string>
+    <string name="btn1">x</string>
+    <string name="btn2">y</string>
+    <string name="directiva_conexion_1">Escriba dirección de servidor</string>
+    <string name="btn3">Conectar al servidor</string>
+    <string name="conectando_label">Conectando al servidor...</string>
+    <string name="polivoto_electronico">PoliVoto Electrónico ©</string>
+    <string name="subtitle">Seleccione un botón</string>
+    <string name="ingrese_titulo">Ingrese Título</string>
+    <string name="add">+</string>
+    <string name="substract">-</string>
+    <string name="ingrese_titulo_opcion">Ingrese Título de opción</string>
+    <string name="iniciar_servicio">Iniciar Servicio</string>
+    <string name="option_menu_2">Seleccione un botón</string>
+    <string name="detener_servicio">Detener Servicio</string>
+    <string name="ultimo_servicio">Iniciar ultimo servicio</string>
+    <string name="ver_participantes">Ver Participantes</string>
+    <string name="ver_participantes_votando">Ver Votando</string>
+    <string name="finalizar_votacion">Finalizar Votación</string>
+    <string name="codigo_legalidad">Código Verificación</string>
+    <string name="Batton_Pass">Suplir Servidor</string>
+    <string name="options"> opciones</string>
+    <string name="elemento_prohibido">X</string>
+    <string name="_first_time_header">¡Bienvenido/a! Es la primera vez que inicia la aplicación</string>
+    <string name="_first_time_label">Ingrese el nombre de su escuela</string>
+    <string name="load_password">Cargar Contraseñas</string>
+    <string name="input_user">Escuela</string>
+    <string name="input_psswd">Contraseña</string>
+    <string name="login">Ingresar</string>
+    <string name="next">SIGUIENTE</string>
+    <string name="psswd_missmatch">Las contraseñas no coinciden.</string>
+    <string name="keys_insert_success">Credenciales actualizadas con éxito.</string>
+    <string name="keys_insert_error">Error al actualizar credenciales.</string>
+    <string name="psswd_length_error">Error, la longitud de las contraseñas debe ser de más de 5 caracteres.</string>
+    <string name="splash_message">Una herramienta de confianza para la comunidad politécnica.</string>
+    <string name="logo_splash_description">PoliVoto es una marca registrada.</string>
+    <string name="mensaje_alerta">¿Está seguro de que quiere finalizar? Esto borrará los datos de la base de datos, creará un fichero
+        cifrado con la información hasta el momento, y no permitirá finalizar cualquier otra auscultación hasta que no sea
+        debidamente tratado el archivo final.</string>
+
+</resources>
