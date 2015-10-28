@@ -48,23 +48,245 @@ public class Votaciones extends SQLiteOpenHelper{
 	@Override
 	public void onCreate(SQLiteDatabase dataBase) {
         dataBase.execSQL("create table Perfil(idPerfil int not null autoincrement, perfil text not null, primary key(idPerfil))");
-        dataBase.execSQL("create table Escuela(idEscuela int not null autoincrement, Nombre text not null, latitud real, longitud real, primary key(idEscuela))");
+        dataBase.execSQL("create table SubPerfil(idSubPerfil int not null autoincrement, idPerfil int not null, SubPerfil text not null, prinamry key(idSubPerfil), foreign key(idPerfil) references Perfil(idPerfil))");
+		dataBase.execSQL("create table Escuela(idEscuela int not null autoincrement, Nombre text not null, latitud real, longitud real, primary key(idEscuela))");
 		dataBase.execSQL("create table Participante(Boleta TEXT, idPerfil int NOT NULL, idEscuela int not null, Fecha_Registro TEXT, PRIMARY KEY(Boleta), foreign key(idPerfil) references Perfil(idPerfil), foreign key(idEscuela) references Escuela(idEscuela));");
         dataBase.execSQL("create table NombreParticipante(Boleta TEXT NOT NULL, Nombre TEXT NOT NULL, ApPaterno TEXT NOT NULL, ApMaterno TEXT NOT NULL, primary key(Boleta), foreign key(Boleta) references Participante(Boleta))");
 
         dataBase.execSQL("create table Votacion(idVotacion int not null autoincrement, Titulo TEXT NOT NULL, Fecha_Inicio DATE NOT NULL, Fecha_Fin DATE NOT NULL, primary key(idVotacion) );");
-		dataBase.execSQL("create table Pregunta(idPregunta int not null autoincrement, Pregunta TEXT not null, idVotacion int not null, primary key(idPregunta), FOREIGN KEY(idVotacion) REFERENCES Votacion(idVotacion));");
+		// Debo preguntar acerca de tener un idPregunta como entero. ¿Podría sólo dejar como pk a Pregunta y hacer que idVotacion forme parte de la pk? (Relación identificadora)
+        dataBase.execSQL("create table Pregunta(idPregunta int not null autoincrement, Pregunta TEXT not null, idVotacion int not null, primary key(idPregunta), FOREIGN KEY(idVotacion) REFERENCES Votacion(idVotacion));");
 		dataBase.execSQL("create table Opcion(idOpcion int not null autoincrement, Reactivo TEXT not null, primary key(idOpcion));");
 		dataBase.execSQL("create table Pregunta_Opcion(idPregunta int not null, idOpcion int not null, PRIMARY KEY(idPregunta,idOpcion), FOREIGN KEY(idPregunta) REFERENCES Pregunta(idPregunta), FOREIGN KEY(idOpcion) REFERENCES Opcion(idOpcion));");
 
-		dataBase.execSQL("create table Participante_Pregunta(Boleta TEXT not null, idPregunta int not null, Hora_Registro text not null, Hora_Inicia_Participacion text, Hora_Finaliza_Participacion text, PRIMARY KEY(Boleta,idPregunta), FOREIGN KEY(Boleta) REFERENCES Participante(Boleta), FOREIGN KEY(idPregunta) REFERENCES Pregunta(idPregunta));");
-		dataBase.execSQL("create table Urna(idUrna INTEGER not null, idVotacion int not null, primary key(idUrna), FOREIGN KEY(idVotacion) REFERENCES Votacion(idVotacion));");
-        dataBase.execSQL("create table UrnaContenido(idUrnaContenido int not null autoincrement, idUrna int not null, Voto blob not null, primary key(idUrnaContenido), foreignKey(idUrna) references Urna(idUrna))");
+		dataBase.execSQL("create table Usuario(idUsuario int not null autoincrement, Name text not null, Psswd blob not null, primary key(idUsuario))");
+		dataBase.execSQL("create table LoginAttempt(idLoginAttempt int not null autoincrement, idUsuario int not null, Attempt_Timestamp text not null, Host text not null, MacAddr text not null, primary key(idLoginAttempt), foreign key(idUsuario) references Usuario(idUsuario))");
+		dataBase.execSQL("create table AttemptSucceded(idLoginAttempt not null, primary key(idLoginAttempt), foreign key(idLoginAttempt) references LoginAttempt(idLoginAttempt))");
+		dataBase.execSQL("create table UserAction(idUserAction int not null autoincrement, idLoginAttempt int not null, Action text not null, Action_Timestamp text not null, primary key(idUserAction), foreign key(idLoginAttempt) references AttemptSucceded(idLoginAttempt))");
 
-        dataBase.execSQL("create table Usuario(idUsuario int not null autoincrement, Name text not null, Psswd blob not null, primary key(idUsuario))");
-        dataBase.execSQL("create table LoginAttempt(idLoginAttempt int not null autoincrement, idUsuario int not null, Attempt_Timestamp text not null, Host text not null, MacAddr text not null, primary key(idLoginAttempt), foreign key(idUsuario) references Usuario(idUsuario))");
-        dataBase.execSQL("create table AttemptSucceded(idLoginAttempt not null, Token blob not null, primary key(idLoginAttempt))");
-        dataBase.execSQL("create table UserAction(idUserAction int not null autoincrement, idLoginAttempt int not null, Action text not null, Action_Timestamp text not null, primary key(idUserAction), foreign key(idLoginAttempt) references AttemptSucceded(idLoginAttempt))");
+        // Recuerda que el "null hack" son tres guiones. Sólo insertas registros de quienes son capturados al momento de validación.
+		dataBase.execSQL("create table Participante_Pregunta(Boleta TEXT not null, idPregunta int not null, Hora_Registro text not null, Hora_Participacion text, PRIMARY KEY(Boleta,idPregunta), FOREIGN KEY(Boleta) REFERENCES Participante(Boleta), FOREIGN KEY(idPregunta) REFERENCES Pregunta(idPregunta));");
+		dataBase.execSQL("create table Voto(idVoto blob not null, idVotacion int not null, idPerfil int not null, Voto blob not null, idLoginAttempt int not null, primary key(idVoto), FOREIGN KEY(idVotacion) REFERENCES Votacion(idVotacion), foreign key(idPerfil) references Perfil(idPerfil), foreign key(idLoginAttempt) references AttemptSucceded(idLoginAttempt));");
+
+        // Vista que sirve para tener a la mano las preguntas totales de cada votación.
+        dataBase.execSQL("create view if not exists Pregntas_Votacion as (select idVotacion,count(*) as Preguntas from Pregunta group by idVotacion)");
+    }
+
+    public long insertaPerfil(String perfil){
+        ContentValues values = new ContentValues();
+        values.put("perfil",perfil);
+        long result = getWritableDatabase().insert("Perfil","---",values);
+        close();
+        return result;
+    }
+
+    public long insertaSubPerfil(String perfil, String subPerfil){
+        String[] args = {perfil};
+        Cursor c = getReadableDatabase().rawQuery("select idPerfil from Perfil where perfil=?", args);
+        long result = -1;
+        if(c.moveToFirst()){
+            ContentValues values = new ContentValues();
+            values.put("idPerfil",c.getInt(c.getColumnIndex("idPerfil")));
+            values.put("SubPerfil",subPerfil);
+            result = getWritableDatabase().insert("SubPerfil","---",values);
+        }
+        close();
+        return result;
+    }
+
+    public long insertaEscuela(String nombre, Double latitud, Double longitud){
+        ContentValues values = new ContentValues();
+        values.put("Nombre",nombre);
+        values.put("latitud", latitud != null ? latitud.doubleValue() : null);
+        values.put("longitud",latitud != null ? latitud.doubleValue() : null);
+        long id = getReadableDatabase().insert("Escuela", "", values);
+        close();
+        return id;
+    }
+
+    public long insertaParticipante(String boleta, String perfil, String escuela){
+        long id = -1;
+        String[] args = {perfil};
+        Cursor c = getReadableDatabase().rawQuery("select idPerfil from Perfil where " +
+                "perfil = ?",args);
+        if(c.moveToFirst()){
+            args[0] = escuela;
+            Cursor c2 = getReadableDatabase().rawQuery("select idEscuela from Escuela where " +
+                    "Nombre = ?",args);
+            if(c2.moveToFirst()){
+                ContentValues values = new ContentValues();
+                values.put("Boleta",boleta);
+                values.put("idPerfil",c.getInt(c.getColumnIndex("idPerfil")));
+                values.put("idEscuela",c2.getInt(c2.getColumnIndex("idEscuela")));
+                values.put("Fecha_Registro", new SimpleDateFormat("dd/MM/yyyy hh:mm:ssss").format(new Date()));
+                id = getWritableDatabase().insert("Participante","---",values);
+            }
+            c2.close();
+        }
+        c.close();
+        close();
+        return id;
+    }
+
+    public long insertaNombreParticipante(String boleta, String apPaterno, String apMaterno){
+        ContentValues values = new ContentValues();
+        values.put("Boleta",boleta);
+        values.put("ApPaterno",apPaterno);
+        values.put("ApMaterno", apMaterno);
+        long id = getWritableDatabase().insert("NombreParticipante","---",values);
+        close();
+        return id;
+    }
+
+    public long insertaVotacion(String titulo, String fechaInicio, String fechaFin){
+        ContentValues values = new ContentValues();
+        values.put("Titulo",titulo);
+        values.put("Fecha_Inicio",fechaInicio);
+        values.put("Fecha_Fin",fechaFin);
+        long id = getWritableDatabase().insert("Votacion","---",values);
+        close();
+        return id;
+    }
+
+    public long insertaPregunta(String pregunta, String votacion){
+        long id = -1;
+        String[] args = {votacion};
+        Cursor c = getReadableDatabase().rawQuery("select idVotacion from Votacion where Titulo = ?", args);
+        if(c.moveToNext()){
+            ContentValues values = new ContentValues();
+            values.put("Pregunta",pregunta);
+            values.put("idVotacion",c.getInt(c.getColumnIndex("idVotacion")));
+            id = getWritableDatabase().insert("Pregunta","---",values);
+        }
+        close();
+        return id;
+    }
+
+    public long insertaOpcion(String reactivo){
+        ContentValues values = new ContentValues();
+        values.put("Reactivo", reactivo);
+        long id = getWritableDatabase().insert("Opcion", "---", values);
+        close();
+        return id;
+    }
+
+    public long insertaPreguntaOpcion(String pregunta, String opcion){
+        long id = -1;
+        String[] args = {pregunta};
+        Cursor c = getReadableDatabase().rawQuery("select idPregunta from Pregunta where Pregunta = ?", args);
+        if(c.moveToFirst()){
+            args[0] = opcion;
+            Cursor c2 = getReadableDatabase().rawQuery("select idOpcion from Opcion where reactivo = ?",args);
+            if(c2.moveToFirst()){
+                ContentValues values = new ContentValues();
+                values.put("idPregunta",c.getInt(c.getColumnIndex("idPregunta")));
+                values.put("idOpcion",c2.getInt(c2.getColumnIndex("idOpcion")));
+                id = getWritableDatabase().insert("Pregunta_Opcion","---",values);
+            }
+        }
+        close();
+        return id;
+    }
+
+    public long insertaUsuario(String usrName, byte[] psswd){
+		ContentValues values = new ContentValues();
+        values.put("Name", usrName);
+        values.put("Psswd", psswd);
+        long result = getWritableDatabase().insert("Usuario","---",values);
+        close();
+        return result;
+    }
+
+    public long insertaLoginAttempt(String usr, String host, String macAddr){
+        String[] columns = {"idUsuario"};
+        String selection = "Name = ?";
+        String selArgs[] = {usr};
+        Cursor c = getReadableDatabase().query("Usuario", columns, selection,selArgs,null,null,null);
+        long usrId = -1;
+        if( c.moveToFirst() ){
+            ContentValues values = new ContentValues();
+            values.put("idUsuario", c.getInt(c.getColumnIndex("idUsuario")));
+            values.put("Host",host);
+            values.put("MacAddr",macAddr);
+            values.put("Attempt_Timestamp",new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date()));
+            usrId = getWritableDatabase().insert("LoginAttempt", "---", values);
+        }
+        c.close();
+        close();
+        return usrId;
+    }
+
+    public long insertaAttemptSucceded(String usrName){
+        long result = -1;
+        String columns[] = {"idUsuario"};
+        String selection = "Name = ?";
+        String selArgs[] = {usrName};
+        Cursor c = getReadableDatabase().query("Usuario",columns,selection,selArgs,null,null,null);
+        if( c.moveToFirst() ){
+            ContentValues values = new ContentValues();
+            values.put("idUsuario", c.getInt(c.getColumnIndex("idUsuario")));
+            result = getWritableDatabase().insert("AttemptSucceded", "---", values);
+        }
+        c.close();
+        close();
+        return result;
+    }
+
+    public long insertUserAction(String usrName,int idLoginAttempt, String action){
+        long result = -1;
+        String[] args = {String.valueOf(idLoginAttempt),usrName};
+        Cursor c = getReadableDatabase().rawQuery("select Name from (select idUsuario, " +
+                "from (LoginAttempt left join (select idLoginAttempt from AttemptSucceded " +
+                "where idLoginAttempt = ?) t on " +
+                "LoginAttempt.idLoginAttempt = t.idLoginAttempt) ) t1 where t1.Name = ?", args);
+        if(c.getCount() > 0){
+            ContentValues values = new ContentValues();
+            values.put("idLoginAttempt",idLoginAttempt);
+            values.put("Action", action);
+            result = getWritableDatabase().insert("UserAction", "---", values);
+        }
+        c.close();
+        close();
+        return result;
+    }
+
+    public long insertaParticipantePregunta(String boleta, String pregunta){
+        long id = -1;
+        String[] args = {pregunta};
+        Cursor c = getReadableDatabase().rawQuery("select idPregunta from Pregunta where Pregunta = ?",args);
+        if(c.moveToFirst()){
+            ContentValues values = new ContentValues();
+            values.put("Boleta",boleta);
+            values.put("idPregunta", c.getInt(c.getColumnIndex("idPregunta")));
+            values.put("Hora_Registro", new SimpleDateFormat("dd/MM/yyyy hh:mm:ssss").format(new Date()));
+            id = getWritableDatabase().insert("Participante_Pregunta","---",values);
+        }
+        c.close();
+        close();
+        return id;
+    }
+
+    public long insertaVoto(byte[] idVoto, String tituloVotacion, String perfil, byte[] voto, int idLoginAttempt){
+        long id = -1;
+        String[] args = {tituloVotacion};
+        Cursor c = getReadableDatabase().rawQuery("select idVotacion from Votacion where Titulo = ?",args);
+        if(c.moveToFirst()){
+            args[0] = perfil;
+            Cursor c2 = getReadableDatabase().rawQuery("select idPerfil from Perfil where perfil = ?",args);
+            if(c2.moveToFirst()){
+                ContentValues values = new ContentValues();
+                values.put("idVoto",idVoto);
+                values.put("idVotacion",c.getInt(c.getColumnIndex("idVotacion")));
+                values.put("idPerfil",c2.getInt(c2.getColumnIndex("idPerfil")));
+                values.put("Voto",voto);
+                values.put("idLoginAttempt",idLoginAttempt);
+                id = getWritableDatabase().insert("Voto","---",values);
+            }
+            c2.close();
+        }
+        c.close();
+        close();
+        return id;
     }
 	
 	public int consultaPAAE(){

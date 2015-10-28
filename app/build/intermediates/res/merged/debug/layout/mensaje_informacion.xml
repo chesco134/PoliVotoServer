@@ -16,4 +16,4 @@
         android:layout_gravity="center"
         android:text="@string/aceptar" />
 
-</LinearLayout><!-- From: file:/home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/res/layout/mensaje_informacion.xml -->
+</LinearLayout><!-- From: file:/home/jcapiz/git/PoliVotoServer/app/src/main/res/layout/mensaje_informacion.xml -->
