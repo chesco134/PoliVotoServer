@@ -72,7 +72,7 @@ public class AttendantHandler extends Thread {
 							socket.getOutputStream());
 					if (datos[2].equals("")) {
 						if( datos[0].equals("Capturista")){
-							if(!keyHandler.consultKey(hasher.makeHash(datos[1]), "Capturista")){
+							if(!keyHandler.consultaUsuario("Capturista",hasher.makeHash(datos[1]))){
 								salidaObjeto.writeUTF("NO");
 								salidaObjeto.flush();
 								socket.close();
@@ -80,7 +80,7 @@ public class AttendantHandler extends Thread {
 							}
 						}else{
 							if(datos[0].equals("Participante")){
-								if(!keyHandler.consultKey(hasher.makeHash(datos[1]), "Participante")){
+								if(!keyHandler.consultaUsuario("Participante",hasher.makeHash(datos[1]))){
 									salidaObjeto.writeUTF("NO");
 									salidaObjeto.flush();
 									socket.close();
@@ -88,7 +88,7 @@ public class AttendantHandler extends Thread {
 									}
 							}else{
 								if(datos[0].equals("Consultor")){
-									if(!keyHandler.consultKey(hasher.makeHash(datos[1]),"Consultor")){
+									if(!keyHandler.consultaUsuario("Consultor",hasher.makeHash(datos[1]))){
 										salidaObjeto.writeUTF("NO");
 										salidaObjeto.flush();
 										socket.close();

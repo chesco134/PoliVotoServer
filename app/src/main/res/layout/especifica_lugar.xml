@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/mensaje_seleccion_escuela"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="20sp"
+        android:textSize="22sp"
+        android:text="@string/mensaje_seleccion_escuela"/>
+    <RelativeLayout
+        android:id="@+id/botones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ingresa_escuela"
+        android:layout_marginTop="12sp"
+        android:layout_marginLeft="12sp"
+        android:layout_marginStart="12sp"
+        android:layout_marginRight="12sp"
+        android:layout_marginEnd="12sp">
+        <Button
+            android:id="@+id/mas_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/aceptar"
+            android:layout_toLeftOf="@+id/aceptar"
+            android:layout_marginEnd="12sp"
+            android:layout_marginRight="12sp"
+            android:onClick="masInfo"
+            android:text="@string/mas_info"/>
+        <Button
+            android:id="@+id/aceptar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="12sp"
+            android:layout_marginRight="12sp"
+            android:onClick="aceptar"
+            android:text="@string/aceptar"/>
+    </RelativeLayout>
+    <EditText
+        android:id="@+id/ingresa_escuela"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mensaje_seleccion_escuela"
+        android:layout_marginTop="12sp"
+        android:layout_marginLeft="12sp"
+        android:layout_marginStart="12sp"
+        android:layout_marginRight="12sp"
+        android:layout_marginEnd="12sp"
+        android:hint="@string/hint_escuela"/>
+
+</RelativeLayout>

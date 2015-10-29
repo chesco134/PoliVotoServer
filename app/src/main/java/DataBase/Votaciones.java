@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -47,29 +48,29 @@ public class Votaciones extends SQLiteOpenHelper{
 
 	@Override
 	public void onCreate(SQLiteDatabase dataBase) {
-        dataBase.execSQL("create table Perfil(idPerfil int not null autoincrement, perfil text not null, primary key(idPerfil))");
-        dataBase.execSQL("create table SubPerfil(idSubPerfil int not null autoincrement, idPerfil int not null, SubPerfil text not null, prinamry key(idSubPerfil), foreign key(idPerfil) references Perfil(idPerfil))");
-		dataBase.execSQL("create table Escuela(idEscuela int not null autoincrement, Nombre text not null, latitud real, longitud real, primary key(idEscuela))");
+        dataBase.execSQL("create table Perfil(idPerfil int not null, perfil text not null, primary key(idPerfil))");
+        dataBase.execSQL("create table SubPerfil(idSubPerfil int not null, idPerfil int not null, SubPerfil text not null, primary key(idSubPerfil), foreign key(idPerfil) references Perfil(idPerfil))");
+		dataBase.execSQL("create table Escuela(idEscuela int not null, Nombre text not null, latitud real, longitud real, primary key(idEscuela))");
 		dataBase.execSQL("create table Participante(Boleta TEXT, idPerfil int NOT NULL, idEscuela int not null, Fecha_Registro TEXT, PRIMARY KEY(Boleta), foreign key(idPerfil) references Perfil(idPerfil), foreign key(idEscuela) references Escuela(idEscuela));");
         dataBase.execSQL("create table NombreParticipante(Boleta TEXT NOT NULL, Nombre TEXT NOT NULL, ApPaterno TEXT NOT NULL, ApMaterno TEXT NOT NULL, primary key(Boleta), foreign key(Boleta) references Participante(Boleta))");
 
-        dataBase.execSQL("create table Votacion(idVotacion int not null autoincrement, Titulo TEXT NOT NULL, Fecha_Inicio DATE NOT NULL, Fecha_Fin DATE NOT NULL, primary key(idVotacion) );");
+        dataBase.execSQL("create table Votacion(idVotacion int not null, Titulo TEXT NOT NULL, Fecha_Inicio DATE NOT NULL, Fecha_Fin DATE NOT NULL, primary key(idVotacion) );");
 		// Debo preguntar acerca de tener un idPregunta como entero. ¿Podría sólo dejar como pk a Pregunta y hacer que idVotacion forme parte de la pk? (Relación identificadora)
-        dataBase.execSQL("create table Pregunta(idPregunta int not null autoincrement, Pregunta TEXT not null, idVotacion int not null, primary key(idPregunta), FOREIGN KEY(idVotacion) REFERENCES Votacion(idVotacion));");
-		dataBase.execSQL("create table Opcion(idOpcion int not null autoincrement, Reactivo TEXT not null, primary key(idOpcion));");
+        dataBase.execSQL("create table Pregunta(idPregunta int not null, Pregunta TEXT not null, idVotacion int not null, primary key(idPregunta), FOREIGN KEY(idVotacion) REFERENCES Votacion(idVotacion));");
+		dataBase.execSQL("create table Opcion(idOpcion int not null, Reactivo TEXT not null, primary key(idOpcion));");
 		dataBase.execSQL("create table Pregunta_Opcion(idPregunta int not null, idOpcion int not null, PRIMARY KEY(idPregunta,idOpcion), FOREIGN KEY(idPregunta) REFERENCES Pregunta(idPregunta), FOREIGN KEY(idOpcion) REFERENCES Opcion(idOpcion));");
 
-		dataBase.execSQL("create table Usuario(idUsuario int not null autoincrement, Name text not null, Psswd blob not null, primary key(idUsuario))");
-		dataBase.execSQL("create table LoginAttempt(idLoginAttempt int not null autoincrement, idUsuario int not null, Attempt_Timestamp text not null, Host text not null, MacAddr text not null, primary key(idLoginAttempt), foreign key(idUsuario) references Usuario(idUsuario))");
+		dataBase.execSQL("create table Usuario(idUsuario int not null, Name text not null, Psswd blob not null, primary key(idUsuario))");
+		dataBase.execSQL("create table LoginAttempt(idLoginAttempt int not null, idUsuario int not null, Attempt_Timestamp text not null, Host text not null, MacAddr text not null, primary key(idLoginAttempt), foreign key(idUsuario) references Usuario(idUsuario))");
 		dataBase.execSQL("create table AttemptSucceded(idLoginAttempt not null, primary key(idLoginAttempt), foreign key(idLoginAttempt) references LoginAttempt(idLoginAttempt))");
-		dataBase.execSQL("create table UserAction(idUserAction int not null autoincrement, idLoginAttempt int not null, Action text not null, Action_Timestamp text not null, primary key(idUserAction), foreign key(idLoginAttempt) references AttemptSucceded(idLoginAttempt))");
+		dataBase.execSQL("create table UserAction(idUserAction int not null, idLoginAttempt int not null, Action text not null, Action_Timestamp text not null, primary key(idUserAction), foreign key(idLoginAttempt) references AttemptSucceded(idLoginAttempt))");
 
         // Recuerda que el "null hack" son tres guiones. Sólo insertas registros de quienes son capturados al momento de validación.
 		dataBase.execSQL("create table Participante_Pregunta(Boleta TEXT not null, idPregunta int not null, Hora_Registro text not null, Hora_Participacion text, PRIMARY KEY(Boleta,idPregunta), FOREIGN KEY(Boleta) REFERENCES Participante(Boleta), FOREIGN KEY(idPregunta) REFERENCES Pregunta(idPregunta));");
 		dataBase.execSQL("create table Voto(idVoto blob not null, idVotacion int not null, idPerfil int not null, Voto blob not null, idLoginAttempt int not null, primary key(idVoto), FOREIGN KEY(idVotacion) REFERENCES Votacion(idVotacion), foreign key(idPerfil) references Perfil(idPerfil), foreign key(idLoginAttempt) references AttemptSucceded(idLoginAttempt));");
 
         // Vista que sirve para tener a la mano las preguntas totales de cada votación.
-        dataBase.execSQL("create view if not exists Pregntas_Votacion as (select idVotacion,count(*) as Preguntas from Pregunta group by idVotacion)");
+        dataBase.execSQL("create view if not exists Pregntas_Votacion as select idVotacion,count(*) as Preguntas from Pregunta group by idVotacion");
     }
 
     public long insertaPerfil(String perfil){
@@ -98,7 +99,7 @@ public class Votaciones extends SQLiteOpenHelper{
         ContentValues values = new ContentValues();
         values.put("Nombre",nombre);
         values.put("latitud", latitud != null ? latitud.doubleValue() : null);
-        values.put("longitud",latitud != null ? latitud.doubleValue() : null);
+        values.put("longitud", latitud != null ? latitud.doubleValue() : null);
         long id = getReadableDatabase().insert("Escuela", "", values);
         close();
         return id;
@@ -143,7 +144,7 @@ public class Votaciones extends SQLiteOpenHelper{
         values.put("Titulo",titulo);
         values.put("Fecha_Inicio",fechaInicio);
         values.put("Fecha_Fin",fechaFin);
-        long id = getWritableDatabase().insert("Votacion","---",values);
+        long id = getWritableDatabase().insert("Votacion", "---", values);
         close();
         return id;
     }
@@ -221,7 +222,7 @@ public class Votaciones extends SQLiteOpenHelper{
         String columns[] = {"idUsuario"};
         String selection = "Name = ?";
         String selArgs[] = {usrName};
-        Cursor c = getReadableDatabase().query("Usuario",columns,selection,selArgs,null,null,null);
+        Cursor c = getReadableDatabase().query("Usuario", columns, selection, selArgs, null, null, null);
         if( c.moveToFirst() ){
             ContentValues values = new ContentValues();
             values.put("idUsuario", c.getInt(c.getColumnIndex("idUsuario")));
@@ -288,6 +289,18 @@ public class Votaciones extends SQLiteOpenHelper{
         close();
         return id;
     }
+
+	public boolean consultaUsuario(String usrName, byte[] psswd){
+		boolean result = false;
+		String[] args = {usrName};
+		Cursor c = getReadableDatabase().rawQuery("select Psswd from Usuario where Name = ?",args);
+		if(c.moveToFirst()){
+			if (Arrays.equals(c.getBlob(c.getColumnIndex("Psswd")), psswd))
+				result = true;
+		}
+		close();
+		return result;
+	}
 	
 	public int consultaPAAE(){
 		SQLiteDatabase db = getReadableDatabase();
@@ -379,15 +392,9 @@ public class Votaciones extends SQLiteOpenHelper{
 	 * *****************/
 
 	public boolean revisaExistenciaDeCredencial(String nombre){
-		SQLiteDatabase db = getReadableDatabase();
-		String[] columns = {"NOMBRE"};
-		String selectionArgs[] = {nombre};
-		Cursor c = db.query("Key", columns, "NOMBRE=?", selectionArgs, null, null, null);
-		c.moveToNext();
-		boolean success = false;
-		if(c.getCount() > 0)
-			success = true;
-		db.close();
+		String[] args = {nombre};
+		boolean success = getReadableDatabase().rawQuery("select idUsuario from Usuario where Name = ?",args).getCount() > 0 ? true : false;
+		close();
 		return success;
 	}
 	
@@ -457,7 +464,7 @@ public class Votaciones extends SQLiteOpenHelper{
 	public boolean quitarOpcion(String texto){
 		SQLiteDatabase db = getWritableDatabase();
 		String whereClause = "ID=?";
-		String[] whereArgs = {new Hasher().makeHash(texto)};
+		String[] whereArgs = {new Hasher().makeHashString(texto)};
 		int count = db.delete("Opcion",whereClause,whereArgs);
 		db.close();
 		if( count > 0)
@@ -1042,7 +1049,7 @@ public class Votaciones extends SQLiteOpenHelper{
 	public boolean quitarPregunta(String titulo){
 		SQLiteDatabase db = getWritableDatabase();
 		String whereClause = "ID=?";
-		String[] whereArgs = {new Hasher().makeHash(titulo)};
+		String[] whereArgs = {new Hasher().makeHashString(titulo)};
 		int count = db.delete("Pregunta",whereClause,whereArgs);
 		db.close();
 		if( count > 0)
@@ -1247,7 +1254,7 @@ public class Votaciones extends SQLiteOpenHelper{
 	public boolean quitarVotacion(String titulo){
 		SQLiteDatabase db = getWritableDatabase();
 		String whereClause = "ID=?";
-		String[] whereArgs = {new Hasher().makeHash(titulo)};
+		String[] whereArgs = {new Hasher().makeHashString(titulo)};
 		int count = db.delete("Votacion",whereClause,whereArgs);
 		db.close();
 		if( count > 0)
@@ -1324,7 +1331,7 @@ public class Votaciones extends SQLiteOpenHelper{
 	public boolean quitarZona(String direccion){
 		SQLiteDatabase db = getWritableDatabase();
 		String whereClause = "ID=?";
-		String[] whereArgs = {new Hasher().makeHash(direccion)};
+		String[] whereArgs = {new Hasher().makeHashString(direccion)};
 		int count = db.delete("Zona",whereClause,whereArgs);
 		db.close();
 		if( count > 0)
@@ -1336,8 +1343,8 @@ public class Votaciones extends SQLiteOpenHelper{
 	public boolean cambiaZona(String antiguaDireccion, String nuevaDireccion, float latitud, float longitud){
 		SQLiteDatabase db = getWritableDatabase();
 		Hasher hasher = new Hasher();
-		String antiguoID = hasher.makeHash(antiguaDireccion);
-		String nuevoID = hasher.makeHash(antiguaDireccion);
+		String antiguoID = hasher.makeHashString(antiguaDireccion);
+		String nuevoID = hasher.makeHashString(antiguaDireccion);
 		String whereClause = "ID=?";
 		String whereArgs[] = {antiguoID};
 		ContentValues values = new ContentValues();

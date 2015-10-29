@@ -111,9 +111,7 @@ public class WelcomeActivity extends AppCompatActivity {
 				//submit.setTextColor(Color.BLUE);
 				success = true;
 				Votaciones bd = new Votaciones(WelcomeActivity.this);
-				bd.altaZonaVoto("Local", 0, 0);
-				if (bd.insertKey(new Hasher().makeHash(psswd), usuario,
-						"Local")) {
+				if (bd.insertaUsuario(usuario, new Hasher().makeHash(psswd)) != -1) {
 					Toast.makeText(WelcomeActivity.this,
 							R.string.keys_insert_success,
 							Toast.LENGTH_SHORT).show();

@@ -30,9 +30,9 @@ public class UnlockerActivity extends Activity {
 		findViewById(R.id.submit).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (new Votaciones(UnlockerActivity.this).consultKey(
-						new Hasher().makeHash(psswd.getText().toString()),
-						"Administrador"))
+				if (new Votaciones(UnlockerActivity.this).consultaUsuario(
+						"Administrador",
+				new Hasher().makeHash(psswd.getText().toString())))
 				{
 					if(isChangePasswords){
 						Intent i = new Intent(UnlockerActivity.this,SelectorDeCredenciales.class);

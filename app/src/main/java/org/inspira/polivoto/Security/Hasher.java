@@ -30,7 +30,7 @@ public class Hasher {
 		return hexString;
 	}
 	
-	public String makeHash(String psswd){
+	public String makeHashString(String psswd){
 		String hashPsswd = null;
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -44,6 +44,18 @@ public class Hasher {
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}		
+		return hashPsswd;
+	}
+
+	public byte[] makeHash(String psswd){
+		byte[] hashPsswd = null;
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			md.update(psswd.getBytes());
+			byte[] byteData = md.digest();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
 		return hashPsswd;
 	}
 }

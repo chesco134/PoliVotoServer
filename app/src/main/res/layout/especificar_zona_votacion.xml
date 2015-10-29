@@ -42,24 +42,16 @@
 
     <Button
         android:id="@+id/confirmar"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="12sp"
         android:layout_marginRight="12sp"
         android:layout_marginStart="12sp"
         android:layout_marginLeft="12sp"
         android:layout_marginTop="20sp"
-        android:layout_below="@+id/location_text"/>
-
-    <Button
-        android:id="@+id/load_gps_location"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/confirmar"
-        android:layout_marginLeft="12sp"
-        android:layout_marginStart="12sp"
-        android:layout_marginEnd="12sp"
-        android:layout_marginRight="12sp"
-        android:layout_marginTop="12sp"
-        android:text="@string/cargar_ubicacion_gps" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/location_text"
+        android:onClick="aceptar"
+        android:text="@string/aceptar"/>
 </RelativeLayout>

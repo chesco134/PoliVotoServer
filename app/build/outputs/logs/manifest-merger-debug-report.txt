@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:2:1-80:12
+ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:2:1-84:12
 	package
 		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:3:5-41
 		INJECTED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml
@@ -142,7 +142,7 @@ MERGED from [com.android.support:support-v4:22.2.1] /home/jcapiz/git/PoliVotoSer
 		INJECTED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml
 		INJECTED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml
 application
-ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:15:5-78:19
+ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:15:5-82:19
 MERGED from [com.google.android.gms:play-services:7.8.0] /home/jcapiz/git/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/7.8.0/AndroidManifest.xml:19:5-20
 MERGED from [com.google.android.gms:play-services-ads:7.8.0] /home/jcapiz/git/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.8.0/AndroidManifest.xml:24:5-32:19
 MERGED from [com.google.android.gms:play-services-base:7.8.0] /home/jcapiz/git/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.8.0/AndroidManifest.xml:20:5-24:19
@@ -281,106 +281,114 @@ service#org.inspira.polivotoserver.MiServicio
 ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:24:9-47
 	android:name
 		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:24:18-44
-activity#org.inspira.polivoto.activities.MensajeInformacion
+activity#org.inspira.polivoto.Activity.MensajeInformacion
 ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:26:9-29:59
 	android:label
 		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:28:13-45
 	android:theme
 		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:29:13-56
 	android:name
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:27:13-78
-activity#org.inspira.polivoto.activities.CargadorDeMatricula
-ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:30:9-32:48
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:27:13-76
+activity#org.inspira.polivoto.Activity.DataPickerActivity
+ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:30:9-33:59
 	android:label
 		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:32:13-45
-	android:name
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:31:13-79
-activity#org.inspira.polivoto.activities.VotacionesConf
-ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:33:9-35:48
-	android:label
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:35:13-45
-	android:name
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:34:13-74
-activity#org.inspira.polivoto.activities.ListaContenido
-ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:36:9-38:48
-	android:label
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:38:13-45
-	android:name
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:37:13-74
-activity#org.inspira.polivoto.activities.UnlockerActivity
-ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:39:9-42:59
-	android:label
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:41:13-45
 	android:theme
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:42:13-56
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:33:13-56
 	android:name
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:40:13-76
-activity#org.inspira.polivoto.activities.WelcomeActivity
-ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:43:9-45:48
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:31:13-76
+activity#org.inspira.polivoto.Activity.CargadorDeMatricula
+ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:34:9-36:48
+	android:label
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:36:13-45
+	android:name
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:35:13-77
+activity#org.inspira.polivoto.Activity.VotacionesConf
+ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:37:9-39:48
+	android:label
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:39:13-45
+	android:name
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:38:13-72
+activity#org.inspira.polivoto.Activity.ListaContenido
+ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:40:9-42:48
+	android:label
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:42:13-45
+	android:name
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:41:13-72
+activity#org.inspira.polivoto.Activity.UnlockerActivity
+ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:43:9-46:59
 	android:label
 		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:45:13-45
-	android:name
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:44:13-75
-activity#org.inspira.polivotoserver.SelectorDeCredenciales
-ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:46:9-48:48
-	android:label
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:48:13-45
-	android:name
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:47:13-51
-activity#org.inspira.polivoto.activities.SimplePromptActivity
-ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:49:9-51:48
-	android:label
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:51:13-45
-	android:name
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:50:13-80
-activity#org.inspira.polivoto.activities.SplashActivity
-ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:52:9-55:74
-	android:label
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:54:13-29
 	android:theme
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:55:13-71
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:46:13-56
 	android:name
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:53:13-74
-activity#org.inspira.polivotoserver.Mensaje
-ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:56:9-59:59
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:44:13-74
+activity#org.inspira.polivoto.Activity.WelcomeActivity
+ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:47:9-49:48
 	android:label
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:58:13-40
-	android:theme
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:59:13-56
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:49:13-45
 	android:name
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:57:13-36
-activity#org.inspira.polivoto.activities.TestDialog
-ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:60:9-64:59
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:48:13-73
+activity#org.inspira.polivoto.Activity.SelectorDeCredenciales
+ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:50:9-52:48
+	android:label
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:52:13-45
+	android:name
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:51:13-80
+activity#org.inspira.polivoto.Activity.SimplePromptActivity
+ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:53:9-55:48
+	android:label
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:55:13-45
+	android:name
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:54:13-78
+activity#org.inspira.polivoto.Activity.SplashActivity
+ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:56:9-59:74
+	android:label
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:58:13-29
+	android:theme
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:59:13-71
+	android:name
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:57:13-72
+activity#org.inspira.polivoto.Activity.Mensaje
+ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:60:9-63:59
+	android:label
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:62:13-40
+	android:theme
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:63:13-56
+	android:name
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:61:13-65
+activity#org.inspira.polivoto.Activity.TestDialog
+ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:64:9-68:59
 	android:screenOrientation
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:63:13-47
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:67:13-47
 	android:label
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:62:13-35
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:66:13-35
 	android:theme
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:64:13-56
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:68:13-56
 	android:name
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:61:13-70
-activity#org.inspira.polivotoserver.MainActivity
-ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:65:9-73:20
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:65:13-68
+activity#org.inspira.polivoto.Activity.MainActivity
+ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:69:9-77:20
 	android:label
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:67:13-45
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:71:13-45
 	android:name
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:66:13-41
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:70:13-70
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:68:13-72:29
+ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:72:13-76:29
 action#android.intent.action.MAIN
-ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:69:17-69
+ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:73:17-69
 	android:name
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:69:25-66
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:73:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:71:17-77
+ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:75:17-77
 	android:name
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:71:27-74
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:75:27-74
 service#org.inspira.polivotoserver.FetchAddressIntentService
-ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:75:9-77:40
+ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:79:9-81:40
 	android:exported
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:77:13-37
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:81:13-37
 	android:name
-		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:76:13-54
+		ADDED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:80:13-54
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from [com.google.android.gms:play-services-ads:7.8.0] /home/jcapiz/git/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.8.0/AndroidManifest.xml:21:5-78
 MERGED from [com.google.android.gms:play-services-analytics:7.8.0] /home/jcapiz/git/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.8.0/AndroidManifest.xml:22:5-79
@@ -416,7 +424,7 @@ MERGED from [com.google.android.gms:play-services-maps:7.8.0] /home/jcapiz/git/P
 	android:required
 		ADDED from [com.google.android.gms:play-services-maps:7.8.0] /home/jcapiz/git/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.8.0/AndroidManifest.xml:25:8-31
 android:uses-permission#android.permission.READ_EXTERNAL_STORAGE
-IMPLIED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:2:1-80:12 reason: com.google.android.gms.maps requested WRITE_EXTERNAL_STORAGE
+IMPLIED from /home/jcapiz/git/PoliVotoServer/app/src/main/AndroidManifest.xml:2:1-84:12 reason: com.google.android.gms.maps requested WRITE_EXTERNAL_STORAGE
 uses-permission#com.google.android.c2dm.permission.RECEIVE
 ADDED from [com.google.android.gms:play-services-gcm:7.8.0] /home/jcapiz/git/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.8.0/AndroidManifest.xml:21:5-82
 	android:name

@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 	private static final int SELECTOR_DE_CREDENCIALES = 319;
 	private static final int WELCOME_ACTIVITY = 002;
 	private static final int UNLOCKER_ACTIVITY = 003;
+    private static final int DATA_PICKER_ACTIVITY = 004;
 	private boolean existsAdmin = false;
 	private static boolean isFirstLaunched;
 
@@ -75,8 +76,7 @@ public class MainActivity extends AppCompatActivity {
 		(findViewById(R.id.Votaciones)).setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View view){
-				Intent i = new Intent(MainActivity.this,VotacionesConf.class);
-				startActivity(i);
+                launchVotacionesConf();
 			}
 		});
 		(findViewById(R.id.Participantes)).setOnClickListener(new OnClickListener(){
@@ -110,25 +110,18 @@ public class MainActivity extends AppCompatActivity {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == RESULT_OK) {
 			switch (requestCode) {
-			case WELCOME_ACTIVITY:
+			    case WELCOME_ACTIVITY:
 				launchSelectorDeCredenciales();
 					break;
-				case SELECTOR_DE_CREDENCIALES:
-
+                case SELECTOR_DE_CREDENCIALES:
+                    launchDataPickerActivity();
 					break;
+                case DATA_PICKER_ACTIVITY:
+                    launchVotacionesConf();
+                    break;
 			}
 		} else {
-			switch (requestCode) {
-			case SELECTOR_DE_CREDENCIALES:
-				launchSelectorDeCredenciales();
-				break;
-			case WELCOME_ACTIVITY:
-				finish();
-				break;
-			case UNLOCKER_ACTIVITY:
-				launchUnlockerActivity();
-				break;
-			}
+			finish();
 		}
 		if (requestCode == SPLASH) {
 			existsAdmin = true;
@@ -160,6 +153,16 @@ public class MainActivity extends AppCompatActivity {
 			}
 		}
 	}
+
+    private void launchVotacionesConf(){
+        Intent i = new Intent(MainActivity.this,VotacionesConf.class);
+        startActivity(i);
+    }
+
+    private void launchDataPickerActivity(){
+        Intent i = new Intent(this,DataPickerActivity.class);
+        startActivityForResult(i,DATA_PICKER_ACTIVITY);
+    }
 	
 	private void launchUnlockerActivity(){
 		Intent i = new Intent(this, UnlockerActivity.class);

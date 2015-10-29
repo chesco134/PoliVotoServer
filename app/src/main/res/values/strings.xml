@@ -32,7 +32,8 @@
     <string name="escribir_contraseña">Escriba contraseña</string>
     <string name="casi_terminamos">¡Casi terminamos!</string>
     <string name="define_zona_votacion">¿En qué lugar se llevará a cabo la auscultación?</string>
-    <string name="especifique_zona">Escriba la dirección de la escuela o el centro en donde se encuentra:</string>
+    <string name="especifique_zona">Escriba el nombre de la escuela o del lugar en donde se encuentra:</string>
+    <string name="escriba_perfil">Nombre del grupo</string>
     <string name="confirmar_contraseña">Confirmar contraseña:</string>
     <string name="cargar_ubicacion_gps">O cargue su ubicación con GPS</string>
     <string name="service_not_available">Lo sentimos, el servicio no está disponible x.X</string>
@@ -47,10 +48,10 @@
     <string name="conectando_label">Conectando al servidor...</string>
     <string name="polivoto_electronico">PoliVoto Electrónico ©</string>
     <string name="subtitle">Seleccione un botón</string>
-    <string name="ingrese_titulo">Ingrese Título</string>
+    <string name="ingrese_titulo">Ingrese pregunta</string>
     <string name="add">+</string>
     <string name="substract">-</string>
-    <string name="ingrese_titulo_opcion">Ingrese Título de opción</string>
+    <string name="ingrese_titulo_opcion">Ingrese opción</string>
     <string name="iniciar_servicio">Iniciar Servicio</string>
     <string name="option_menu_2">Seleccione un botón</string>
     <string name="detener_servicio">Detener Servicio</string>
@@ -74,6 +75,13 @@
     <string name="keys_insert_error">Error al actualizar credenciales.</string>
     <string name="psswd_length_error">Error, la longitud de las contraseñas debe ser de más de 5 caracteres.</string>
     <string name="splash_message">Una herramienta de confianza para la comunidad politécnica.</string>
+    <string name="mensaje_seleccion_escuela">Nos gustaría saber el lugar en el cual usará PoliVoto (institución)</string>
+    <string name="mensaje_seleccion_perfiles">Casi terminamos, por favor, especifique los grupos bajo los cuales serán registrados los participantes.</string>
+    <string name="hint_escuela">Escuela/Institución</string>
+    <string name="gps_tag">GPS</string>
+    <string name="mas_info">Más Info</string>
+    <string name="agregar">Nuevo</string>
+    <string name="quitar">Quitar</string>
     <string name="logo_splash_description">PoliVoto es una marca registrada.</string>
     <string name="mensaje_alerta">¿Está seguro de que quiere finalizar? Esto borrará los datos de la base de datos, creará un fichero
         cifrado con la información hasta el momento, y no permitirá finalizar cualquier otra auscultación hasta que no sea

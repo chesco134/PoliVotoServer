@@ -83,7 +83,7 @@ public class CredencialesFragment extends Fragment{
 				if( psswd.length() > 5 && psswd2.length() > 5 ){
 					if(isChangePasswords){
 						Votaciones db = new Votaciones(context); 
-						if( db.consultKey(new Hasher().makeHash(psswd), usuario)){
+						if( db.consultaUsuario(usuario,new Hasher().makeHash(psswd))){
 							if(db.updateKey(psswd, psswd2, usuario, zona)){
 								Toast.makeText(context,"Credenciales actualizadas con éxito.",Toast.LENGTH_SHORT).show();
 								psswdInput.setText("");

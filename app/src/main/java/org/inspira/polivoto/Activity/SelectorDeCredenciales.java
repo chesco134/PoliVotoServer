@@ -30,13 +30,13 @@ public class SelectorDeCredenciales extends AppCompatActivity implements
 	private MyFragmentStatePagerAdapter adapter;
 	private static LinkedList<CredencialesFragment> fragmentitos;
 	
-	protected boolean compruebaCredencial(String usuario){
+	public boolean compruebaCredencial(String usuario){
 		boolean isIn = false;
 		isIn = new Votaciones(this).revisaExistenciaDeCredencial(usuario);
 		return isIn;
 	}
 	
-	protected String[] checkProgress(){
+	public String[] checkProgress(){
 		String[] credencialesFaltantes = null;
 		if(!isChangePasswords){
 			ListIterator<CredencialesFragment> credencialesFragmentIterator = fragmentitos.listIterator();
@@ -56,10 +56,8 @@ public class SelectorDeCredenciales extends AppCompatActivity implements
 		return credencialesFaltantes;
 	}
 	
-	protected boolean guardarCredencial(String usuario, String password){
-		boolean success = false;
-		Hasher hasher = new Hasher();
-		success = new Votaciones(this).insertKey(hasher.makeHash(password),usuario, zona);
+	public boolean guardarCredencial(String usuario, String password){
+		boolean success = new Votaciones(this).insertaUsuario(usuario,new Hasher().makeHash(password)) != -1 ? true : false;
 		return success;
 	}
 	

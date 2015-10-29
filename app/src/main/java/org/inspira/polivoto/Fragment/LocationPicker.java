@@ -31,7 +31,6 @@ public class LocationPicker extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.especificar_zona_votacion,root,false);
         confirmar = (Button)rootView.findViewById(R.id.confirmar);
-        gpsLauncher = (Button)rootView.findViewById(R.id.load_gps_location);
         locationText = (EditText)rootView.findViewById(R.id.location_text);
         return rootView;
     }

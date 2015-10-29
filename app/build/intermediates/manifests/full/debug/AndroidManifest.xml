@@ -34,46 +34,50 @@
         <service android:name="org.inspira.polivotoserver.MiServicio" />
 
         <activity
-            android:name="org.inspira.polivoto.activities.MensajeInformacion"
+            android:name="org.inspira.polivoto.Activity.MensajeInformacion"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Dialog" />
         <activity
-            android:name="org.inspira.polivoto.activities.CargadorDeMatricula"
-            android:label="@string/app_name" />
-        <activity
-            android:name="org.inspira.polivoto.activities.VotacionesConf"
-            android:label="@string/app_name" />
-        <activity
-            android:name="org.inspira.polivoto.activities.ListaContenido"
-            android:label="@string/app_name" />
-        <activity
-            android:name="org.inspira.polivoto.activities.UnlockerActivity"
+            android:name="org.inspira.polivoto.Activity.DataPickerActivity"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Dialog" />
         <activity
-            android:name="org.inspira.polivoto.activities.WelcomeActivity"
+            android:name="org.inspira.polivoto.Activity.CargadorDeMatricula"
             android:label="@string/app_name" />
         <activity
-            android:name="org.inspira.polivotoserver.SelectorDeCredenciales"
+            android:name="org.inspira.polivoto.Activity.VotacionesConf"
             android:label="@string/app_name" />
         <activity
-            android:name="org.inspira.polivoto.activities.SimplePromptActivity"
+            android:name="org.inspira.polivoto.Activity.ListaContenido"
             android:label="@string/app_name" />
         <activity
-            android:name="org.inspira.polivoto.activities.SplashActivity"
+            android:name="org.inspira.polivoto.Activity.UnlockerActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name="org.inspira.polivoto.Activity.WelcomeActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="org.inspira.polivoto.Activity.SelectorDeCredenciales"
+            android:label="@string/app_name" />
+        <activity
+            android:name="org.inspira.polivoto.Activity.SimplePromptActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="org.inspira.polivoto.Activity.SplashActivity"
             android:label=""
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
-            android:name="org.inspira.polivotoserver.Mensaje"
+            android:name="org.inspira.polivoto.Activity.Mensaje"
             android:label="Advertencia"
             android:theme="@android:style/Theme.Dialog" />
         <activity
-            android:name="org.inspira.polivoto.activities.TestDialog"
+            android:name="org.inspira.polivoto.Activity.TestDialog"
             android:label="Espere"
             android:screenOrientation="locked"
             android:theme="@android:style/Theme.Dialog" />
         <activity
-            android:name="org.inspira.polivotoserver.MainActivity"
+            android:name="org.inspira.polivoto.Activity.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
