@@ -39,6 +39,10 @@
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Dialog" />
         <activity
+            android:name="org.inspira.polivoto.Activity.InputDateAndTimeValuesActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
             android:name="org.inspira.polivoto.Activity.DataPickerActivity"
             android:label="@string/app_name" />
         <activity

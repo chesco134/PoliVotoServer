@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:2:1-86:12
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:2:1-90:12
 	package
 		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:3:5-41
 		INJECTED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml
@@ -203,7 +203,7 @@ MERGED from [com.android.support:support-v4:23.1.0] /home/jcapiz/AndroidStudioPr
 		INJECTED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml
 		INJECTED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml
 application
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:15:5-84:19
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:15:5-88:19
 MERGED from [com.google.android.gms:play-services:8.1.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/8.1.0/AndroidManifest.xml:19:5-20
 MERGED from [com.google.android.gms:play-services-ads:8.1.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.1.0/AndroidManifest.xml:24:5-32:19
 MERGED from [com.google.android.gms:play-services-basement:8.1.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.1.0/AndroidManifest.xml:20:5-24:19
@@ -389,110 +389,118 @@ ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/Androi
 		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:29:13-56
 	android:name
 		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:27:13-76
-activity#org.inspira.polivoto.Activity.DataPickerActivity
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:30:9-32:48
+activity#org.inspira.polivoto.Activity.InputDateAndTimeValuesActivity
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:30:9-33:59
 	android:label
 		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:32:13-45
-	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:31:13-76
-activity#org.inspira.polivoto.Activity.CargadorDeMatricula
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:33:9-35:48
-	android:label
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:35:13-45
-	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:34:13-77
-activity#org.inspira.polivoto.Activity.CambiaZonaPerfilesActivity
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:36:9-38:48
-	android:label
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:38:13-45
-	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:37:13-84
-activity#org.inspira.polivoto.Activity.VotacionesConf
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:39:9-41:48
-	android:label
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:41:13-45
-	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:40:13-72
-activity#org.inspira.polivoto.Activity.ListaContenido
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:42:9-44:48
-	android:label
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:44:13-45
-	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:43:13-72
-activity#org.inspira.polivoto.Activity.UnlockerActivity
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:45:9-48:59
-	android:label
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:47:13-45
 	android:theme
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:48:13-56
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:33:13-56
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:46:13-74
-activity#org.inspira.polivoto.Activity.WelcomeActivity
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:49:9-51:48
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:31:13-88
+activity#org.inspira.polivoto.Activity.DataPickerActivity
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:34:9-36:48
+	android:label
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:36:13-45
+	android:name
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:35:13-76
+activity#org.inspira.polivoto.Activity.CargadorDeMatricula
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:37:9-39:48
+	android:label
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:39:13-45
+	android:name
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:38:13-77
+activity#org.inspira.polivoto.Activity.CambiaZonaPerfilesActivity
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:40:9-42:48
+	android:label
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:42:13-45
+	android:name
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:41:13-84
+activity#org.inspira.polivoto.Activity.VotacionesConf
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:43:9-45:48
+	android:label
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:45:13-45
+	android:name
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:44:13-72
+activity#org.inspira.polivoto.Activity.ListaContenido
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:46:9-48:48
+	android:label
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:48:13-45
+	android:name
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:47:13-72
+activity#org.inspira.polivoto.Activity.UnlockerActivity
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:49:9-52:59
 	android:label
 		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:51:13-45
+	android:theme
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:52:13-56
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:50:13-73
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:50:13-74
+activity#org.inspira.polivoto.Activity.WelcomeActivity
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:53:9-55:48
+	android:label
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:55:13-45
+	android:name
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:54:13-73
 activity#org.inspira.polivoto.Activity.SelectorDeCredenciales
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:52:9-54:48
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:56:9-58:48
 	android:label
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:54:13-45
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:58:13-45
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:53:13-80
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:57:13-80
 activity#org.inspira.polivoto.Activity.SimplePromptActivity
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:55:9-57:48
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:59:9-61:48
 	android:label
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:57:13-45
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:61:13-45
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:56:13-78
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:60:13-78
 activity#org.inspira.polivoto.Activity.SplashActivity
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:58:9-61:74
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:62:9-65:74
 	android:label
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:60:13-29
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:64:13-29
 	android:theme
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:61:13-71
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:65:13-71
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:59:13-72
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:63:13-72
 activity#org.inspira.polivoto.Activity.Mensaje
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:62:9-65:59
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:66:9-69:59
 	android:label
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:64:13-40
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:68:13-40
 	android:theme
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:65:13-56
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:69:13-56
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:63:13-65
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:67:13-65
 activity#org.inspira.polivoto.Activity.TestDialog
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:66:9-70:59
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:70:9-74:59
 	android:screenOrientation
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:69:13-47
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:73:13-47
 	android:label
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:68:13-35
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:72:13-35
 	android:theme
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:70:13-56
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:74:13-56
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:67:13-68
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:71:13-68
 activity#org.inspira.polivoto.Activity.MainActivity
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:71:9-79:20
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:75:9-83:20
 	android:label
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:73:13-45
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:77:13-45
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:72:13-70
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:76:13-70
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:74:13-78:29
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:78:13-82:29
 action#android.intent.action.MAIN
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:75:17-69
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:79:17-69
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:75:25-66
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:79:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:77:17-77
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:81:17-77
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:77:27-74
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:81:27-74
 service#org.inspira.polivotoserver.FetchAddressIntentService
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:81:9-83:40
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:85:9-87:40
 	android:exported
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:83:13-37
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:87:13-37
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:82:13-54
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:86:13-54
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from [com.google.android.gms:play-services-ads:8.1.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.1.0/AndroidManifest.xml:21:5-78
 MERGED from [com.google.android.gms:play-services-analytics:8.1.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/8.1.0/AndroidManifest.xml:22:5-79
@@ -538,7 +546,7 @@ MERGED from [com.google.android.gms:play-services-maps:8.1.0] /home/jcapiz/Andro
 	android:required
 		ADDED from [com.google.android.gms:play-services-maps:8.1.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.1.0/AndroidManifest.xml:25:8-31
 android:uses-permission#android.permission.READ_EXTERNAL_STORAGE
-IMPLIED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:2:1-86:12 reason: com.google.android.gms.maps requested WRITE_EXTERNAL_STORAGE
+IMPLIED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:2:1-90:12 reason: com.google.android.gms.maps requested WRITE_EXTERNAL_STORAGE
 uses-permission#com.google.android.c2dm.permission.RECEIVE
 ADDED from [com.google.android.gms:play-services-gcm:8.1.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/8.1.0/AndroidManifest.xml:21:5-82
 MERGED from [com.google.android.gms:play-services-gcm:8.1.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/8.1.0/AndroidManifest.xml:21:5-82

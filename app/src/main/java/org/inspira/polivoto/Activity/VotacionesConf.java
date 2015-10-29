@@ -46,8 +46,13 @@ public class VotacionesConf extends AppCompatActivity implements
 	public static final String PARTICIPANTES_FILE = Environment.getExternalStorageDirectory().getAbsolutePath() + "/participantes.csv";
 	public static final String FILE_NAME = Environment.getExternalStorageDirectory().getAbsolutePath() + "/votaciones.conf";
 	public static final String RESULTS_FILE = Environment.getExternalStorageDirectory().getAbsolutePath() + "/resultados.polivoto";
+	public static final int FREE_CAMPAIGN = 703;
 	private static final int FINISH_VOTING_PROCESS_REQUEST = 134;
 	private static final int DATA_LOADER = 5;
+    private static final int STARTING_SERVICE_FOR_START_DATE = 47;
+    private static final int STARTING_SERVICE = 48;
+    private String fechaInicioVotacion;
+    private String fechaFinVotacion;
 	private int counter = 0;
 
 	private void launchMensajeConfirmacion(){
@@ -70,6 +75,20 @@ public class VotacionesConf extends AppCompatActivity implements
 		//Toast.makeText(this, "Tul", Toast.LENGTH_LONG).show();
 		startActivityForResult(dataLoader, DATA_LOADER);
 	}
+
+    @Override
+    public void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        outState.putString("fechaInicioVotacion", fechaInicioVotacion);
+        outState.putString("fechaFinVotacion", fechaFinVotacion);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+        fechaInicioVotacion = savedInstanceState.getString("fechaInicioVotacion");
+        fechaFinVotacion = savedInstanceState.getString("fechaFinVotacion");
+    }
 
 	/**
 	 * The {@link ViewPager} that will host the section contents.
@@ -181,6 +200,109 @@ public class VotacionesConf extends AppCompatActivity implements
 				Toast.makeText(this,"Servicio iniciado", Toast.LENGTH_SHORT)
 				.show();
 				break;
+            case STARTING_SERVICE_FOR_START_DATE:
+                /** Aún no está validado el campo de fecha de inicio **/
+                int year = data.getExtras().getInt("year");
+                int month = data.getExtras().getInt("month");
+                int day = data.getExtras().getInt("day");
+                int hourOfDay = data.getExtras().getInt("hourOfDay");
+                int minute = data.getExtras().getInt("minute");
+                fechaInicioVotacion = day + "/" + month + "/" + year + ", " +
+                        hourOfDay + ":" + minute;
+                launchIniciaVotacion(getString(R.string.define_fecha_fin_votacion),STARTING_SERVICE,true);
+                break;
+            case STARTING_SERVICE:
+                /** Aún no está validado el campo de fecha de fin **/
+                year = data.getExtras().getInt("year");
+                month = data.getExtras().getInt("month");
+                day = data.getExtras().getInt("day");
+                hourOfDay = data.getExtras().getInt("hourOfDay");
+                minute = data.getExtras().getInt("minute");
+                fechaFinVotacion = day + "/" + month + "/" + year + ", " +
+                        hourOfDay + ":" + minute;
+                String titVotacion = data.getExtras().getString("response");
+               Votaciones db = new Votaciones(this);
+                db.insertaVotacion(titVotacion,fechaInicioVotacion, fechaFinVotacion);
+               ListIterator<MainFragment> currentPregunta = fragmentitos
+                        .listIterator();
+                LinkedList<Pregunta> pregs = new LinkedList<Pregunta>();
+                String texto = new String();
+                int count = 0;
+                while (currentPregunta.hasNext()) {
+                    MainFragment mFragment = currentPregunta.next();
+                    String titulo = null;
+                    try {
+                        titulo = mFragment.getTitle().getText().toString();
+                    } catch (NullPointerException e) {
+                        titulo = "";
+                    }
+                    String op1 = null;
+                    try {
+                        op1 = mFragment.getTitle_option().getText().toString();
+                    } catch (NullPointerException e) {
+                        op1 = "";
+                    }
+                    String op2 = null;
+                    try {
+                        op2 = mFragment.getTitle_option_2().getText().toString();
+                    } catch (NullPointerException e) {
+                        op2 = "";
+                    }
+                    if (!titulo.equals("") && !op1.equals("") && !op2.equals("")) {
+                        texto = texto.concat("\n\n" + count + "\nTitulo:"+titulo+"\nopcion1:"+op1+"\nopcion2:"+op2);
+                        Pregunta pregunta = new Pregunta();
+                        LinkedList<Opcion> opciones = new LinkedList<Opcion>();
+                        Opcion opcion1 = new Opcion();
+                        opcion1.nombre = op1;
+                        opcion1.cantidad = 0;
+                        Opcion opcion2 = new Opcion();
+                        opcion2.nombre = op2;
+                        opcion2.cantidad = 0;
+                        db.insertaPregunta(titulo,titVotacion);
+                        db.insertaOpcion(op1);
+                        db.insertaPreguntaOpcion(titulo,op1);
+                        db.insertaOpcion(op2);
+                        db.insertaPreguntaOpcion(titulo,op2);
+                        opciones.add(opcion1);
+                        opciones.add(opcion2);
+                        ListIterator<View> currentRowView = mFragment
+                                .getAdditionalRows().listIterator();
+                        counter = 3;
+                        while (currentRowView.hasNext()) {
+                            Opcion opi = new Opcion();
+                            opi.nombre = ((EditText) currentRowView.next()
+                                    .findViewById(R.id.set_title_option)).getText()
+                                    .toString();
+                            opi.cantidad = 0;
+                            opciones.add(opi);
+                            db.insertaOpcion(opi.nombre);
+                            db.insertaPreguntaOpcion(titulo,opi.nombre);
+                            texto = texto.concat("\nopcion" + counter++ + ":" + opi.nombre);
+                        }
+                        pregunta.opciones = opciones;
+                        pregunta.titulo = titulo;
+                        pregs.add(pregunta);
+                    }
+                    count++;
+                }
+                if (pregs.size() == 0) {
+                    Toast.makeText(this, "Error, al menos debes llenar una forma",
+                            Toast.LENGTH_SHORT).show();
+                }else{
+                    superChunk = new SuperChunk(pregs);
+                    myService.putExtra("SuperChunk", superChunk);
+                    myService.putExtra("operating_mode",FREE_CAMPAIGN);
+                    startService(myService); // Debes iniciar el servicio cuando la aplicación haya devuelto adecuadamente.
+                    //launchDataLoader("Cargando matrícula", superChunk.getPreguntas().toArray(new Pregunta[0]));
+                    try{
+                        ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(FILE_NAME));
+                        salida.writeObject(superChunk);
+                        salida.close();
+                    }catch(IOException e){
+                        Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }
+                break;
 			}
 		}
 	}
@@ -202,86 +324,17 @@ public class VotacionesConf extends AppCompatActivity implements
 		Votaciones v;
 		String[] rows;
 		if (id == R.id.iniciar_servicio) {
-			ListIterator<MainFragment> currentPregunta = fragmentitos
-					.listIterator();
-			LinkedList<Pregunta> pregs = new LinkedList<Pregunta>();
-			String texto = new String();
-			int count = 0;
-			while (currentPregunta.hasNext()) {
-				MainFragment mFragment = currentPregunta.next();
-				String titulo = null;
-				try {
-					titulo = mFragment.getTitle().getText().toString();
-				} catch (NullPointerException e) {
-					titulo = "";
-				}
-				String op1 = null;
-				try {
-					op1 = mFragment.getTitle_option().getText().toString();
-				} catch (NullPointerException e) {
-					op1 = "";
-				}
-				String op2 = null;
-				try {
-					op2 = mFragment.getTitle_option_2().getText().toString();
-				} catch (NullPointerException e) {
-					op2 = "";
-				}
-				if (!titulo.equals("") && !op1.equals("") && !op2.equals("")) {
-					texto = texto.concat("\n\n" + count + "\nTitulo:"+titulo+"\nopcion1:"+op1+"\nopcion2:"+op2);
-					Pregunta pregunta = new Pregunta();
-					LinkedList<Opcion> opciones = new LinkedList<Opcion>();
-					Opcion opcion1 = new Opcion();
-					opcion1.nombre = op1;
-					opcion1.cantidad = 0;
-					Opcion opcion2 = new Opcion();
-					opcion2.nombre = op2;
-					opcion2.cantidad = 0;
-					opciones.add(opcion1);
-					opciones.add(opcion2);
-					ListIterator<View> currentRowView = mFragment
-							.getAdditionalRows().listIterator();
-					counter = 3;
-					while (currentRowView.hasNext()) {
-						Opcion opi = new Opcion();
-						opi.nombre = ((EditText) currentRowView.next()
-								.findViewById(R.id.set_title_option)).getText()
-								.toString();
-						opi.cantidad = 0;
-						opciones.add(opi);
-						texto = texto.concat("\nopcion" + counter++ + ":" + opi.nombre);
-					}
-					pregunta.opciones = opciones;
-					pregunta.titulo = titulo;
-					pregs.add(pregunta);
-				}
-				count++;
-			}
-			if (pregs.size() == 0) {
-				Toast.makeText(this, "Error, al menos debes llenar una forma",
-						Toast.LENGTH_SHORT).show();
-			}else{
-				superChunk = new SuperChunk(pregs);
-				myService.putExtra("SuperChunk", superChunk);
-				// startService(myService); Debes iniciar el servicio cuando la aplicación haya devuelto adecuadamente.
-				launchDataLoader("Cargando matrícula", superChunk.getPreguntas().toArray(new Pregunta[0]));
-				try{
-					ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(FILE_NAME));
-					salida.writeObject(superChunk);
-					salida.close();
-				}catch(IOException e){
-					Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
-				}
-			}
+            launchIniciaVotacion(getString(R.string.define_fecha_inicio_votacion),STARTING_SERVICE_FOR_START_DATE,false);
 		} else if (id == R.id.action_last_server) {
 			try{
 				ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(FILE_NAME));
 				superChunk = (SuperChunk)entrada.readObject();
 				myService.putExtra("SuperChunk", superChunk);
-				launchDataLoader("Cargando matrícula", superChunk.getPreguntas().toArray(new Pregunta[0]));
-				//startService(myService); // Iniciar el servicio después de que la actividad haya terminado satisfactoriamente.
-				//Toast.makeText(this,"Servicio Iniciado", Toast.LENGTH_SHORT)
-				//.show();
+				myService.putExtra("operation_mode",FREE_CAMPAIGN);
+				//launchDataLoader("Cargando matrícula", superChunk.getPreguntas().toArray(new Pregunta[0]));
+				startService(myService); // Iniciar el servicio después de que la actividad haya terminado satisfactoriamente.
+				Toast.makeText(this,"Servicio Iniciado", Toast.LENGTH_SHORT)
+				.show();
 				entrada.close();
 			}catch(IOException | ClassNotFoundException e){
 				Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
@@ -349,4 +402,11 @@ public class VotacionesConf extends AppCompatActivity implements
 	public void onTabReselected(ActionBar.Tab tab,
 			FragmentTransaction fragmentTransaction) {
 	}
+
+    private void launchIniciaVotacion(String title, int requestCode, boolean requestTitle){
+        Intent i = new Intent(this,InputDateAndTimeValuesActivity.class);
+        i.putExtra("title",title);
+        i.putExtra("requestTitle",requestTitle);
+        startActivityForResult(i, requestCode);
+    }
 }

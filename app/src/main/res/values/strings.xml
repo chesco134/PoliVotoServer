@@ -84,6 +84,9 @@
     <string name="quitar">Quitar</string>
     <string name="mensaje_cambio_perfiles">Aquí puede editar los perfiles existentes.</string>
     <string name="logo_splash_description">PoliVoto es una marca registrada.</string>
+    <string name="define_fecha_inicio_votacion">Defina la fecha de inicio de la votación</string>
+    <string name="define_fecha_fin_votacion">Defina la fecha de término de la votación</string>
+    <string name="define_tiempo_fin_votacion">Defina la fecha y hora de término de la votación</string>
     <string name="cambia_zona">Aquí puede cambiar el nombre del lugar en el que se encuentra</string>
     <string name="mensaje_alerta">¿Está seguro de que quiere finalizar? Esto borrará los datos de la base de datos, creará un fichero
         cifrado con la información hasta el momento, y no permitirá finalizar cualquier otra auscultación hasta que no sea

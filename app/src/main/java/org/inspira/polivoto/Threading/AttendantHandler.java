@@ -6,6 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -52,9 +53,6 @@ public class AttendantHandler extends Thread {
 		db = new Votaciones(activity);
 		keyHandler = new Votaciones(activity);
 		hasher = new Hasher();
-		totales[0] = db.consultaPAAE();
-		totales[1] = db.consultaDOCENTE();
-		totales[2] = db.consultaAlumno();
 		attendantInnerHandler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -70,30 +68,40 @@ public class AttendantHandler extends Thread {
 					}
 					salidaObjeto = new ObjectOutputStream(
 							socket.getOutputStream());
+                    int idLoginAttempt;
 					if (datos[2].equals("")) {
 						if( datos[0].equals("Capturista")){
+                            idLoginAttempt = db.insertaLoginAttempt(datos[0],socket.getRemoteSocketAddress().toString());
 							if(!keyHandler.consultaUsuario("Capturista",hasher.makeHash(datos[1]))){
 								salidaObjeto.writeUTF("NO");
 								salidaObjeto.flush();
 								socket.close();
 								return;
-							}
+							}else{
+                                db.insertaAttemptSucceded(idLoginAttempt);
+                            }
 						}else{
 							if(datos[0].equals("Participante")){
+                                idLoginAttempt = db.insertaLoginAttempt(datos[0],socket.getRemoteSocketAddress().toString());
 								if(!keyHandler.consultaUsuario("Participante",hasher.makeHash(datos[1]))){
 									salidaObjeto.writeUTF("NO");
 									salidaObjeto.flush();
 									socket.close();
 									return;
-									}
+                                }else{
+                                    db.insertaAttemptSucceded(idLoginAttempt);
+                                }
 							}else{
 								if(datos[0].equals("Consultor")){
-									if(!keyHandler.consultaUsuario("Consultor",hasher.makeHash(datos[1]))){
+                                    idLoginAttempt = db.insertaLoginAttempt(datos[0],socket.getRemoteSocketAddress().toString());
+                                    if(!keyHandler.consultaUsuario("Consultor",hasher.makeHash(datos[1]))){
 										salidaObjeto.writeUTF("NO");
 										salidaObjeto.flush();
 										socket.close();
 										return;
-										}
+                                }else{
+                                        db.insertaAttemptSucceded(idLoginAttempt);
+                                    }
 								}else{
 									LinkedList<String> titulos = new LinkedList<String>();
 									titulos.add("NO");
@@ -124,7 +132,7 @@ public class AttendantHandler extends Thread {
 									 * cambios (es decir, que alguien se quiera llevar el cel después,
 									 * sólo se tendría que poner a un capturista como nuevo candidato
 									 * (haciendo "back & forth")y el nuevo participante conectarse
-									 * para reclamarlo.	
+									 * para reclamarlo.
 									 * // Revisar que haya ya un capturista registrado.
 
 									  synchronized (participantes) {
@@ -149,7 +157,7 @@ public class AttendantHandler extends Thread {
 									synchronized (capturistas) {
 										salidaObjeto.writeObject(capturistas);
 										salidaObjeto.flush();
-									}									
+									}
 								} else {
 									LinkedList<String> titulos = new LinkedList<String>();
 									if (datos[0].equals("Consultor")) {
@@ -179,7 +187,8 @@ public class AttendantHandler extends Thread {
 							socket.close();
 							return;
 						}
-						
+
+                        // ¿Alguna vez entra aquí?
 						if( datos.length == 5){
 							long result = db.insertaRegistroUnico(datos[2], datos[3], datos[4], superChunk.getPreguntas());
 							if( result != -1 )
@@ -193,23 +202,22 @@ public class AttendantHandler extends Thread {
 							entradaObjeto.close();
 							socket.close();
 							return;
-						}
-						
+						} // ...
+
 						/****************************************************************************************
-						 * 
-						 * 
-						 * 		El capturista debe validar una boleta y en caso de s�, mandar todas las opciones 
+						 *
+						 *
+						 * 		El capturista debe validar una boleta y en caso de s�, mandar todas las opciones
 						 * 	al participante. Contacta al participante en el puerto 36523. Por cada pregunta hace
 						 * 	un intento de conexi�n con el participante.
-						 * 
-						 * 
+						 *
+						 *
 						 ******************************************************************************************/
 
-						List<String> papeletasRestantes;
 						/* UNCOMMENT FOr a VOTING PROCESS WITH DATASET*/
-						
-						if( db.consultaParticipante(datos[2]) ){
-							if(db.consultaParticipanteHoraVoto(datos[2])){
+
+						if( db.consultaParticipante(datos[2])){
+							if(db.consultaParticipanteHoraParticipacion(datos[2]) != null){
 								salidaObjeto.writeUTF("El participante ha votado.");
 								salidaObjeto.flush();
 								salidaObjeto.close();
@@ -218,22 +226,20 @@ public class AttendantHandler extends Thread {
 								return;
 							}
 						}else{
-						/*
-							LinkedList<Pregunta> preguntas = new LinkedList<Pregunta>();
+                            db.insertaParticipante(datos[2],db.obtenerPerfiles()[0],db.obtenerUltimaEscuela());
 							ListIterator<Pregunta> pregs = superChunk.getPreguntas().listIterator();
 							while(pregs.hasNext()){
-								preguntas.add(pregs.next());
+                                db.insertaParticipantePregunta(datos[2],pregs.next().titulo);
 							}
-							long tempId = db.insertaRegistroUnico("AyRodrigo", datos[2], "Tul", preguntas);
-						*/
 							// This is for a voting process with dataset
+							/*
 							salidaObjeto.writeUTF("El participante no está registrado.");
 							salidaObjeto.flush();
 							salidaObjeto.close();
 							entradaObjeto.close();
 							socket.close();
 							return;
-						
+							*/
 						}
 						/* UNCOMMENT FOr a VOTING PROCESS WITH DATASET*/
 
@@ -245,19 +251,19 @@ public class AttendantHandler extends Thread {
 							preguntas.add(pregs.next());
 						}
 						*/
-						
+
 						//db.insertaRegistroUnico("AyRodrigo", datos[2], "tul", preguntas);
-						//db.insertaBoleta(datos[2],preguntas); // El método puede devolver -1 en 
+						//db.insertaBoleta(datos[2],preguntas); // El método puede devolver -1 en
 						// caso de no haber podido insertar la boleta.
 						/* UNCOMMENT FOr a NORMA VOTING PROCESS */
-						
-						papeletasRestantes = db.consultaPapeletasFaltantes(datos[2]);
+
+						String[] papeletasRestantes = (db.consultaParticipantePreguntas(datos[2]));
 						try {
-							for (int i = 0; i< papeletasRestantes.size(); i++) {
+							for (int i = 0; i< papeletasRestantes.length; i++) {
 								Socket slaveTerminal = new Socket(datos[3], 36523);
 								ObjectOutputStream salida = new ObjectOutputStream(
 										slaveTerminal.getOutputStream());
-								Pregunta currentQuestion = superChunk.getPregunta(papeletasRestantes.get(i));
+								Pregunta currentQuestion = superChunk.getPregunta(papeletasRestantes[i]);
 								opcionesVoto = new String[currentQuestion.opciones.size()];
 								for( int j=0; j<opcionesVoto.length; j++){
 									opcionesVoto[j] = currentQuestion.opciones.get(j).nombre;
@@ -291,21 +297,21 @@ public class AttendantHandler extends Thread {
 						return;
 					}
 						/* ***
-						 * 
+						 *
 						 *  SuperChunk es un elemento que debe ser colocado al iniciar el servicio.
-						 *  
+						 *
 						 * ****/
-						
-					
+
+
 					/***************************************************************************
-					 * 
+					 *
 					 * 		El participante debe saber con qu� capturista trabajar, para evitar
 					 * 	programar m�s puertos.
 					 *
-					 **********************************************************************/							
-					
+					 **********************************************************************/
+
 					if (datos[0].equals("Participante")) {
-						
+
 						if (datos.length != 5) {
 							String participanteHost = socket.getInetAddress()
 									.getHostAddress();	//AL CAPTURISTA HAY QUE DECIRLE QUIEN ES SU PARTICIPANTE
@@ -322,7 +328,7 @@ public class AttendantHandler extends Thread {
 									if (wasIn) {
 										Socket capturista = new Socket(datos[2],
 												33401);
-										
+
 										ObjectOutputStream salida = new ObjectOutputStream(
 												capturista.getOutputStream());
 										salida.writeUTF(participanteHost);
@@ -337,7 +343,7 @@ public class AttendantHandler extends Thread {
 										}
 										salidaObjeto.writeUTF("Registrado.");
 										salidaObjeto.flush();
-										
+
 										salida.close();
 										capturista.close();
 									} else {
@@ -351,7 +357,7 @@ public class AttendantHandler extends Thread {
 								salidaObjeto
 								.writeUTF("Error: " + e.toString());
 								salidaObjeto.flush();
-								
+
 								/*
 								String pair = datos[2] + " - "
 										+ socket.getInetAddress().getHostAddress();
@@ -366,15 +372,21 @@ public class AttendantHandler extends Thread {
 							socket.close();
 							return;
 						}
-						
+
 						/***************************************************************
-						 * 
+						 *
 						 * 		El participante debe "actualizarVoto".
 						 *
 						 **********************************************************************/
-						
-						
-						String result = db.actualizaVotando(datos[2], datos[3], datos[4]);
+
+
+						long result = db.insertaVoto(
+                                new Hasher().makeHash(datos[2] + "..." + datos[4] + String.valueOf(Math.random()))
+                                , db.obtenerIdVotacionFromPregunta(datos[3])
+                                , db.obtenerPerfiles()[0]
+                                , datos[4]
+                                , Integer.parseInt(datos[5])
+                        ); //db.actualizaVotando(datos[2], datos[3], datos[4]);
 						ListIterator<String> actualPair = participantes.listIterator();
 						String capturist = null;
 						while(actualPair.hasNext()){
@@ -388,7 +400,7 @@ public class AttendantHandler extends Thread {
 							Socket so = new Socket(capturist,5001);
 							DataOutputStream salida = new DataOutputStream(so.getOutputStream());
 							salida.flush();
-							if(result != null){
+							if(result != -1){
 								salida.writeUTF(datos[2] +", ha votado con éxito.");
 							}else{
 								salida.writeUTF("El participante ha emitido un voto.");
@@ -406,16 +418,16 @@ public class AttendantHandler extends Thread {
 						return;
 					}
 					if (datos[0].equals("Consultor")) {
-						
+
 						/***************************************************************
-						 * 
+						 *
 						 * 		El Consultor pregunta con un t�tulo cuales son los resultados
 						 * 	que desea obtener, as�, se debe llamar a "consultarVotos", pasando
 						 * 	el nombre de la pregunta como par�metro de b�squeda y armando una
 						 * 	lista ligada con los t�tulos de las opciones @ n�mero de votos.
 						 *
-						 **********************************************************************/							
-						
+						 **********************************************************************/
+
 						LinkedList<String> Resultados = new LinkedList<String>();
 						LinkedList<Pregunta> preguntas = superChunk.getPreguntas();
 						ListIterator<Pregunta> iter = preguntas.listIterator();
@@ -466,7 +478,7 @@ public class AttendantHandler extends Thread {
 					socket.close();
 					return;
 				} catch (IOException e) {
-					
+
 				} catch (ClassNotFoundException e) {
 				}
 

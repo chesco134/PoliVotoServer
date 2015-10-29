@@ -166,6 +166,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void participantes(View v){
+        launchInputDateAndTimeValues();
+        /*
         new Thread(){
             @Override
             public void run(){
@@ -177,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         }.start();
+        */
     }
 
     private void launchVotacionesConf(){
@@ -227,6 +230,11 @@ public class MainActivity extends AppCompatActivity {
     private void launchEditaPerfiles(){
         Intent i = new Intent(this,CambiaZonaPerfilesActivity.class);
         i.putExtra("action",PERFILES_ACTION);
+        startActivity(i);
+    }
+
+    private void launchInputDateAndTimeValues(){
+        Intent i = new Intent(this,InputDateAndTimeValuesActivity.class);
         startActivity(i);
     }
 }

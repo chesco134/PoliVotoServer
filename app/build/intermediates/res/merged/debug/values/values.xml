@@ -400,6 +400,9 @@
     <string name="decline">Decline</string>
     <!-- From: file:/home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="define_fecha_fin_votacion">Defina la fecha de término de la votación</string>
+    <string name="define_fecha_inicio_votacion">Defina la fecha de inicio de la votación</string>
+    <string name="define_tiempo_fin_votacion">Defina la fecha y hora de término de la votación</string>
     <string name="define_zona_votacion">¿En qué lugar se llevará a cabo la auscultación?</string>
     <string name="detener_servicio">Detener Servicio</string>
     <string name="directiva_conexion_1">Escriba dirección de servidor</string>

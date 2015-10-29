@@ -60,6 +60,7 @@ public class MiServicio extends Service {
 					Message attendantMsg = attendantHandler.attendantInnerHandler
 							.obtainMessage();
 					attendantMsg.obj = socket;
+					attendantMsg.arg2 = msg.arg2;
 					attendantHandler.attendantInnerHandler
 							.sendMessage(attendantMsg);
 				}
@@ -79,12 +80,14 @@ public class MiServicio extends Service {
 		msg.arg1 = startId;
 		if( intent != null ){
 			msg.obj = intent.getSerializableExtra("SuperChunk");
+			msg.arg2 = intent.getIntExtra("operating_mode", VotacionesConf.FREE_CAMPAIGN);
 		} else {
 			try{
 				ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(VotacionesConf.FILE_NAME));
 				SuperChunk superChunk = (SuperChunk)entrada.readObject();
 				entrada.close();
 				msg.obj = superChunk;
+				msg.arg2 = VotacionesConf.FREE_CAMPAIGN;
 			}catch(IOException | ClassNotFoundException e){
 				Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
 			}

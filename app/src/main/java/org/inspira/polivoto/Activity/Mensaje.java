@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ public class Mensaje extends Activity {
 		}
 		Bundle extras = getIntent().getExtras();
 		boolean isChoice = extras.getBoolean("isChoice");
+		boolean isInputMethod = extras.getBoolean("isInputMethod");
 		if( isChoice ){
 			LinearLayout buttonContainer = (LinearLayout)findViewById(R.id.button_container);
 			Button aceptar = new Button(this);
@@ -51,8 +53,24 @@ public class Mensaje extends Activity {
 			});
 			buttonContainer.addView(aceptar);
 			buttonContainer.addView(cancelar);
+		}else if(isInputMethod){
+			LinearLayout buttonContainer = (LinearLayout)findViewById(R.id.button_container);
+			Button aceptar = new Button(this);
+			aceptar.setText("Aceptar");
+			final EditText inputField = new EditText(this);
+			aceptar.setOnClickListener(new OnClickListener(){
+				@Override
+				public void onClick(View view){
+					Intent i = new Intent();
+					i.putExtra("response", inputField.getText().toString());
+					setResult(RESULT_OK,i);
+					finish();
+				}
+			});
+			buttonContainer.addView(aceptar);
+			buttonContainer.addView(inputField);
 		}else
-		setTitle("Enhorabuena!! =)");
+			setTitle("Enhorabuena!! =)");
 		TextView text = (TextView)findViewById(R.id.texto);
 		text.setText(msj);
 	}
