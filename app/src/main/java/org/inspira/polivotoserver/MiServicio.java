@@ -7,8 +7,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import org.inspira.capiz.NeoSuperChunk.SuperChunk;
-import org.inspira.polivoto.activities.VotacionesConf;
-import org.inspira.polivoto.threads.AttendantHandler;
+import org.inspira.polivoto.Activity.VotacionesConf;
+import org.inspira.polivoto.Threading.AttendantHandler;
 
 import android.app.Service;
 import android.content.Intent;

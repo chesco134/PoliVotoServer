@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.inspira.polivotoserver.SHAExample;
+import org.inspira.polivoto.Security.Hasher;
 
 import Shared.Pregunta;
 import android.content.ContentValues;
@@ -409,7 +409,7 @@ public class Votaciones extends SQLiteOpenHelper{
 		ContentValues values = new ContentValues();
 		values.put("VALUE", key);
 		values.put("NOMBRE", user);
-		values.put("Zona", new SHAExample().makeHash(zona));
+		values.put("Zona", new Hasher().makeHash(zona));
 		long result = db.insert("Key", "---", values);
 		db.close();
 		if (result != -1)
@@ -443,7 +443,7 @@ public class Votaciones extends SQLiteOpenHelper{
 	public boolean altaOpcion(String texto){
 		SQLiteDatabase db = getWritableDatabase();
 		ContentValues values = new ContentValues();
-		SHAExample hasher = new SHAExample();
+		Hasher hasher = new Hasher();
 		values.put("ID", hasher.makeHash(texto));
 		values.put("Texto", texto);
 		long result = db.insert("Opcion","---",values);
@@ -457,7 +457,7 @@ public class Votaciones extends SQLiteOpenHelper{
 	public boolean quitarOpcion(String texto){
 		SQLiteDatabase db = getWritableDatabase();
 		String whereClause = "ID=?";
-		String[] whereArgs = {new SHAExample().makeHash(texto)};
+		String[] whereArgs = {new Hasher().makeHash(texto)};
 		int count = db.delete("Opcion",whereClause,whereArgs);
 		db.close();
 		if( count > 0)
@@ -471,7 +471,7 @@ public class Votaciones extends SQLiteOpenHelper{
 		String whereClause = "ID=?";
 		String whereArgs[] = {idOpcion};
 		ContentValues values = new ContentValues();
-		values.put("ID",new SHAExample().makeHash(nTexto));
+		values.put("ID",new Hasher().makeHash(nTexto));
 		values.put("Texto",nTexto);
 		if( db.update("Opcion",values,whereClause,whereArgs) > 0)
 			return true;
@@ -1027,7 +1027,7 @@ public class Votaciones extends SQLiteOpenHelper{
 	public boolean altaPregunta(String titulo, String votacion){
 		SQLiteDatabase db = getWritableDatabase();
 		ContentValues values = new ContentValues();
-		SHAExample hasher = new SHAExample();
+		Hasher hasher = new Hasher();
 		values.put("ID", hasher.makeHash(titulo));
 		values.put("Titulo", titulo);
 		values.put("Votacion", hasher.makeHash(votacion));
@@ -1042,7 +1042,7 @@ public class Votaciones extends SQLiteOpenHelper{
 	public boolean quitarPregunta(String titulo){
 		SQLiteDatabase db = getWritableDatabase();
 		String whereClause = "ID=?";
-		String[] whereArgs = {new SHAExample().makeHash(titulo)};
+		String[] whereArgs = {new Hasher().makeHash(titulo)};
 		int count = db.delete("Pregunta",whereClause,whereArgs);
 		db.close();
 		if( count > 0)
@@ -1056,7 +1056,7 @@ public class Votaciones extends SQLiteOpenHelper{
 		String whereClause = "ID=?";
 		String whereArgs[] = {idPregunta};
 		ContentValues values = new ContentValues();
-		values.put("ID",new SHAExample().makeHash(nTitulo));
+		values.put("ID",new Hasher().makeHash(nTitulo));
 		values.put("Titulo",nTitulo);
 		values.put("Votacion",nVotacion);
 		if( db.update("Pregunta",values,whereClause,whereArgs) > 0)
@@ -1171,7 +1171,7 @@ public class Votaciones extends SQLiteOpenHelper{
 	public boolean altaUrna(String votacion, String tag){
 		SQLiteDatabase db = getWritableDatabase();
 		ContentValues values = new ContentValues();
-		values.put("Votacion", new SHAExample().makeHash(votacion));
+		values.put("Votacion", new Hasher().makeHash(votacion));
 		values.put("Tag", tag);
 		long result = db.insert("Urna","---",values);
 		db.close();
@@ -1232,7 +1232,7 @@ public class Votaciones extends SQLiteOpenHelper{
 	public boolean altaVotacion(String titulo, String fechaInicio, String fechaFin){
 		SQLiteDatabase db = getWritableDatabase();
 		ContentValues values = new ContentValues();
-		values.put("ID", new SHAExample().makeHash(titulo));
+		values.put("ID", new Hasher().makeHash(titulo));
 		values.put("Titulo", titulo);
 		values.put("Fecha_Inicio", fechaInicio);
 		values.put("Fecha_Fin", fechaFin);
@@ -1247,7 +1247,7 @@ public class Votaciones extends SQLiteOpenHelper{
 	public boolean quitarVotacion(String titulo){
 		SQLiteDatabase db = getWritableDatabase();
 		String whereClause = "ID=?";
-		String[] whereArgs = {new SHAExample().makeHash(titulo)};
+		String[] whereArgs = {new Hasher().makeHash(titulo)};
 		int count = db.delete("Votacion",whereClause,whereArgs);
 		db.close();
 		if( count > 0)
@@ -1309,7 +1309,7 @@ public class Votaciones extends SQLiteOpenHelper{
 	public boolean altaZonaVoto(String direccion, float latitud, float longitud){
 		SQLiteDatabase db = getWritableDatabase();
 		ContentValues values = new ContentValues();
-		values.put("ID", new SHAExample().makeHash(direccion));
+		values.put("ID", new Hasher().makeHash(direccion));
 		values.put("Direccion", direccion);
 		values.put("Latitud", latitud);
 		values.put("Longitud",longitud);
@@ -1324,7 +1324,7 @@ public class Votaciones extends SQLiteOpenHelper{
 	public boolean quitarZona(String direccion){
 		SQLiteDatabase db = getWritableDatabase();
 		String whereClause = "ID=?";
-		String[] whereArgs = {new SHAExample().makeHash(direccion)};
+		String[] whereArgs = {new Hasher().makeHash(direccion)};
 		int count = db.delete("Zona",whereClause,whereArgs);
 		db.close();
 		if( count > 0)
@@ -1335,7 +1335,7 @@ public class Votaciones extends SQLiteOpenHelper{
 	
 	public boolean cambiaZona(String antiguaDireccion, String nuevaDireccion, float latitud, float longitud){
 		SQLiteDatabase db = getWritableDatabase();
-		SHAExample hasher = new SHAExample();
+		Hasher hasher = new Hasher();
 		String antiguoID = hasher.makeHash(antiguaDireccion);
 		String nuevoID = hasher.makeHash(antiguaDireccion);
 		String whereClause = "ID=?";
