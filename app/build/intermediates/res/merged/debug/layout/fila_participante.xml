@@ -29,4 +29,4 @@
         android:layout_below="@+id/boleta"
         android:layout_marginBottom="12sp" />
 
-</RelativeLayout><!-- From: file:/home/jcapiz/git/PoliVotoServer/app/src/main/res/layout/fila_participante.xml -->
+</RelativeLayout><!-- From: file:/home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/res/layout/fila_participante.xml -->

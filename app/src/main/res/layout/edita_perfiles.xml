@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/mensaje_seleccion_perfiles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="20sp"
+        android:textSize="22sp"
+        android:text="@string/mensaje_cambio_perfiles"/>
+    <Button
+        android:id="@+id/aceptar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20sp"
+        android:layout_marginRight="20sp"
+        android:layout_below="@id/mensaje_seleccion_perfiles"
+        android:onClick="aceptar2"
+        android:text="@string/aceptar"/>
+
+    <RelativeLayout
+        android:id="@+id/barra_perfiles"
+        android:layout_below="@+id/aceptar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/set_title" >
+
+                    <TextView
+                        android:id="@+id/set_title_option_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_margin="20sp"
+                        android:layout_toLeftOf="@+id/substract"
+                        android:layout_toStartOf="@+id/substract"
+                        android:fontFamily="sans-serif-normal-bold"
+                        android:text="@string/escriba_perfil"
+                        android:textColor="#904444"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:id="@+id/substract"
+                        android:layout_width="47sp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="16sp"
+                        android:layout_toLeftOf="@+id/add"
+                        android:layout_toStartOf="@+id/add"
+                        android:enabled="false"
+                        android:text="@string/substract" />
+
+                    <Button
+                        android:id="@+id/add"
+                        android:layout_width="47sp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginEnd="20sp"
+                        android:layout_marginLeft="8sp"
+                        android:layout_marginRight="20sp"
+                        android:layout_marginStart="8sp"
+                        android:layout_marginTop="16sp"
+                        android:text="@string/add" />
+
+                    <EditText
+                        android:id="@+id/set_title_option"
+                        android:layout_width="match_parent"
+                        android:layout_height="36sp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/set_title_option_label"
+                        android:layout_marginEnd="20sp"
+                        android:layout_marginLeft="20sp"
+                        android:layout_marginRight="20sp"
+                        android:layout_marginStart="20sp"
+                        android:background="@drawable/input_box_1"
+                        android:fontFamily="sans-serif-normal"
+                        android:inputType="text"
+                        android:textColor="#333333"
+                        android:textSize="20sp" />
+
+                    <LinearLayout
+                        android:id="@+id/option_set"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/set_title_option"
+                        android:layout_marginBottom="20sp"
+                        android:orientation="vertical" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+        </ScrollView>
+    </RelativeLayout>
+</RelativeLayout>

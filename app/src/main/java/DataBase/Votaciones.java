@@ -48,34 +48,39 @@ public class Votaciones extends SQLiteOpenHelper{
 
 	@Override
 	public void onCreate(SQLiteDatabase dataBase) {
-        dataBase.execSQL("create table Perfil(idPerfil int not null, perfil text not null, primary key(idPerfil))");
-        dataBase.execSQL("create table SubPerfil(idSubPerfil int not null, idPerfil int not null, SubPerfil text not null, primary key(idSubPerfil), foreign key(idPerfil) references Perfil(idPerfil))");
-		dataBase.execSQL("create table Escuela(idEscuela int not null, Nombre text not null, latitud real, longitud real, primary key(idEscuela))");
-		dataBase.execSQL("create table Participante(Boleta TEXT, idPerfil int NOT NULL, idEscuela int not null, Fecha_Registro TEXT, PRIMARY KEY(Boleta), foreign key(idPerfil) references Perfil(idPerfil), foreign key(idEscuela) references Escuela(idEscuela));");
+        dataBase.execSQL("create table Perfil(idPerfil INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, perfil text not null)");
+        dataBase.execSQL("create table SubPerfil(idSubPerfil INTEGER NOT NULL, idPerfil INTEGER NOT NULL, SubPerfil text not null, primary key(idSubPerfil), foreign key(idPerfil) references Perfil(idPerfil))");
+		dataBase.execSQL("create table Escuela(idEscuela INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Nombre text not null, latitud real, longitud real)");
+		dataBase.execSQL("create table Participante(Boleta TEXT, idPerfil INTEGER NOT NULL, idEscuela INTEGER NOT NULL, Fecha_Registro TEXT, PRIMARY KEY(Boleta), foreign key(idPerfil) references Perfil(idPerfil), foreign key(idEscuela) references Escuela(idEscuela));");
         dataBase.execSQL("create table NombreParticipante(Boleta TEXT NOT NULL, Nombre TEXT NOT NULL, ApPaterno TEXT NOT NULL, ApMaterno TEXT NOT NULL, primary key(Boleta), foreign key(Boleta) references Participante(Boleta))");
 
-        dataBase.execSQL("create table Votacion(idVotacion int not null, Titulo TEXT NOT NULL, Fecha_Inicio DATE NOT NULL, Fecha_Fin DATE NOT NULL, primary key(idVotacion) );");
+        dataBase.execSQL("create table Votacion(idVotacion INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Fecha_Inicio DATE NOT NULL, Fecha_Fin DATE NOT NULL );");
 		// Debo preguntar acerca de tener un idPregunta como entero. ¿Podría sólo dejar como pk a Pregunta y hacer que idVotacion forme parte de la pk? (Relación identificadora)
-        dataBase.execSQL("create table Pregunta(idPregunta int not null, Pregunta TEXT not null, idVotacion int not null, primary key(idPregunta), FOREIGN KEY(idVotacion) REFERENCES Votacion(idVotacion));");
-		dataBase.execSQL("create table Opcion(idOpcion int not null, Reactivo TEXT not null, primary key(idOpcion));");
-		dataBase.execSQL("create table Pregunta_Opcion(idPregunta int not null, idOpcion int not null, PRIMARY KEY(idPregunta,idOpcion), FOREIGN KEY(idPregunta) REFERENCES Pregunta(idPregunta), FOREIGN KEY(idOpcion) REFERENCES Opcion(idOpcion));");
+        dataBase.execSQL("create table Pregunta(idPregunta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Pregunta TEXT not null, idVotacion INTEGER NOT NULL, FOREIGN KEY(idVotacion) REFERENCES Votacion(idVotacion));");
+		dataBase.execSQL("create table Opcion(idOpcion INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Reactivo TEXT not null);");
+		dataBase.execSQL("create table Pregunta_Opcion(idPregunta INTEGER NOT NULL, idOpcion INTEGER NOT NULL, PRIMARY KEY(idPregunta,idOpcion), FOREIGN KEY(idPregunta) REFERENCES Pregunta(idPregunta), FOREIGN KEY(idOpcion) REFERENCES Opcion(idOpcion));");
 
-		dataBase.execSQL("create table Usuario(idUsuario int not null, Name text not null, Psswd blob not null, primary key(idUsuario))");
-		dataBase.execSQL("create table LoginAttempt(idLoginAttempt int not null, idUsuario int not null, Attempt_Timestamp text not null, Host text not null, MacAddr text not null, primary key(idLoginAttempt), foreign key(idUsuario) references Usuario(idUsuario))");
+		dataBase.execSQL("create table Usuario(idUsuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Name text not null, Psswd blob not null)");
+		dataBase.execSQL("create table LoginAttempt(idLoginAttempt INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER NOT NULL, Attempt_Timestamp text not null, Host text not null, MacAddr text not null, foreign key(idUsuario) references Usuario(idUsuario))");
 		dataBase.execSQL("create table AttemptSucceded(idLoginAttempt not null, primary key(idLoginAttempt), foreign key(idLoginAttempt) references LoginAttempt(idLoginAttempt))");
-		dataBase.execSQL("create table UserAction(idUserAction int not null, idLoginAttempt int not null, Action text not null, Action_Timestamp text not null, primary key(idUserAction), foreign key(idLoginAttempt) references AttemptSucceded(idLoginAttempt))");
+		dataBase.execSQL("create table UserAction(idUserAction INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, idLoginAttempt INTEGER NOT NULL, Action text not null, Action_Timestamp text not null, foreign key(idLoginAttempt) references AttemptSucceded(idLoginAttempt))");
 
         // Recuerda que el "null hack" son tres guiones. Sólo insertas registros de quienes son capturados al momento de validación.
-		dataBase.execSQL("create table Participante_Pregunta(Boleta TEXT not null, idPregunta int not null, Hora_Registro text not null, Hora_Participacion text, PRIMARY KEY(Boleta,idPregunta), FOREIGN KEY(Boleta) REFERENCES Participante(Boleta), FOREIGN KEY(idPregunta) REFERENCES Pregunta(idPregunta));");
-		dataBase.execSQL("create table Voto(idVoto blob not null, idVotacion int not null, idPerfil int not null, Voto blob not null, idLoginAttempt int not null, primary key(idVoto), FOREIGN KEY(idVotacion) REFERENCES Votacion(idVotacion), foreign key(idPerfil) references Perfil(idPerfil), foreign key(idLoginAttempt) references AttemptSucceded(idLoginAttempt));");
+		dataBase.execSQL("create table Participante_Pregunta(Boleta TEXT not null, idPregunta INTEGER NOT NULL, Hora_Registro text not null, Hora_Participacion text, PRIMARY KEY(Boleta,idPregunta), FOREIGN KEY(Boleta) REFERENCES Participante(Boleta), FOREIGN KEY(idPregunta) REFERENCES Pregunta(idPregunta));");
+		dataBase.execSQL("create table Voto(idVoto blob not null, idVotacion INTEGER NOT NULL, idPerfil INTEGER NOT NULL, Voto blob not null, idLoginAttempt INTEGER NOT NULL, primary key(idVoto), FOREIGN KEY(idVotacion) REFERENCES Votacion(idVotacion), foreign key(idPerfil) references Perfil(idPerfil), foreign key(idLoginAttempt) references AttemptSucceded(idLoginAttempt));");
 
         // Vista que sirve para tener a la mano las preguntas totales de cada votación.
         dataBase.execSQL("create view if not exists Pregntas_Votacion as select idVotacion,count(*) as Preguntas from Pregunta group by idVotacion");
     }
 
     public long insertaPerfil(String perfil){
+        String[] args = {perfil};
+        Cursor c = getReadableDatabase().rawQuery("select idPerfil from Perfil where perfil = ?",args);
+        Integer idPerfil = c.moveToFirst() ? c.getInt(c.getColumnIndex("idPerfil")) : null;
         ContentValues values = new ContentValues();
         values.put("perfil",perfil);
+        if( idPerfil != null )
+            values.put("idPerfil", idPerfil);
         long result = getWritableDatabase().insert("Perfil","---",values);
         close();
         return result;
@@ -143,7 +148,7 @@ public class Votaciones extends SQLiteOpenHelper{
         ContentValues values = new ContentValues();
         values.put("Titulo",titulo);
         values.put("Fecha_Inicio",fechaInicio);
-        values.put("Fecha_Fin",fechaFin);
+        values.put("Fecha_Fin", fechaFin);
         long id = getWritableDatabase().insert("Votacion", "---", values);
         close();
         return id;
@@ -193,7 +198,7 @@ public class Votaciones extends SQLiteOpenHelper{
 		ContentValues values = new ContentValues();
         values.put("Name", usrName);
         values.put("Psswd", psswd);
-        long result = getWritableDatabase().insert("Usuario","---",values);
+        long result = getWritableDatabase().insert("Usuario", "---", values);
         close();
         return result;
     }
@@ -254,7 +259,7 @@ public class Votaciones extends SQLiteOpenHelper{
     public long insertaParticipantePregunta(String boleta, String pregunta){
         long id = -1;
         String[] args = {pregunta};
-        Cursor c = getReadableDatabase().rawQuery("select idPregunta from Pregunta where Pregunta = ?",args);
+        Cursor c = getReadableDatabase().rawQuery("select idPregunta from Pregunta where Pregunta = ?", args);
         if(c.moveToFirst()){
             ContentValues values = new ContentValues();
             values.put("Boleta",boleta);
@@ -301,6 +306,54 @@ public class Votaciones extends SQLiteOpenHelper{
 		close();
 		return result;
 	}
+
+    public boolean consultaEscuela(){
+        boolean result = getReadableDatabase().rawQuery("select * from Escuela",null).getCount()
+                > 0 ? true : false;
+        close();
+        return result;
+    }
+
+    public boolean consultaPerfiles(){
+        boolean result = getReadableDatabase().rawQuery("select * from Perfil",null).getCount()
+                > 0 ? true : false;
+        close();
+        return result;
+    }
+
+    public boolean actualizaUsuarioPsswd(String usrName, byte[] psswd){
+        ContentValues values = new ContentValues();
+        values.put("Psswd",psswd);
+        String[] selArgs = {usrName};
+        boolean result = getWritableDatabase().update("Usuario", values, "Name=?", selArgs) > 0 ? true : false;
+        close();
+        return result;
+    }
+
+    public String obtenerUltimaEscuela(){
+        Cursor c = getReadableDatabase().rawQuery("select Nombre from Escuela",null);
+        c.moveToLast();
+        String result = c.getString(c.getColumnIndex("Nombre"));
+        c.close();
+        close();
+        return result;
+    }
+
+    public void borraPerfil(String perfil){
+        String[] args = {perfil};
+        getWritableDatabase().delete("Perfil","perfil = ?",args);
+        close();
+    }
+
+    public String[] obtenerPerfiles(){
+        Cursor c = getReadableDatabase().rawQuery("select perfil from Perfil",null);
+        String[] perfiles = new String[c.getCount()];
+        int counter = 0;
+        while(c.moveToNext())
+            perfiles[counter++] = c.getString(c.getColumnIndex("perfil"));
+        c.close();
+        return perfiles;
+    }
 	
 	public int consultaPAAE(){
 		SQLiteDatabase db = getReadableDatabase();
@@ -994,20 +1047,6 @@ public class Votaciones extends SQLiteOpenHelper{
 			return true;
 		else
 			return false;
-	}
-
-	public String[] obtenerPerfiles(){
-		SQLiteDatabase db = getReadableDatabase();
-		String[] columns = {"Nombre"};
-		String selectionArgs[] = null;
-		String whereClause = null;
-		Cursor c = db.query("Perfil", columns, whereClause, selectionArgs, null, null, null);
-		List<String> direcciones = new ArrayList<String>();
-		while(c.moveToNext())
-			direcciones.add(c.getString(c.getColumnIndex("Nombre")));
-		db.close();
-		String[] resultado = new String[1];
-		return direcciones.toArray(resultado);
 	}
 	
 	public boolean existePerfil(String perfil){

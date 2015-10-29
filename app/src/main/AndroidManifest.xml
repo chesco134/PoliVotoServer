@@ -29,10 +29,12 @@
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name="org.inspira.polivoto.Activity.DataPickerActivity"
-            android:label="@string/app_name"
-            android:theme="@android:style/Theme.Dialog" />
+            android:label="@string/app_name" />
         <activity
             android:name="org.inspira.polivoto.Activity.CargadorDeMatricula"
+            android:label="@string/app_name" />
+        <activity
+            android:name="org.inspira.polivoto.Activity.CambiaZonaPerfilesActivity"
             android:label="@string/app_name" />
         <activity
             android:name="org.inspira.polivoto.Activity.VotacionesConf"

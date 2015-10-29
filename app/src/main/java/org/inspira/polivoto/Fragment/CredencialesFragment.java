@@ -20,6 +20,8 @@ import org.inspira.polivotoserver.R;
 import org.inspira.polivoto.Security.Hasher;
 import org.inspira.polivoto.Activity.SelectorDeCredenciales;
 
+import java.util.Arrays;
+
 public class CredencialesFragment extends Fragment{
 
 	private SelectorDeCredenciales activity;
@@ -82,9 +84,10 @@ public class CredencialesFragment extends Fragment{
 				String psswd2 = psswdInput2.getText().toString();
 				if( psswd.length() > 5 && psswd2.length() > 5 ){
 					if(isChangePasswords){
-						Votaciones db = new Votaciones(context); 
-						if( db.consultaUsuario(usuario,new Hasher().makeHash(psswd))){
-							if(db.updateKey(psswd, psswd2, usuario, zona)){
+						Votaciones db = new Votaciones(context);
+                        Hasher hasher = new Hasher();
+						if( db.consultaUsuario(usuario, hasher.makeHash(psswd))){
+							if(db.actualizaUsuarioPsswd(usuario, hasher.makeHash(psswd2))){
 								Toast.makeText(context,"Credenciales actualizadas con éxito.",Toast.LENGTH_SHORT).show();
 								psswdInput.setText("");
 								psswdInput2.setText("");

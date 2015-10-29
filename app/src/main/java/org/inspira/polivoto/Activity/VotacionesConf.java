@@ -126,7 +126,7 @@ public class VotacionesConf extends AppCompatActivity implements
 					.setText(adapter.getPageTitle(i))
 					.setTabListener(this));
 		} 
-		new Votaciones(this).selectPendingVotes();
+		//new Votaciones(this).selectPendingVotes();
 		myService = new Intent(this, MiServicio.class);
 	}
 

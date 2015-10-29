@@ -15,6 +15,8 @@ import org.inspira.polivotoserver.R;
  */
 public class LocationPickerFragment extends Fragment {
 
+    public LocationPickerFragment(){}
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInsntaceState){
         View rootView = inflater.inflate(R.layout.especificar_zona_votacion,parent,false);

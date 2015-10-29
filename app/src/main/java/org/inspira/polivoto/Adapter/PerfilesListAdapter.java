@@ -20,7 +20,7 @@ public class PerfilesListAdapter extends BaseAdapter {
     LinkedList<String> texts;
     Activity activity;
 
-    public PerfilesListAdapter(Activity actvity, LinkedList<String> textos){
+    public PerfilesListAdapter(Activity activity, LinkedList<String> textos){
         this.activity = activity;
         texts = textos;
     }

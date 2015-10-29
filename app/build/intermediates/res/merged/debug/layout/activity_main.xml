@@ -4,4 +4,4 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="org.inspira.polivoto.Activity.MainActivity" />
-<!-- From: file:/home/jcapiz/git/PoliVotoServer/app/src/main/res/layout/activity_main.xml -->
+<!-- From: file:/home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/res/layout/activity_main.xml -->

@@ -51,7 +51,8 @@ public class Mensaje extends Activity {
 			});
 			buttonContainer.addView(aceptar);
 			buttonContainer.addView(cancelar);
-		}
+		}else
+		setTitle("Enhorabuena!! =)");
 		TextView text = (TextView)findViewById(R.id.texto);
 		text.setText(msj);
 	}

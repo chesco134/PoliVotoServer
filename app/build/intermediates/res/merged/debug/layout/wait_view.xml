@@ -30,4 +30,4 @@
         android:layout_toRightOf="@+id/progressBar1"
         android:text="@string/conectando_label" />
 
-</RelativeLayout><!-- From: file:/home/jcapiz/git/PoliVotoServer/app/src/main/res/layout/wait_view.xml -->
+</RelativeLayout><!-- From: file:/home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/res/layout/wait_view.xml -->

@@ -36,4 +36,4 @@
         android:text="@string/splash_message"
         android:textColor="@color/splash_text" />
 
-</RelativeLayout><!-- From: file:/home/jcapiz/git/PoliVotoServer/app/src/main/res/layout-port/splash.xml -->
+</RelativeLayout><!-- From: file:/home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/res/layout-port/splash.xml -->

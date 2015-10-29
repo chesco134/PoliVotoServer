@@ -76,4 +76,4 @@
         android:layout_marginTop="12sp"
         android:inputType="textPassword" />
 
-</RelativeLayout><!-- From: file:/home/jcapiz/git/PoliVotoServer/app/src/main/res/layout/escribe_credenciales_usuario.xml -->
+</RelativeLayout><!-- From: file:/home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/res/layout/escribe_credenciales_usuario.xml -->

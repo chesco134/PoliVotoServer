@@ -19,7 +19,7 @@ import android.widget.TextView;
 import org.inspira.polivotoserver.R;
 
 public class MainFragment extends Fragment {
-	
+
 	private static final int LIMMIT_OF_PLUS_ROWS = 10;
 	private int numberOfAditionalRows = 2;
 	private AppCompatActivity activity;
@@ -59,7 +59,7 @@ public class MainFragment extends Fragment {
 	public TextView getTitleLabel() {
 		return titleLabel;
 	}
-	
+
 	public LinearLayout getOptionSet(){
 		return optionSet;
 	}
@@ -74,7 +74,7 @@ public class MainFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup root,
-			Bundle savedInstanceState) {
+							 Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.question_form, root, false);
 		substract = (Button) rootView.findViewById(R.id.substract);
 		add = (Button) rootView.findViewById(R.id.add);
@@ -149,7 +149,7 @@ public class MainFragment extends Fragment {
 			substract.setEnabled(false);
 		return rootView;
 	}
-	
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);

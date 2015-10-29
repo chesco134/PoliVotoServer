@@ -27,4 +27,4 @@
         android:text="@string/polivoto_electronico"
         android:textSize="18sp" />
 
-</RelativeLayout><!-- From: file:/home/jcapiz/git/PoliVotoServer/app/src/main/res/layout/polivoto_fragment_logo.xml -->
+</RelativeLayout><!-- From: file:/home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/res/layout/polivoto_fragment_logo.xml -->

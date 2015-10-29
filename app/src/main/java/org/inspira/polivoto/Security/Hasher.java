@@ -52,7 +52,7 @@ public class Hasher {
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA-256");
 			md.update(psswd.getBytes());
-			byte[] byteData = md.digest();
+			hashPsswd = md.digest();
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}

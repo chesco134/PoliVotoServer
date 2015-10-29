@@ -3,4 +3,4 @@
     android:id="@+id/main_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent" />
-<!-- From: file:/home/jcapiz/git/PoliVotoServer/app/src/main/res/layout/main_activity_with_fragment.xml -->
+<!-- From: file:/home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/res/layout/main_activity_with_fragment.xml -->

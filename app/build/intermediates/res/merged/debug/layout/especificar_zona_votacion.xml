@@ -54,4 +54,4 @@
         android:layout_below="@+id/location_text"
         android:onClick="aceptar"
         android:text="@string/aceptar"/>
-</RelativeLayout><!-- From: file:/home/jcapiz/git/PoliVotoServer/app/src/main/res/layout/especificar_zona_votacion.xml -->
+</RelativeLayout><!-- From: file:/home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/res/layout/especificar_zona_votacion.xml -->
