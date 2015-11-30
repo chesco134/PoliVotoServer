@@ -15,9 +15,7 @@
 
     <uses-feature
         android:glEsVersion="0x00020000"
-        android:required="true" />
-
-    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- Permissions required for GCM -->
+        android:required="true" /> <!-- Permissions required for GCM -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" /> <!-- Optional permission for App measurement to run. -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -40,8 +38,7 @@
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name="org.inspira.polivoto.Activity.InputDateAndTimeValuesActivity"
-            android:label="@string/app_name"
-            android:theme="@android:style/Theme.Dialog" />
+            android:label="@string/app_name" />
         <activity
             android:name="org.inspira.polivoto.Activity.DataPickerActivity"
             android:label="@string/app_name" />
@@ -59,8 +56,7 @@
             android:label="@string/app_name" />
         <activity
             android:name="org.inspira.polivoto.Activity.UnlockerActivity"
-            android:label="@string/app_name"
-            android:theme="@android:style/Theme.Dialog" />
+            android:label="@string/app_name" />
         <activity
             android:name="org.inspira.polivoto.Activity.WelcomeActivity"
             android:label="@string/app_name" />
@@ -104,6 +100,11 @@
         <activity
             android:name="com.google.android.gms.ads.purchase.InAppPurchaseActivity"
             android:theme="@style/Theme.IAPTheme" />
+        <activity
+            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <provider
             android:name="com.google.android.gms.measurement.AppMeasurementContentProvider"

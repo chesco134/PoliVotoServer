@@ -4,11 +4,13 @@ import org.inspira.polivotoserver.R;
 
 import DataBase.Votaciones;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -78,6 +80,11 @@ public class MainActivity extends AppCompatActivity {
 		if (savedInstanceState == null) {
 			isFirstLaunched = true;
 		}
+		((TextView)findViewById(R.id.Credenciales)).setTypeface(Typeface.createFromAsset(getAssets(), "RobotoCondensed-Bold.ttf"));
+		((TextView)findViewById(R.id.Votaciones)).setTypeface(Typeface.createFromAsset(getAssets(), "RobotoCondensed-Bold.ttf"));
+		((TextView)findViewById(R.id.Perfiles)).setTypeface(Typeface.createFromAsset(getAssets(), "RobotoCondensed-Bold.ttf"));
+		((TextView)findViewById(R.id.Zonas)).setTypeface(Typeface.createFromAsset(getAssets(), "RobotoCondensed-Bold.ttf"));
+		((TextView)findViewById(R.id.Participantes)).setTypeface(Typeface.createFromAsset(getAssets(), "RobotoCondensed-Bold.ttf"));
 	}
 
 	@Override
@@ -101,9 +108,6 @@ public class MainActivity extends AppCompatActivity {
 					break;
                 case DATA_PICKER_ACTIVITY:
                     launchVotacionesConf();
-                    launchMensajeConfirmacion("Ahora sólo queda que configure sus preguntas con sus "
-                            + "respectivas opciones.\n¡Puede reconfigurar cualquiera de los pasos" +
-                            " anteriores despues! =)", false);
                     break;
 			}
 		} else {
@@ -166,7 +170,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void participantes(View v){
-        launchInputDateAndTimeValues();
         /*
         new Thread(){
             @Override

@@ -31,13 +31,14 @@
     <EditText
         android:id="@+id/location_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="32sp"
         android:layout_below="@+id/first_time_tag"
         android:layout_marginEnd="12sp"
         android:layout_marginLeft="12sp"
         android:layout_marginRight="12sp"
         android:layout_marginStart="12sp"
         android:layout_marginTop="12sp"
+        android:background="@drawable/input_box_1"
         android:inputType="text" />
 
     <Button

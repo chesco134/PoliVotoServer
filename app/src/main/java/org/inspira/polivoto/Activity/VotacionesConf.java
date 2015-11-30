@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
@@ -155,6 +156,8 @@ public class VotacionesConf extends AppCompatActivity implements
 		if(resultCode == RESULT_OK){
 			switch(requestCode){
 			case FINISH_VOTING_PROCESS_REQUEST:
+				Votaciones v = new Votaciones(this);
+				/*
 				if( data.getBooleanExtra("response", false) ){
 					Votaciones v = new Votaciones(this);
 					String[] rows;
@@ -192,8 +195,11 @@ public class VotacionesConf extends AppCompatActivity implements
 						Toast.makeText(this, "Error al finalizar la votación:\n" + ex.toString(), Toast.LENGTH_LONG).show();
 					}
 					v.terminarVotaciones();
+                    v.terminaUltimaVotacion();
 					stopService(myService);
 				}
+				*/
+				v.terminaUltimaVotacion();
 				break;
 			case DATA_LOADER:
 				startService(myService);
@@ -209,7 +215,7 @@ public class VotacionesConf extends AppCompatActivity implements
                 int minute = data.getExtras().getInt("minute");
                 fechaInicioVotacion = day + "/" + month + "/" + year + ", " +
                         hourOfDay + ":" + minute;
-                launchIniciaVotacion(getString(R.string.define_fecha_fin_votacion),STARTING_SERVICE,true);
+                launchIniciaVotacion(getString(R.string.define_fecha_fin_votacion),STARTING_SERVICE,false);
                 break;
             case STARTING_SERVICE:
                 /** Aún no está validado el campo de fecha de fin **/
@@ -220,10 +226,10 @@ public class VotacionesConf extends AppCompatActivity implements
                 minute = data.getExtras().getInt("minute");
                 fechaFinVotacion = day + "/" + month + "/" + year + ", " +
                         hourOfDay + ":" + minute;
-                String titVotacion = data.getExtras().getString("response");
-               Votaciones db = new Votaciones(this);
-                db.insertaVotacion(titVotacion,fechaInicioVotacion, fechaFinVotacion);
-               ListIterator<MainFragment> currentPregunta = fragmentitos
+                Votaciones db = new Votaciones(this);
+				String titVotacion = db.obtenerTituloVotacionActual();
+				//db.insertaVotacion(titVotacion,fechaInicioVotacion, fechaFinVotacion);
+                ListIterator<MainFragment> currentPregunta = fragmentitos
                         .listIterator();
                 LinkedList<Pregunta> pregs = new LinkedList<Pregunta>();
                 String texto = new String();
@@ -298,6 +304,7 @@ public class VotacionesConf extends AppCompatActivity implements
                         ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(FILE_NAME));
                         salida.writeObject(superChunk);
                         salida.close();
+						Toast.makeText(this, "Servicio iniciado correctamente", Toast.LENGTH_LONG).show();
                     }catch(IOException e){
                         Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
                     }
@@ -324,8 +331,14 @@ public class VotacionesConf extends AppCompatActivity implements
 		Votaciones v;
 		String[] rows;
 		if (id == R.id.iniciar_servicio) {
-            launchIniciaVotacion(getString(R.string.define_fecha_inicio_votacion),STARTING_SERVICE_FOR_START_DATE,false);
+            Votaciones db = new Votaciones(this);
+            if(db.obtenerFechaInicioVotacionActual() == null)
+                launchIniciaVotacion(getString(R.string.define_fecha_inicio_votacion),STARTING_SERVICE_FOR_START_DATE,true);
+            else
+                Toast.makeText(this,"Ya hay un proceso de votación programado",Toast.LENGTH_SHORT).show();
 		} else if (id == R.id.action_last_server) {
+            Toast.makeText(this,"Building... :)",Toast.LENGTH_SHORT).show();
+            /*
 			try{
 				ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(FILE_NAME));
 				superChunk = (SuperChunk)entrada.readObject();
@@ -339,6 +352,7 @@ public class VotacionesConf extends AppCompatActivity implements
 			}catch(IOException | ClassNotFoundException e){
 				Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
 			}
+            */
 		} else if (id == R.id.detener_servicio) {
 			if (stopService(myService))
 				Toast.makeText(this, "Servicio Detenido", Toast.LENGTH_SHORT)
@@ -347,6 +361,13 @@ public class VotacionesConf extends AppCompatActivity implements
 				Toast.makeText(this, "El servicio ya está detenido",
 						Toast.LENGTH_SHORT).show();
 		} else if (id == R.id.ver_participantes) {
+            //Toast.makeText(this,"Building :)",Toast.LENGTH_SHORT).show();
+            v = new Votaciones(this);
+            String titulo = v.obtenerTituloVotacionActual();
+            String[] participaron = null;
+            if( titulo != null )
+                participaron = v.quienesHanParticipado(titulo);
+            /*
 			v = new Votaciones(this);
 			rows = v.consultaVotando();
 			File participantesFile = new File(PARTICIPANTES_FILE);
@@ -365,10 +386,11 @@ public class VotacionesConf extends AppCompatActivity implements
 				e.printStackTrace();
 				Toast.makeText(this, "No pudimos escribir el archivo.", Toast.LENGTH_SHORT).show();
 			}
-			i = new Intent(this, SimplePromptActivity.class);
-			i.putExtra("rows", rows);
-			i.putExtra("header", "Participantes Registrados");
-			startActivity(i);
+			*/
+                i = new Intent(this, SimplePromptActivity.class);
+                i.putExtra("rows", participaron);
+                i.putExtra("header", "Participantes Registrados");
+                startActivity(i);
 		} else  if (id == R.id.finalizar_votacion) {
 			try{
 				FileInputStream fis = new FileInputStream(RESULTS_FILE);

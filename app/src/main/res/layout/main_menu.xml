@@ -37,7 +37,7 @@
                 android:layout_marginTop="28sp"
                 android:onClick="credenciales"
                 android:text="@string/Credenciales"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/Votaciones"
@@ -55,7 +55,7 @@
                 android:layout_marginTop="28sp"
                 android:onClick="votaciones"
                 android:text="@string/Votaciones"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/Perfiles"
@@ -73,7 +73,7 @@
                 android:layout_marginTop="28sp"
                 android:onClick="perfiles"
                 android:text="@string/Perfiles"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/Zonas"
@@ -91,7 +91,7 @@
                 android:layout_marginTop="28sp"
                 android:onClick="zonas"
                 android:text="@string/Zonas"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/Participantes"
@@ -109,7 +109,7 @@
                 android:layout_marginTop="28sp"
                 android:onClick="participantes"
                 android:text="@string/Participantes"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
         </RelativeLayout>
     </ScrollView>
 

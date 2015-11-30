@@ -28,12 +28,12 @@
         android:orderInCategory="100"
         android:title="@string/finalizar_votacion"
         app:showAsAction="never"/>
+    <!--
     <item
         android:id="@+id/cambiar_contraseñas"
         android:orderInCategory="100"
         android:title="@string/cambiar_contraseñas"
         app:showAsAction="never"/>
-    <!--
     <item
         android:id="@+id/codigo_legalidad"
         android:orderInCategory="100"

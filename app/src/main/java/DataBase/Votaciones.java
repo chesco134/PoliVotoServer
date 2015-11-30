@@ -23,13 +23,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
 
 public class Votaciones extends SQLiteOpenHelper{
 	
 	private static final String FILE_NAME = Environment.getExternalStorageDirectory().getAbsolutePath() + "/chu";
-	
+	private Context ctx;
 	public Votaciones(Context context){
-		super(context, "PoliVoto Electrónico", null, 1);
+        super(context, "PoliVoto Electrónico", null, 1);
+		ctx = context;
 	}
 
 	@Override
@@ -54,7 +56,8 @@ public class Votaciones extends SQLiteOpenHelper{
 		dataBase.execSQL("create table Participante(Boleta TEXT, idPerfil INTEGER NOT NULL, idEscuela INTEGER NOT NULL, Fecha_Registro TEXT, PRIMARY KEY(Boleta), foreign key(idPerfil) references Perfil(idPerfil), foreign key(idEscuela) references Escuela(idEscuela));");
         dataBase.execSQL("create table NombreParticipante(Boleta TEXT NOT NULL, Nombre TEXT NOT NULL, ApPaterno TEXT NOT NULL, ApMaterno TEXT NOT NULL, primary key(Boleta), foreign key(Boleta) references Participante(Boleta))");
 
-        dataBase.execSQL("create table Votacion(idVotacion INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Titulo text not null, Fecha_Inicio DATE NOT NULL, Fecha_Fin DATE NOT NULL );");
+        dataBase.execSQL("create table Votacion(idVotacion INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Titulo text not null, Fecha_Inicio DATE NOT NULL, Fecha_Fin DATE);");
+        dataBase.execSQL("create table VotacionFechaFin(idVotacion INTEGER NOT NULL PRIMARY KEY, Fecha_Fin DATE not null, foreign key(idVotacion) references Votacion(idVotacion));");
 		// Debo preguntar acerca de tener un idPregunta como entero. ¿Podría sólo dejar como pk a Pregunta y hacer que idVotacion forme parte de la pk? (Relación identificadora)
         dataBase.execSQL("create table Pregunta(idPregunta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Pregunta TEXT not null, idVotacion INTEGER NOT NULL, FOREIGN KEY(idVotacion) REFERENCES Votacion(idVotacion));");
 		dataBase.execSQL("create table Opcion(idOpcion INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Reactivo TEXT not null);");
@@ -62,12 +65,13 @@ public class Votaciones extends SQLiteOpenHelper{
 
 		dataBase.execSQL("create table Usuario(idUsuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Name text not null, Psswd blob not null)");
 		dataBase.execSQL("create table LoginAttempt(idLoginAttempt INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER NOT NULL, Attempt_Timestamp text not null, Host text not null, foreign key(idUsuario) references Usuario(idUsuario))");
-		dataBase.execSQL("create table AttemptSucceded(idLoginAttempt not null, primary key(idLoginAttempt), foreign key(idLoginAttempt) references LoginAttempt(idLoginAttempt))");
+		dataBase.execSQL("create table AttemptSucceded(idLoginAttempt not null, secretKey BLOB not null, primary key(idLoginAttempt), foreign key(idLoginAttempt) references LoginAttempt(idLoginAttempt))");
 		dataBase.execSQL("create table UserAction(idUserAction INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, idLoginAttempt INTEGER NOT NULL, Action text not null, Action_Timestamp text not null, foreign key(idLoginAttempt) references AttemptSucceded(idLoginAttempt))");
+        dataBase.execSQL("create table ActiveUsers(idLoginAttempt INTEGER NOT NULL,  text not null, Action_Timestamp text not null, foreign key(idLoginAttempt) references AttemptSucceded(idLoginAttempt))");
 
         // Recuerda que el "null hack" son tres guiones. Sólo insertas registros de quienes son capturados al momento de validación.
 		dataBase.execSQL("create table Participante_Pregunta(Boleta TEXT not null, idPregunta INTEGER NOT NULL, Hora_Registro text not null, Hora_Participacion text, PRIMARY KEY(Boleta,idPregunta), FOREIGN KEY(Boleta) REFERENCES Participante(Boleta), FOREIGN KEY(idPregunta) REFERENCES Pregunta(idPregunta));");
-		dataBase.execSQL("create table Voto(idVoto blob not null, idVotacion INTEGER NOT NULL, idPerfil INTEGER NOT NULL, Voto text not null, idLoginAttempt INTEGER NOT NULL, primary key(idVoto), FOREIGN KEY(idVotacion) REFERENCES Votacion(idVotacion), foreign key(idPerfil) references Perfil(idPerfil), foreign key(idLoginAttempt) references AttemptSucceded(idLoginAttempt));");
+		dataBase.execSQL("create table Voto(idVoto blob not null, idVotacion INTEGER NOT NULL, idPerfil INTEGER NOT NULL, Voto text not null, idLoginAttempt INTEGER NOT NULL, idPregunta INTEGER NOT NULL, primary key(idVoto), FOREIGN KEY(idVotacion) REFERENCES Votacion(idVotacion), foreign key(idPerfil) references Perfil(idPerfil), foreign key(idLoginAttempt) references AttemptSucceded(idLoginAttempt), foreign key(idPregunta) references Pregunta(idPregunta));");
 
         // Vista que sirve para tener a la mano las preguntas totales de cada votación.
         dataBase.execSQL("create view if not exists Pregntas_Votacion as select idVotacion,count(*) as Preguntas from Pregunta group by idVotacion");
@@ -75,20 +79,13 @@ public class Votaciones extends SQLiteOpenHelper{
 
     public String[] consultaParticipantePreguntas(String boleta){
         String args[] = {boleta};
-        Cursor c = getReadableDatabase().rawQuery("select Pregunta from (Pregunta join (select idPregunta from Participante_Pregunta where Boleta = ? and Hora_Participacion is null) t on Pregunta.idPregunta = t.idPregunta)",args);
+        Cursor c = getReadableDatabase().rawQuery("select Pregunta from (Pregunta join (select idPregunta from Participante_Pregnta where Boleta = ? and Hora_Participacion is null) t on Pregunta.idPregunta = t.idPregunta)",args);
         String[] preguntasFaltantes = new String[c.getCount()];
         int i = 0;
         while(c.moveToNext())
             preguntasFaltantes[i++] = c.getString(c.getColumnIndex("Pregunta"));
         close();
         return preguntasFaltantes;
-    }
-
-    public boolean consultaParticipante(String boleta){
-        String[] args = {boleta};
-        boolean result = getReadableDatabase().rawQuery("select Hora_Participacion from Participante_Pregunta where Boleta = ?",args).getCount() > 0 ? true : false;
-        close();
-        return result;
     }
 
     public String consultaParticipanteHoraParticipacion(String boleta){
@@ -99,6 +96,23 @@ public class Votaciones extends SQLiteOpenHelper{
             result = c.getString(c.getColumnIndex("Hora_Participacion"));
         close();
         return result;
+    }
+
+    public String[] quienesHanParticipado(String titulo){
+        Cursor c0 = getReadableDatabase().rawQuery("select idVotacion from Votacion where Titulo = ?",new String[]{titulo});
+        String[] participantes = null;
+        if( c0.moveToFirst()) {
+            int idVotacion = c0.getInt(c0.getColumnIndex("idVotacion"));
+            Cursor c = getReadableDatabase().rawQuery("select a.Boleta from (select * from Preguntas_Votacion where idVotacion = ?) a join (select Boleta,count(*) cuenta from Participante_Pregunta join (select idPregunta from Pregunta where idVotacion = ?) r on Participante_Pregunta.idPregunta = r.idPregunta where Hora_Participacion is not null or Hora_Participacion != '---' group by Boleta) s on a.Preguntas = s.cuenta", new String[]{String.valueOf(idVotacion)});
+            participantes = new String[c.getCount()];
+            int count = 0;
+            while (c.moveToNext()) {
+                participantes[count++] = c.getString(c.getColumnIndex("Boleta"));
+            }
+            c.close();
+        }
+        close();
+        return participantes;
     }
 
     //public boolean agregaParticipante()
@@ -164,14 +178,74 @@ public class Votaciones extends SQLiteOpenHelper{
         return id;
     }
 
-    public long insertaNombreParticipante(String boleta, String apPaterno, String apMaterno){
+    public long insertaNombreParticipante(String boleta, String nombre, String apPaterno, String apMaterno){
         ContentValues values = new ContentValues();
         values.put("Boleta",boleta);
+        values.put("Nombre",nombre);
         values.put("ApPaterno",apPaterno);
         values.put("ApMaterno", apMaterno);
         long id = getWritableDatabase().insert("NombreParticipante", "---", values);
         close();
         return id;
+    }
+
+    public String obtenerFechaInicioVotacionActual(){
+        Cursor c = getReadableDatabase().rawQuery("select Fecha_Inicio from Votacion where Fecha_Fin is null or Fecha_Fin = '---'",null);
+        String fechaInicio = null;
+        int length = c.getCount();
+        if(c.moveToNext())
+            fechaInicio = c.getString(c.getColumnIndex("Fecha_Inicio"));
+        c.close();
+        close();
+        return fechaInicio;
+    }
+
+    public String obtenerTituloVotacionActual(){
+        Cursor c = getReadableDatabase().rawQuery("select Titulo from Votacion where Fecha_Fin is null or Fecha_Fin = '---'", null);
+        String titulo = null;
+        if(c.moveToNext())
+            titulo = c.getString(c.getColumnIndex("Titulo"));
+        c.close();
+        close();
+        return titulo;
+    }
+
+    public void conservaFechaFinVotacionActual(String tituloVotacion, String fechaFin){
+        Cursor c = getReadableDatabase().rawQuery("select idVotacion from Votacion where Titulo = ?",new String[]{tituloVotacion});
+        if(c.moveToFirst()) {
+            int idVotacion = c.getInt(c.getColumnIndex("idVotacion"));
+            ContentValues values = new ContentValues();
+            values.put("idVotacion", idVotacion);
+            values.put("Fecha_Fin", fechaFin);
+            getWritableDatabase().insert("VotacionFechaFin", "---", values);
+        }
+    }
+
+    public String obtenerFechaFinVotacionActual(){
+        String fechaFin = null;
+        Cursor c = getReadableDatabase().rawQuery("select Fecha_Fin from VotacionFechaFin join (select idVotacion from Votacion where Fecha_Fin is null or Fecha_Fin = '---') r on r.idVotacion = VotacionFechaFin.idVotacion",null);
+        if(c.moveToFirst()){
+            fechaFin = c.getString(c.getColumnIndex("Fech_Fin"));
+        }
+        c.close();
+        close();
+        return fechaFin;
+    }
+
+    public void terminaUltimaVotacion(){
+        ContentValues values = new ContentValues();
+        values.put("Fecha_Fin", new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date()));
+        int tul = getWritableDatabase().update("Votacion", values, "Fecha_Fin is null or Fecha_Fin = '---'", null);
+        if( tul != -1 )
+            Toast.makeText(ctx,"Hecho",Toast.LENGTH_SHORT).show();
+        close();
+    }
+
+    public void actualizaFechaInicioVotacionActual(String fechaInicio){
+        ContentValues values = new ContentValues();
+        values.put("Fecha_Inicio",fechaInicio);
+        getWritableDatabase().update("Votacion", values, "Fecha_Fin is null or Fecha_Fin = '---'", null);
+        close();
     }
 
     public long insertaVotacion(String tituloVotacion,String fechaInicio, String fechaFin){
@@ -238,43 +312,38 @@ public class Votaciones extends SQLiteOpenHelper{
         String selection = "Name = ?";
         String selArgs[] = {usr};
         Cursor c = getReadableDatabase().query("Usuario", columns, selection,selArgs,null,null,null);
-        int usrId = -1;
+        int loginAttempt = -1;
         if( c.moveToFirst() ){
             ContentValues values = new ContentValues();
             values.put("idUsuario", c.getInt(c.getColumnIndex("idUsuario")));
             values.put("Host",host);
-            values.put("Attempt_Timestamp",new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date()));
-            usrId = (int)getWritableDatabase().insert("LoginAttempt", "---", values);
+            values.put("Attempt_Timestamp", new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date()));
+            getWritableDatabase().insert("LoginAttempt", "---", values);
+            Cursor c2 = getReadableDatabase().rawQuery("SELECT last_insert_rowid()",null);
+            c2.moveToFirst();
+            loginAttempt = c2.getInt(0);
+            c2.close();
         }
         c.close();
         close();
-        return usrId;
+        return loginAttempt;
     }
 
-    public int insertaAttemptSucceded(int idLoginAttempt){
+    public int insertaAttemptSucceded(int idLoginAttempt, byte[] secretKey){
         ContentValues values = new ContentValues();
         values.put("idLoginAttempt", idLoginAttempt);
+        values.put("secretKey", secretKey);
         int result = (int)getWritableDatabase().insert("AttemptSucceded", "---", values);
         close();
         return result;
     }
 
-    public long insertUserAction(String usrName,int idLoginAttempt, String action){
-        long result = -1;
-        String[] args = {String.valueOf(idLoginAttempt),usrName};
-        Cursor c = getReadableDatabase().rawQuery("select Name from (select idUsuario, " +
-                "from (LoginAttempt left join (select idLoginAttempt from AttemptSucceded " +
-                "where idLoginAttempt = ?) t on " +
-                "LoginAttempt.idLoginAttempt = t.idLoginAttempt) ) t1 where t1.Name = ?", args);
-        if(c.getCount() > 0){
-            ContentValues values = new ContentValues();
-            values.put("idLoginAttempt",idLoginAttempt);
-            values.put("Action", action);
-            result = getWritableDatabase().insert("UserAction", "---", values);
-        }
-        c.close();
+    public void insertUserAction(int idLoginAttempt, String action){
+        ContentValues values = new ContentValues();
+        values.put("idLoginAttempt",idLoginAttempt);
+        values.put("Action", action);
+        getWritableDatabase().insert("UserAction", "---", values);
         close();
-        return result;
     }
 
     public long insertaParticipantePregunta(String boleta, String pregunta){
@@ -293,6 +362,19 @@ public class Votaciones extends SQLiteOpenHelper{
         return id;
     }
 
+    public boolean actualizaParticipantePregunta(String boleta, String pregunta){
+        boolean success = false;
+        Cursor c = getReadableDatabase().rawQuery("select idPregunta from Pregunta where Pregunta = ?", new String[]{pregunta});
+        if(c.moveToFirst()) {
+            int idPregunta = c.getInt(c.getColumnIndex("idPregunta"));
+            ContentValues values = new ContentValues();
+            values.put("Hora_Participacion", new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date()));
+            if(getWritableDatabase().update("Participante_Pregunta",values,"Boleta = ?",new String[]{boleta}) != -1)
+                success = true;
+        }
+        return success;
+    }
+
     public int obtenerIdVotacionFromPregunta(String pregunta){
         String args[] = {pregunta};
         Cursor c = getReadableDatabase().rawQuery("select idVotacion from Pregunta where Pregunta = ?",args);
@@ -301,7 +383,18 @@ public class Votaciones extends SQLiteOpenHelper{
         return idVotacion;
     }
 
-    public long insertaVoto(byte[] idVoto, int idVotacion, String perfil, String voto, int idLoginAttempt){
+    public byte[] obtenerSKeyEncoded(int idAttempt){
+        byte[] encodedSKey = null;
+        Cursor c = getReadableDatabase().rawQuery("SELECT secretKey from AttemptSucceded where idAttempt = ?",new String[]{String.valueOf(idAttempt)});
+        if(c.moveToFirst()){
+            encodedSKey = c.getBlob(c.getColumnIndex("secretKey"));
+            c.close();
+        }
+        close();
+        return encodedSKey;
+    }
+
+    public long insertaVoto(byte[] idVoto, int idVotacion, String perfil, String voto, int idLoginAttempt, int idPregunta){
         long id = -1;
         String args[] = {perfil};
         Cursor c2 = getReadableDatabase().rawQuery("select idPerfil from Perfil where perfil = ?",args);
@@ -312,6 +405,7 @@ public class Votaciones extends SQLiteOpenHelper{
             values.put("idPerfil",c2.getInt(c2.getColumnIndex("idPerfil")));
             values.put("Voto",voto);
             values.put("idLoginAttempt",idLoginAttempt);
+            values.put("idPregunta",idPregunta);
             id = getWritableDatabase().insert("Voto","---",values);
         }
         c2.close();
@@ -322,25 +416,24 @@ public class Votaciones extends SQLiteOpenHelper{
 	public boolean consultaUsuario(String usrName, byte[] psswd){
 		boolean result = false;
 		String[] args = {usrName};
-		Cursor c = getReadableDatabase().rawQuery("select Psswd from Usuario where Name = ?",args);
-		if(c.moveToFirst()){
-			if (Arrays.equals(c.getBlob(c.getColumnIndex("Psswd")), psswd))
-				result = true;
-		}
+        Cursor c = getReadableDatabase().rawQuery("select Psswd from Usuario where Name = ?", args);
+        if (c.moveToFirst()) {
+            result = Arrays.equals(c.getBlob(c.getColumnIndex("Psswd")), psswd);
+        }
 		close();
 		return result;
 	}
 
     public boolean consultaEscuela(){
         boolean result = getReadableDatabase().rawQuery("select * from Escuela", null).getCount()
-                > 0 ? true : false;
+                > 0;
         close();
         return result;
     }
 
     public boolean consultaPerfiles(){
         boolean result = getReadableDatabase().rawQuery("select * from Perfil", null).getCount()
-                > 0 ? true : false;
+                > 0;
         close();
         return result;
     }
@@ -349,7 +442,7 @@ public class Votaciones extends SQLiteOpenHelper{
         ContentValues values = new ContentValues();
         values.put("Psswd", psswd);
         String[] selArgs = {usrName};
-        boolean result = getWritableDatabase().update("Usuario", values, "Name=?", selArgs) > 0 ? true : false;
+        boolean result = getWritableDatabase().update("Usuario", values, "Name=?", selArgs) > 0;
         close();
         return result;
     }
@@ -377,6 +470,63 @@ public class Votaciones extends SQLiteOpenHelper{
             perfiles[counter++] = c.getString(c.getColumnIndex("perfil"));
         c.close();
         return perfiles;
+    }
+
+    public String obtenerUsuarioPorIdAttempt(int idAttempt){
+        String uName = null;
+        Cursor c = getReadableDatabase().rawQuery("Select Name from (Usuario join LoginAttempt on " +
+                "Usuario.idUsuario = LoginAttempt.idUsuario) t where  t.idLoginAttempt = ?",new String[]{String.valueOf(idAttempt)});
+        if(c.moveToFirst()){
+            uName = c.getString(c.getColumnIndex("Name"));
+        }
+        c.close();
+        close();
+        return uName;
+    }
+
+    public boolean consultaExistenciaBoleta(String boleta){
+        boolean existe = false;
+        Cursor c = getReadableDatabase().rawQuery("select * from Participante where Boleta = ?", new String[]{boleta});
+        existe = (c.getCount() > 0);
+        c.close();
+        close();
+        return existe;
+    }
+
+    public int obtenerIdPregunta(String pregunta){
+        int idPregunta = -1;
+        Cursor c = getReadableDatabase().rawQuery("select idPregunta from Pregunta where Pregunta = ?", new String[]{pregunta});
+        if(c.moveToFirst()){
+            idPregunta = c.getInt(c.getColumnIndex("idPregunta"));
+        }
+        c.close();
+        close();
+        return idPregunta;
+    }
+
+    public LinkedList<String> obtenerResultadosPorPregunta(String pregunta, int idVotacion){
+        LinkedList<String> resultados = new LinkedList<>();
+        Cursor c = getReadableDatabase().rawQuery("select voto,count(*) as cantidad from Voto join (select Reactivo from Opcion join (select a.idOpcion from ( (select idPregunta from Pregunta where idVotacion = ? and Pregunta = ?) a join Pregunta_Opcion on " +
+                "Pregunta_Opcion.idPregunta = a.idPregunta) s ) t on Opcion.idOpcion = t.idOpcion) u on u.Reactivo = Voto.voto group by voto ", new String[]{String.valueOf(idVotacion),pregunta});
+        while(c.moveToNext()){
+            resultados.add(c.getString(c.getColumnIndex("voto"))+"@"+c.getString(c.getColumnIndex("cantidad")));
+        }
+        c.close();
+        close();
+        return resultados;
+    }
+
+    public String[] obtenerPreguntasVotacion(String titulo){
+        String[] preguntas = null;
+        Cursor c = getReadableDatabase().rawQuery("select Pregunta from Pregunta join (select idVotacion from Votacion where Titulo = ?) r on Pregunta.idVotacion = r.idVotacion", new String[]{titulo});
+        preguntas = new String[c.getCount()];
+        int counter = 0;
+        while(c.moveToNext()){
+            preguntas[counter++] = c.getString(c.getColumnIndex("Pregunta"));
+        }
+        c.close();
+        close();
+        return preguntas;
     }
 	
 	public int consultaPAAE(){

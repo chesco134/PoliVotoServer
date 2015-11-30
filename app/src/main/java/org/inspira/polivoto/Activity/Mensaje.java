@@ -1,13 +1,17 @@
 package org.inspira.polivoto.Activity;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.inspira.polivotoserver.R;
@@ -15,8 +19,9 @@ import org.inspira.polivotoserver.R;
 public class Mensaje extends Activity {
 
 	private static String msj;
-	
-	@Override
+    private EditText inputField;
+
+    @Override
 	protected void onCreate(Bundle b){
 		super.onCreate(b);
 		setContentView(R.layout.mensaje);
@@ -42,37 +47,51 @@ public class Mensaje extends Activity {
 					finish();
 				}
 			});
-			cancelar.setOnClickListener(new OnClickListener(){
-				@Override
-				public void onClick(View view){
-					Intent i = new Intent();
-					i.putExtra("response", false);
-					setResult(RESULT_OK,i);
-					finish();
-				}
-			});
+			cancelar.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent();
+                    i.putExtra("response", false);
+                    setResult(RESULT_OK, i);
+                    finish();
+                }
+            });
+            buttonContainer.setGravity(Gravity.END);
+            buttonContainer.addView(cancelar);
 			buttonContainer.addView(aceptar);
-			buttonContainer.addView(cancelar);
 		}else if(isInputMethod){
-			LinearLayout buttonContainer = (LinearLayout)findViewById(R.id.button_container);
-			Button aceptar = new Button(this);
-			aceptar.setText("Aceptar");
-			final EditText inputField = new EditText(this);
-			aceptar.setOnClickListener(new OnClickListener(){
-				@Override
-				public void onClick(View view){
-					Intent i = new Intent();
-					i.putExtra("response", inputField.getText().toString());
-					setResult(RESULT_OK,i);
-					finish();
-				}
-			});
+            setTitle("Título de Votación");
+            ((LinearLayout)findViewById(R.id.main_container)).removeView(findViewById(R.id.texto));
+            inputField = new EditText(this);
+            inputField.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            Button aceptar = new Button(this);
+            LinearLayout.LayoutParams aceptarLP = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            aceptarLP.setMargins(0, 20, 0, 20);
+            aceptar.setLayoutParams(aceptarLP);
+            aceptar.setText("Aceptar");
+            aceptar.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+					if(!"".equals(inputField.getText().toString())) {
+						Intent i = new Intent();
+						i.putExtra("response", inputField.getText().toString());
+						setResult(RESULT_OK, i);
+						finish();
+					}else{
+						inputField.setHint("Escribe título");
+					}
+                }
+            });
+            LinearLayout buttonContainer = (LinearLayout)findViewById(R.id.button_container);
+            buttonContainer.setGravity(Gravity.END);
+            buttonContainer.setOrientation(LinearLayout.VERTICAL);
+            buttonContainer.addView(inputField);
 			buttonContainer.addView(aceptar);
-			buttonContainer.addView(inputField);
 		}else
-			setTitle("Enhorabuena!! =)");
+			setTitle("Enhorabuena!!");
 		TextView text = (TextView)findViewById(R.id.texto);
-		text.setText(msj);
+        if( text != null)
+		    text.setText(msj);
 	}
 	
 	@Override

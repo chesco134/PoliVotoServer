@@ -16,6 +16,8 @@ import java.util.Calendar;
 public class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
 
+    private Bundle args;
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current date as the default date in the picker
@@ -30,14 +32,19 @@ public class DatePickerFragment extends DialogFragment
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
         // Do something with the date chosen by the user
-
-        Bundle args = new Bundle();
+        args = new Bundle();
         args.putInt("year",year);
-        args.putInt("month",month);
-        args.putInt("day",day);
-        args.putString("response",getArguments().getString("titulo"));
+        args.putInt("month", month);
+        args.putInt("day", day);
+        args.putString("response", getArguments().getString("titulo"));
+        args.putString("failMessage",getArguments().getString("failMessage"));
+    }
+
+    @Override
+    public void onDestroy(){
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.setArguments(args);
         newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+        super.onDestroy();
     }
 }

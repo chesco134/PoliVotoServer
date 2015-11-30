@@ -13,9 +13,7 @@
         android:layout_marginEnd="12sp"
         android:layout_marginRight="12sp"
         android:layout_marginBottom="12sp"
-        android:background="@drawable/cute_button"
-        android:text="@string/confirm"
-        android:textColor="@color/actionbar_color" />
+        android:text="@string/confirm" />
 
     <TextView
         android:id="@+id/mensaje_de_error"
@@ -26,7 +24,8 @@
         android:layout_marginLeft="12sp"
         android:layout_marginRight="12sp"
         android:layout_marginStart="12sp"
-        android:layout_marginTop="12sp" />
+        android:layout_marginTop="12sp"
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/first_time_tag"
@@ -38,18 +37,20 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/mensaje_de_error"
         android:layout_margin="8sp"
-        android:text="@string/escribir_contraseña" />
+        android:text="@string/escribir_contraseña"
+        android:textSize="20sp"/>
 
     <EditText
         android:id="@+id/psswd1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="32sp"
         android:layout_below="@+id/first_time_tag"
         android:layout_marginEnd="12sp"
         android:layout_marginLeft="12sp"
         android:layout_marginRight="12sp"
         android:layout_marginStart="12sp"
         android:layout_marginTop="12sp"
+        android:background="@drawable/input_box_1"
         android:inputType="textPassword" />
 
     <TextView
@@ -61,19 +62,21 @@
         android:layout_marginLeft="12sp"
         android:layout_marginRight="12sp"
         android:layout_marginStart="12sp"
-        android:layout_marginTop="12sp"
-        android:text="@string/confirmar_contraseña" />
+        android:layout_marginTop="20sp"
+        android:text="@string/confirmar_contraseña"
+        android:textSize="20sp"/>
 
     <EditText
         android:id="@+id/psswd2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="32sp"
         android:layout_below="@+id/confirmar_contraseña"
         android:layout_marginEnd="12sp"
         android:layout_marginLeft="12sp"
         android:layout_marginRight="12sp"
         android:layout_marginStart="12sp"
         android:layout_marginTop="12sp"
+        android:background="@drawable/input_box_1"
         android:inputType="textPassword" />
 
 </RelativeLayout>

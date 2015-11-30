@@ -1,5 +1,4 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="20dp" >
@@ -12,7 +11,7 @@
 
         <TextView
             android:id="@+id/texto"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12sp"
             android:layout_marginEnd="12sp"
@@ -25,10 +24,15 @@
 
         <LinearLayout
             android:id="@+id/button_container"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12sp"
+            android:layout_marginLeft="12sp"
+            android:layout_marginRight="12sp"
+            android:layout_marginEnd="12sp"
+            android:layout_marginTop="20sp"
+            android:orientation="horizontal"
+            android:layout_gravity="end"/>
     </LinearLayout>
 
 </ScrollView><!-- From: file:/home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/res/layout/mensaje.xml -->
