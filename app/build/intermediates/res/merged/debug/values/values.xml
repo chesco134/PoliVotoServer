@@ -434,6 +434,7 @@
     <string name="iniciar_servicio">Iniciar Servicio</string>
     <string name="input_psswd">Contraseña</string>
     <string name="input_user">Escuela</string>
+    <string name="instrucciones_conf_participantes">Seleccione la forma en que se cargarán a los participantes.</string>
     <string name="instrucciones_contraseñas">A continuación, defina la contraseña para el usuario</string>
     <string name="invalid_lat_long_used">Latitud o longitud incorrecto(s) x.X</string>
     <string name="keys_insert_error">Error al actualizar credenciales.</string>
@@ -442,6 +443,8 @@
     <string name="login">Ingresar</string>
     <string name="logo_splash_description">PoliVoto es una marca registrada.</string>
     <string name="mas_info">Más Info</string>
+    <string name="matricula_file_name_pref_key">Nombre de Archivo</string>
+    <string name="matricula_file_name_sum">Carga un archivo con ese nombre desde la raiz de la memoria del teléfono.</string>
     <string name="mensaje_alerta">¿Está seguro de que quiere finalizar? Esto borrará los datos de la base de datos, creará un fichero
         cifrado con la información hasta el momento, y no permitirá finalizar cualquier otra auscultación hasta que no sea
         debidamente tratado el archivo final.</string>
@@ -467,6 +470,8 @@
     <string name="no_geocoder_available">El dispositivo no tiene un codificador geográfico =)</string>
     <string name="option_menu_2">Seleccione un botón</string>
     <string name="options"> opciones</string>
+    <string name="part_act_1">Usar una lista de participantes</string>
+    <string name="part_act_2">Usar registro libre</string>
     <string name="participante">Participante</string>
     <string name="polivoto_electronico">PoliVoto Electrónico ©</string>
     <string name="primera_apertura">Esta es la primera vez que se inicia la aplicación, por favor, escriba una contraseña para el administrador.</string>
@@ -492,6 +497,9 @@
     <string name="title_section2">Pregunta 2</string>
     <string name="title_section3">Pregunta 3</string>
     <string name="ultimo_servicio">Iniciar ultimo servicio</string>
+    <string name="usar_matricula">Usar matrícula</string>
+    <string name="usar_matricula_pref_key">Usar matricula</string>
+    <string name="usar_matricula_sum">Cargar un archivo de participantes.</string>
     <string name="ver_participantes">Ver Participantes</string>
     <string name="ver_participantes_votando">Ver Votando</string>
     <!-- From: file:/home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/8.3.0/res/values/wallet_strings.xml -->

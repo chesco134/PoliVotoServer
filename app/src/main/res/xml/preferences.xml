@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="Zukam Prefs">
+    <CheckBoxPreference
+        android:key="usar_matricula_pref_key"
+        android:title="@string/usar_matricula"
+        android:summary="@string/usar_matricula_sum"
+        android:defaultValue="false" />
+    <EditTextPreference
+        android:dependency="usar_matricula_pref_key"
+        android:key="matricula_file_name_pref_key"
+        android:title="Nombre de archivo"
+        android:summary="@string/matricula_file_name_sum"/>
+
+</PreferenceScreen>

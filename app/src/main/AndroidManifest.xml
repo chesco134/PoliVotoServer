@@ -55,6 +55,9 @@
             android:name="org.inspira.polivoto.Activity.SelectorDeCredenciales"
             android:label="@string/app_name" />
         <activity
+            android:name="org.inspira.polivoto.Activity.ConfiguraParticipantesActivity"
+            android:label="@string/app_name"/>
+        <activity
             android:name="org.inspira.polivoto.Activity.SimplePromptActivity"
             android:label="@string/app_name" />
         <activity

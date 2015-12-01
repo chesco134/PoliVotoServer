@@ -170,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void participantes(View v){
+		launchPreferenceActivity();
         /*
         new Thread(){
             @Override
@@ -240,4 +241,9 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this,InputDateAndTimeValuesActivity.class);
         startActivity(i);
     }
+
+	private void launchPreferenceActivity(){
+		Intent i = new Intent(this,ConfiguraParticipantesActivity.class);
+		startActivity(i);
+	}
 }

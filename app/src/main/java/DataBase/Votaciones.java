@@ -13,6 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.inspira.polivoto.Security.Hasher;
+import org.json.JSONArray;
 
 import Shared.Pregunta;
 import android.content.ContentValues;
@@ -223,9 +224,9 @@ public class Votaciones extends SQLiteOpenHelper{
 
     public String obtenerFechaFinVotacionActual(){
         String fechaFin = null;
-        Cursor c = getReadableDatabase().rawQuery("select Fecha_Fin from VotacionFechaFin join (select idVotacion from Votacion where Fecha_Fin is null or Fecha_Fin = '---') r on r.idVotacion = VotacionFechaFin.idVotacion",null);
-        if(c.moveToFirst()){
-            fechaFin = c.getString(c.getColumnIndex("Fech_Fin"));
+        Cursor c = getReadableDatabase().rawQuery("select Fecha_Fin from VotacionFechaFin join (select idVotacion from Votacion where Fecha_Fin is null or Fecha_Fin = '---') r on r.idVotacion = VotacionFechaFin.idVotacion", null);
+        if(c.moveToNext()){
+            fechaFin = c.getString(0);
         }
         c.close();
         close();
@@ -236,7 +237,7 @@ public class Votaciones extends SQLiteOpenHelper{
         ContentValues values = new ContentValues();
         values.put("Fecha_Fin", new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date()));
         int tul = getWritableDatabase().update("Votacion", values, "Fecha_Fin is null or Fecha_Fin = '---'", null);
-        if( tul != -1 )
+        if( tul != 0 )
             Toast.makeText(ctx,"Hecho",Toast.LENGTH_SHORT).show();
         close();
     }
@@ -329,11 +330,11 @@ public class Votaciones extends SQLiteOpenHelper{
         return loginAttempt;
     }
 
-    public int insertaAttemptSucceded(int idLoginAttempt, byte[] secretKey){
+    public long insertaAttemptSucceded(int idLoginAttempt, byte[] secretKey){
         ContentValues values = new ContentValues();
         values.put("idLoginAttempt", idLoginAttempt);
         values.put("secretKey", secretKey);
-        int result = (int)getWritableDatabase().insert("AttemptSucceded", "---", values);
+        long result = getWritableDatabase().insert("AttemptSucceded", "---", values);
         close();
         return result;
     }
@@ -342,6 +343,7 @@ public class Votaciones extends SQLiteOpenHelper{
         ContentValues values = new ContentValues();
         values.put("idLoginAttempt",idLoginAttempt);
         values.put("Action", action);
+        values.put("Action_Timestamp",new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date()));
         getWritableDatabase().insert("UserAction", "---", values);
         close();
     }
@@ -385,13 +387,33 @@ public class Votaciones extends SQLiteOpenHelper{
 
     public byte[] obtenerSKeyEncoded(int idAttempt){
         byte[] encodedSKey = null;
-        Cursor c = getReadableDatabase().rawQuery("SELECT secretKey from AttemptSucceded where idAttempt = ?",new String[]{String.valueOf(idAttempt)});
+        Cursor c = getReadableDatabase().rawQuery("SELECT secretKey from AttemptSucceded where idLoginAttempt = CAST(? as INTEGER)",new String[]{String.valueOf(idAttempt)});
         if(c.moveToFirst()){
             encodedSKey = c.getBlob(c.getColumnIndex("secretKey"));
             c.close();
         }
         close();
         return encodedSKey;
+    }
+
+    public void dummySelect(){
+        Cursor c = getReadableDatabase().rawQuery("SELECT * FROM AttemptSucceded",null);
+        Cursor c2 = getReadableDatabase().rawQuery("SELECT secretKey FROM AttemptSucceded WHERE idLoginAttempt = CAST(? as INTEGER)",new String[]{String.valueOf(9)});
+        if(c2.moveToNext())
+            Log.e("Riot Mode",Arrays.toString(c2.getBlob(c2.getColumnIndex("secretKey"))));
+        else {
+            Log.e("Termination", "Sucks");
+            c2 = getReadableDatabase().query("AttemptSucceded",null,"idLoginAttempt=?",
+                    new String[]{"13"},null,null,null);
+            if(c2.moveToNext())
+                Log.i("Intrinsic",Arrays.toString(c2.getBlob(c2.getColumnIndex("secretKey"))));
+            else
+                Log.i("Intrinsic","It keeps sucking");
+        }
+        c2.close();
+        while(c.moveToNext())
+            Log.d("STRIKER",c.getInt(c.getColumnIndex("idLoginAttempt"))+Arrays.toString(c.getBlob(c.getColumnIndex("secretKey"))));
+        close();
     }
 
     public long insertaVoto(byte[] idVoto, int idVotacion, String perfil, String voto, int idLoginAttempt, int idPregunta){
@@ -405,8 +427,8 @@ public class Votaciones extends SQLiteOpenHelper{
             values.put("idPerfil",c2.getInt(c2.getColumnIndex("idPerfil")));
             values.put("Voto",voto);
             values.put("idLoginAttempt",idLoginAttempt);
-            values.put("idPregunta",idPregunta);
-            id = getWritableDatabase().insert("Voto","---",values);
+            values.put("idPregunta", idPregunta);
+            id = getWritableDatabase().insert("Voto", "---", values);
         }
         c2.close();
         close();
@@ -527,6 +549,17 @@ public class Votaciones extends SQLiteOpenHelper{
         c.close();
         close();
         return preguntas;
+    }
+
+    public JSONArray obtenerOpcionesVotacion(String pregunta){
+        Cursor c = getReadableDatabase().rawQuery("SELECT Reactivo from Opcion join (select idOpcion from (select idPregunta from " +
+                "Pregunta where Pregunta = ?) r join Pregunta_Opcion on r.idPregunta = Pregunta_Opcion.idPregunta) s " +
+                "on Opcion.idOpcion = s.idOpcion", new String[]{pregunta});
+        JSONArray opciones = new JSONArray();
+        while(c.moveToNext()){
+            opciones.put(c.getString(c.getColumnIndex("Reactivo")));
+        }
+        return opciones;
     }
 	
 	public int consultaPAAE(){

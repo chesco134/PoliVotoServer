@@ -62,9 +62,8 @@ public class AttendantHandler extends Thread {
                 sih.setContext(activity);
                 sih.setRHost(socket.getRemoteSocketAddress().toString());
                 sih.start();// Recieving client's parameters. Name and desired action.
-                sih.join();
-
             } catch (Exception e) {
+                e.printStackTrace();
             }
 			}
 		};

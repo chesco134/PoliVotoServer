@@ -200,6 +200,7 @@ public class VotacionesConf extends AppCompatActivity implements
 				}
 				*/
 				v.terminaUltimaVotacion();
+                stopService(myService);
 				break;
 			case DATA_LOADER:
 				startService(myService);

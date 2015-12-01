@@ -17,6 +17,7 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 import android.widget.Toast;
 
 public class MiServicio extends Service {
@@ -61,12 +62,13 @@ public class MiServicio extends Service {
 							.obtainMessage();
 					attendantMsg.obj = socket;
 					attendantMsg.arg2 = msg.arg2;
-					attendantHandler.attendantInnerHandler
-							.sendMessage(attendantMsg);
+                    attendantHandler.attendantInnerHandler
+                            .sendMessage(attendantMsg);
 				}
 			} catch (IOException e) {
 				Toast.makeText(MiServicio.this, "Server down!",
 						Toast.LENGTH_SHORT).show();
+				e.printStackTrace();
 			}
 		}
 	}

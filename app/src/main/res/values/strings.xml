@@ -88,8 +88,16 @@
     <string name="define_fecha_fin_votacion">Defina fecha de término</string>
     <string name="define_tiempo_fin_votacion">Defina la fecha y hora de término de la votación</string>
     <string name="cambia_zona">Aquí puede cambiar el nombre del lugar en el que se encuentra</string>
+    <string name="instrucciones_conf_participantes">Seleccione la forma en que se cargarán a los participantes.</string>
+    <string name="part_act_1">Usar una lista de participantes</string>
+    <string name="part_act_2">Usar registro libre</string>
     <string name="mensaje_alerta">¿Está seguro de que quiere finalizar? Esto borrará los datos de la base de datos, creará un fichero
         cifrado con la información hasta el momento, y no permitirá finalizar cualquier otra auscultación hasta que no sea
         debidamente tratado el archivo final.</string>
+    <string name="usar_matricula">Usar matrícula</string>
+    <string name="matricula_file_name_sum">Carga un archivo con ese nombre desde la raiz de la memoria del teléfono.</string>
+    <string name="matricula_file_name_pref_key">Nombre de Archivo</string>
+    <string name="usar_matricula_sum">Cargar un archivo de participantes.</string>
+    <string name="usar_matricula_pref_key">Usar matricula</string>
 
 </resources>

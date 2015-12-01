@@ -1,9 +1,11 @@
 package org.inspira.polivoto.Threading;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
 
+import org.inspira.polivoto.Activity.ConfiguraParticipantesActivity;
 import org.inspira.polivoto.Security.Hasher;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,7 +22,6 @@ import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -45,15 +46,21 @@ public class SocketInputHandler extends Thread {
     private List<String> messages;
     private Context context;
     private String rHost;
-    private static volatile List<Integer> idAttPostulados;
+    private static volatile List<String> hostsPostulados;
+
+    private int idAttempt;
+    private Votaciones db;
+    private byte[] chunk;
+    private Cipher cip;
+    int resp;
 
     public SocketInputHandler(InputStream entrada, OutputStream salida){
         this.entrada = new DataInputStream(entrada);
         this.salida = new DataOutputStream(salida);
         bytes = new ArrayList<>();
         messages = new ArrayList<>();
-        if(idAttPostulados == null)
-            idAttPostulados = new ArrayList<>();
+        if(hostsPostulados == null)
+            hostsPostulados = new ArrayList<>();
     }
 
     public void setContext(Context context){
@@ -67,14 +74,15 @@ public class SocketInputHandler extends Thread {
     @Override
     public void run(){
         try{
-            Cipher cip;
+            Log.d("RE3","Entered the nightmare");
             // Wait for the first byte and analyse it.
             cByte = entrada.read();
             b = Byte.parseByte(String.valueOf((byte) (cByte & 0xFF)));
             Log.d("SocketHandler", "Guten tag " + rHost);
-            Votaciones db = new Votaciones(context);
-            if( b == Byte.parseByte(String.valueOf((byte) (-1 & 0xFF))) ){ // Make key Exchange.
-                try{
+            db = new Votaciones(context);
+            // Make key Exchange.
+            if( b == Byte.parseByte(String.valueOf((byte) (-1 & 0xFF))) ) {
+                try {
                     KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
                     kpg.initialize(1024);
                     KeyPair kp = kpg.genKeyPair();
@@ -88,62 +96,54 @@ public class SocketInputHandler extends Thread {
                     cip = Cipher.getInstance("RSA/ECB/PKCS1Padding"); // That String is needed in ANDROID
                     cip.init(Cipher.DECRYPT_MODE, privateKey);
                     encodedAESKey = cip.doFinal(cipheredAESKey);
-                    SecretKeySpec skp = new SecretKeySpec(encodedAESKey,"AES");
+                    SecretKeySpec skp = new SecretKeySpec(encodedAESKey, "AES");
                     System.out.println("" + encodedAESKey.length);
                     byte[] cipheredMessage = new byte[Integer.valueOf(entrada.read())];
                     entrada.read(cipheredMessage);
                     cip = Cipher.getInstance("AES");
-                    cip.init(Cipher.DECRYPT_MODE,skp);
+                    cip.init(Cipher.DECRYPT_MODE, skp);
                     // Remaining bytes conform a JSON String.
                     String jstr = new String(cip.doFinal(cipheredMessage));
-                    Log.d("Shura",jstr);
+                    Log.d("Shura", jstr);
                     // This json contains the User credentials.
                     JSONObject json = new JSONObject(jstr);
                     String uName = json.getString("uName");
                     String psswd = json.getString("psswd"); // Password is hashed with sha-254
                     boolean bol = db.consultaUsuario(uName, Hasher.hexStringToByteArray(psswd));
                     // You need to keep the secret key for the user.
-                    int lid = db.insertaLoginAttempt(uName,rHost);
-                    if(bol) {
-                        db.insertaAttemptSucceded(lid, skp.getEncoded());
-                        Log.d("La ruptura","" + lid); // Hence you use the id to retrieve
-                        // the sKey to know the content of the messages.
+                    int lid = db.insertaLoginAttempt(uName, rHost);
+                    if (bol) {
+                        long lon = db.insertaAttemptSucceded(lid, skp.getEncoded());
+                        Log.d("La ruptura", "" + lid + ", lon: " + lon); // Hence you use the id to retrieve
+                        // keep the sKey to know the content of the messages.
                     }
                     salida.write(lid);
                     salida.flush();
-                }catch(IOException e){
-                    e.printStackTrace();
-                } catch (NoSuchAlgorithmException e) {
-                    e.printStackTrace();
-                } catch (IllegalBlockSizeException e) {
-                    e.printStackTrace();
-                } catch (InvalidKeyException e) {
-                    e.printStackTrace();
-                } catch (BadPaddingException e) {
-                    e.printStackTrace();
-                } catch (NoSuchPaddingException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
+                } catch (IOException | NoSuchAlgorithmException | InvalidKeyException | IllegalBlockSizeException | NoSuchPaddingException | BadPaddingException | JSONException e) {
                     e.printStackTrace();
                 }
-            }else{
+            }
+            else{
                 // Read the first byte to know which sKey to load so you can decipher the String.
-                int idAttempt = entrada.read();
+                idAttempt = (b);
+                Log.d("RAKATATAKA","" + idAttempt);
                 SecretKeySpec sk = new SecretKeySpec(db.obtenerSKeyEncoded(idAttempt),"AES");
-                byte[] chunk = new byte[entrada.read()]; // El siguiente byte contiene cuantos siguen.
+                chunk = new byte[entrada.read()]; // El siguiente byte contiene cuantos siguen.
                 entrada.read(chunk); // Obtenemos los bytes cifrados.
                 try {
                     cip = Cipher.getInstance("AES");
+                    cip.init(Cipher.DECRYPT_MODE,sk);
                     String jstr = new String(cip.doFinal(chunk));
                     JSONObject json = new JSONObject(jstr);
                     // En el objecto JSON esperamos encontrar al usuario y a sus intenciones
                     db.insertUserAction(idAttempt,jstr);
+                    int resp;
                     String boleta;
                     byte[] idVoto;
                     String perfil;
                     String voto;
                     String pregunta;
-                    int requestedAction = json.getInt("action"); // La acción es un entero.
+                    int requestedAction = json.getInt("action"); // La tarea a realizar es un entero.
                     // 1 Postulate me!.
                     // 2 Pide validación de boleta.
                     // 3 Entrega voto.
@@ -156,25 +156,16 @@ public class SocketInputHandler extends Thread {
                     // 10 Pide perfiles.
                     // 11 Pide preguntas para participante.
                     // 12 Participante contestó pregunta.
-                    cip.init(Cipher.ENCRYPT_MODE,sk);
+                    // 13 Pide opciones de pregunta.
+                    cip.init(Cipher.ENCRYPT_MODE, sk);
+                    Log.e("Man", db.obtenerUsuarioPorIdAttempt(idAttempt) + "\n------------> " + requestedAction);
                     switch(requestedAction){
                         case 1:
-                            if("Participante".equals(db.obtenerUsuarioPorIdAttempt(idAttempt))){
-                                idAttPostulados.add(idAttempt);
-                                // Participante may need to wait until a new Capturista contacts it
-                            }else if("Capturista".equals(db.obtenerUsuarioPorIdAttempt(idAttempt))){
-                                while(idAttPostulados.size() == 0);
-                                salida.write(cip.doFinal(String.valueOf(idAttPostulados.remove(idAttPostulados.size() - 1)).getBytes()));
-                                salida.flush();
-                            }
+                            action1(salida);
                             break;
                         case 2:
-                            boleta = json.getString("boleta");
-                            if(db.consultaExistenciaBoleta(boleta)){
-                                salida.write(cip.doFinal(String.valueOf(1).getBytes()));
-                            }else{
-                                salida.write(cip.doFinal(String.valueOf(0).getBytes()));
-                            }
+                            // Las siguientes dos líneas deben ser implementación del servicio.
+                            action2(salida,json);
                             break;
                         case 3:
                             idVoto = Hasher.hexStringToByteArray(json.getString("idVoto"));
@@ -183,9 +174,12 @@ public class SocketInputHandler extends Thread {
                             perfil = json.getString("perfil");
                             voto = json.getString("voto");
                             if(db.insertaVoto(idVoto,idVotacion,perfil,voto,idAttempt,db.obtenerIdPregunta(pregunta))!=-1)
-                                salida.write(cip.doFinal(String.valueOf(1).getBytes()));
+                                resp = 1;
                             else
-                                salida.write(cip.doFinal(String.valueOf(0).getBytes()));
+                                resp = 0;
+                            chunk = cip.doFinal(String.valueOf(resp).getBytes());
+                            salida.write(chunk.length);
+                            salida.write(chunk);
                             break;
                         case 4:
                             /***************************************************************
@@ -205,11 +199,15 @@ public class SocketInputHandler extends Thread {
                                 pair = str.split("@");
                                 jsresp.put(pair[0], pair[1]);
                             }
-                            salida.write(cip.doFinal(jsresp.toString().getBytes()));
+                            chunk = cip.doFinal(jsresp.toString().getBytes());
+                            salida.write(chunk.length);
+                            salida.write(chunk);
                             break;
                         case 5:
                             String titulo = db.obtenerTituloVotacionActual();
-                            salida.write(cip.doFinal(titulo.getBytes()));
+                            chunk = cip.doFinal(titulo.getBytes());
+                            salida.write(chunk.length);
+                            salida.write(chunk);
                             break;
                         case 6:
                             String preguntas[] = db.obtenerPreguntasVotacion(db.obtenerTituloVotacionActual());
@@ -217,33 +215,31 @@ public class SocketInputHandler extends Thread {
                             for(int i=0; i<preguntas.length;i++){
                                 jarr.put(i,preguntas[i]);
                             }
-                            salida.write(cip.doFinal(jarr.toString().getBytes()));
+                            chunk = cip.doFinal(jarr.toString().getBytes());
+                            salida.write(chunk.length);
+                            salida.write(chunk);
                             break;
                         case 7:
-                            salida.write(cip.doFinal(db.obtenerFechaInicioVotacionActual().getBytes()));
+                            chunk = cip.doFinal(db.obtenerFechaInicioVotacionActual().getBytes());
+                            salida.write(chunk.length);
+                            salida.write(chunk);
                             break;
                         case 8:
-                            salida.write(cip.doFinal(db.obtenerFechaFinVotacionActual().getBytes()));
+                            chunk = cip.doFinal(db.obtenerFechaFinVotacionActual().getBytes());
+                            salida.write(chunk.length);
+                            salida.write(chunk);
                             break;
                         case 9:
-                            boleta = json.getString("boleta");
-                            perfil = json.getString("perfil");
-                            String escuela = json.getString("escuela");
-                            String nombre = json.getString("nombre");
-                            String apPaterno = json.getString("ap_paterno");
-                            String apMaterno = json.getString("ap_materno");
-                            db.insertaParticipante(boleta,perfil,escuela);
-                            db.insertaNombreParticipante(boleta, nombre, apPaterno, apMaterno);
-                            String[] pregs = db.obtenerPreguntasVotacion(db.obtenerTituloVotacionActual());
-                            for(String preg : pregs)
-                                db.insertaParticipantePregunta(boleta,preg);
+                            action9(json);
                             break;
                         case 10:
                             String[] perfiles = db.obtenerPerfiles();
                             JSONArray jsonArray = new JSONArray();
                             for(int i=0; i<perfiles.length;i++)
                                 jsonArray.put(i,perfiles[i]);
-                            salida.write(cip.doFinal(jsonArray.toString().getBytes()));
+                            chunk = cip.doFinal(jsonArray.toString().getBytes());
+                            salida.write(chunk.length);
+                            salida.write(chunk);
                             break;
                         case 11:
                             boleta = json.getString("boleta");
@@ -251,12 +247,19 @@ public class SocketInputHandler extends Thread {
                             JSONArray jsonArray1 = new JSONArray();
                             for(int i=0; i<pregsParticipante.length;i++)
                                 jsonArray1.put(i,pregsParticipante[i]);
-                            salida.write(cip.doFinal(jsonArray1.toString().getBytes()));
+                            chunk = cip.doFinal(jsonArray1.toString().getBytes());
+                            salida.write(chunk.length);
+                            salida.write(chunk);
                             break;
                         case 12:
                             boleta = json.getString("boleta");
                             pregunta = json.getString("pregunta");
                             db.actualizaParticipantePregunta(boleta,pregunta);
+                            break;
+                        case 13:
+                            chunk = cip.doFinal(db.obtenerOpcionesVotacion(json.getString("pregunta")).toString().getBytes());
+                            salida.write(chunk.length);
+                            salida.write(chunk);
                             break;
                         default:
                     }
@@ -274,27 +277,61 @@ public class SocketInputHandler extends Thread {
                     e.printStackTrace();
                 }
             }
+            salida.close();
+            entrada.close();
         }catch(IOException e){//this can be very funy
             Log.d("SocketInputHandler", e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    private void take(){
-        try {
-            if (b == Byte.parseByte(String.valueOf((byte) ('\n' & 0xFF)))) { // Read bytes.
-                byte[] bts = new byte[bytes.size()];
-                for (int i = 0; i < bts.length; i++)
-                    bts[i] = bytes.get(i);
-                messages.add(new String(bts, "UTF-8"));
-                bytes.clear();
-                if (messages.size() >= 2) {
-                    salida.write(8);
-                    salida.flush(); // Confirm you've recieved all data.
-                }
-            } else
-                bytes.add(b);
-        }catch(IOException e){
-            e.printStackTrace();
+    private void action1(DataOutputStream salida) throws IOException, BadPaddingException, IllegalBlockSizeException {
+        if("Participante".equals(db.obtenerUsuarioPorIdAttempt(idAttempt))){
+            hostsPostulados.add(rHost);
+            // Participante may need to wait until a new Capturista contacts it
+        }else if ("Capturista".equals(db.obtenerUsuarioPorIdAttempt(idAttempt))) {
+            Log.d("Pollos",String.valueOf(hostsPostulados.size()));
+            while (hostsPostulados.size() == 0);
+            Log.d("Pollos", "Entered the underworld");
+            chunk = cip.doFinal(String.valueOf(hostsPostulados.remove(hostsPostulados.size() - 1)).getBytes());
+            salida.write(chunk.length);
+            salida.write(chunk);
+            salida.flush();
         }
+    }
+
+    private void action2(DataOutputStream salida, JSONObject json) throws IOException, BadPaddingException, IllegalBlockSizeException, JSONException {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        Boolean usarMatricula = sharedPref.getBoolean(ConfiguraParticipantesActivity.USAR_MATRICULA_KEY, false);
+        String boleta = json.getString("boleta");
+        if(db.consultaExistenciaBoleta(boleta)){
+            resp = 1;
+        }else{
+            resp = 0;
+        }
+        if(resp == 0 && !usarMatricula){
+            action9(json);
+        }
+        chunk = cip.doFinal(String.valueOf(resp).getBytes());
+        salida.write(chunk.length);
+        salida.write(chunk);
+    }
+
+    private void action9(JSONObject json) throws JSONException {
+        String boleta = json.getString("boleta");
+        String perfil = json.getString("perfil");
+        String escuela = json.getString("escuela");
+        String nombre = json.getString("nombre");
+        String apPaterno = json.getString("ap_paterno");
+        String apMaterno = json.getString("ap_materno");
+        if(db.insertaParticipante(boleta,perfil == null ? "" : perfil,escuela == null ? "" : escuela) == -1){
+            // Si no se proporcionan
+            db.insertaParticipante(boleta,db.obtenerPerfiles()[0],db.obtenerUltimaEscuela());
+        }
+        if( nombre != null && apPaterno != null && apMaterno != null)
+            db.insertaNombreParticipante(boleta, nombre, apPaterno, apMaterno);
+        String[] pregs = db.obtenerPreguntasVotacion(db.obtenerTituloVotacionActual());
+        for(String preg : pregs) // Habilita una pregunta para cada participante.
+            db.insertaParticipantePregunta(boleta,preg);
     }
 }
