@@ -111,9 +111,9 @@ public class MainFragment extends Fragment {
 					if (!add.isEnabled())
 						add.setEnabled(true);
 					if (numberOfAditionalRows == 2)
-						((Button) view).setEnabled(false);
+						view.setEnabled(false);
 				} else {
-					((Button) view).setEnabled(false);
+					view.setEnabled(false);
 				}
 			}
 		});
@@ -133,9 +133,9 @@ public class MainFragment extends Fragment {
 					if (!substract.isEnabled())
 						substract.setEnabled(true);
 					if (numberOfAditionalRows == LIMMIT_OF_PLUS_ROWS)
-						((Button) view).setEnabled(false);
+						view.setEnabled(false);
 				} else {
-					((Button) view).setEnabled(false);
+					view.setEnabled(false);
 				}
 			}
 		});
@@ -153,7 +153,7 @@ public class MainFragment extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-	};
+	}
 
 	@Override
 	public void onViewStateRestored(Bundle savedInstanceState) {
@@ -166,7 +166,7 @@ public class MainFragment extends Fragment {
 				((EditText)additionalRows.get(i).findViewById(R.id.set_title_option)).setText(optionText[i+2]);
 			}
 		}
-	};
+	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {

@@ -104,9 +104,9 @@ public class ProfilesPickerFragment extends Fragment {
                     if (!add.isEnabled())
                         add.setEnabled(true);
                     if (numberOfAditionalRows == 1)
-                        ((Button) view).setEnabled(false);
+                        view.setEnabled(false);
                 } else {
-                    ((Button) view).setEnabled(false);
+                    view.setEnabled(false);
                 }
             }
         });
@@ -118,7 +118,7 @@ public class ProfilesPickerFragment extends Fragment {
                             .getSystemService(Context.LAYOUT_INFLATER_SERVICE))
                             .inflate(R.layout.pair_options, optionSet, false);
                     ((TextView)newRow.findViewById(R.id.set_title_option_label)).setText(R.string.escriba_perfil);
-                    ((TextView)newRow.findViewById(R.id.set_title_option)).requestFocus();
+                    newRow.findViewById(R.id.set_title_option).requestFocus();
                     additionalRows.add(newRow);
                     numberOfAditionalRows++;
                     newRow.setId(numberOfAditionalRows);
@@ -126,9 +126,9 @@ public class ProfilesPickerFragment extends Fragment {
                     if (!substract.isEnabled())
                         substract.setEnabled(true);
                     if (numberOfAditionalRows == LIMMIT_OF_PLUS_ROWS)
-                        ((Button) view).setEnabled(false);
+                        view.setEnabled(false);
                 } else {
-                    ((Button) view).setEnabled(false);
+                    view.setEnabled(false);
                 }
             }
         });
@@ -146,7 +146,7 @@ public class ProfilesPickerFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-    };
+    }
 
     @Override
     public void onViewStateRestored(Bundle savedInstanceState) {
@@ -158,7 +158,7 @@ public class ProfilesPickerFragment extends Fragment {
                 ((EditText)additionalRows.get(i).findViewById(R.id.set_title_option)).setText(optionText[i+1]);
             }
         }
-    };
+    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {

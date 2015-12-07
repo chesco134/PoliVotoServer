@@ -80,7 +80,7 @@ public class CambiaZonaPerfilesActivity extends AppCompatActivity {
         }
         if (!op1.equals("")) {
             db.insertaPerfil(op1);
-            LinkedList<View> lst = (LinkedList<View>)mFragment.getAdditionalRows();
+            LinkedList<View> lst = mFragment.getAdditionalRows();
             int length = lst.size();
             for (int i = 0; i<length;i++) {
                 Opcion opi = new Opcion();

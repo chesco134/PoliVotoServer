@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:2:1-91:12
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:2:1-100:12
 	package
 		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:3:5-41
 		INJECTED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml
@@ -15,20 +15,6 @@ ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/Androi
 		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:2:11-69
 uses-permission#android.permission.INTERNET
 ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:7:5-67
-MERGED from [com.google.android.gms:play-services-ads:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.3.0/AndroidManifest.xml:20:5-66
-MERGED from [com.google.android.gms:play-services-analytics:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/8.3.0/AndroidManifest.xml:21:5-67
-MERGED from [com.google.android.gms:play-services-appinvite:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/8.3.0/AndroidManifest.xml:19:5-67
-MERGED from [com.google.android.gms:play-services-maps:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.3.0/AndroidManifest.xml:21:5-66
-MERGED from [com.google.android.gms:play-services-gcm:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/8.3.0/AndroidManifest.xml:22:5-67
-MERGED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:21:5-67
-MERGED from [com.google.android.gms:play-services-maps:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.3.0/AndroidManifest.xml:21:5-66
-MERGED from [com.google.android.gms:play-services-maps:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.3.0/AndroidManifest.xml:21:5-66
-MERGED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:21:5-67
-MERGED from [com.google.android.gms:play-services-wallet:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/8.3.0/AndroidManifest.xml:20:5-66
-MERGED from [com.google.android.gms:play-services-maps:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.3.0/AndroidManifest.xml:21:5-66
-MERGED from [com.google.android.gms:play-services-ads:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.3.0/AndroidManifest.xml:20:5-66
-MERGED from [com.google.android.gms:play-services-gcm:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/8.3.0/AndroidManifest.xml:22:5-67
-MERGED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:21:5-67
 	android:name
 		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:7:22-64
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
@@ -41,141 +27,7 @@ ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/Androi
 		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:9:22-78
 uses-sdk
 ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:11:5-13:41
-MERGED from [com.google.android.gms:play-services:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-ads:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.3.0/AndroidManifest.xml:23:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-analytics:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-appindexing:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-appinvite:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-appstate:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-auth:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth/8.3.0/AndroidManifest.xml:18:5-43
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-cast:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:mediarouter-v7:22.2.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:appcompat-v7:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-drive:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-fitness:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-location:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-maps:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.3.0/AndroidManifest.xml:26:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-games:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-drive:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-gcm:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-identity:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-location:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-maps:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.3.0/AndroidManifest.xml:26:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-maps:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.3.0/AndroidManifest.xml:26:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-nearby:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-panorama:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-plus:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-safetynet:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-vision:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-vision/8.3.0/AndroidManifest.xml:4:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-wallet:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/8.3.0/AndroidManifest.xml:19:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-identity:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-maps:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.3.0/AndroidManifest.xml:26:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-wearable:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:appcompat-v7:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-ads:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.3.0/AndroidManifest.xml:23:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-identity:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-gcm:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-base:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:18:5-42
 MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
 	android:targetSdkVersion
 		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:13:9-38
@@ -186,114 +38,8 @@ MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioPr
 		INJECTED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml
 		INJECTED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml
 application
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:15:5-89:19
-MERGED from [com.google.android.gms:play-services:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/8.3.0/AndroidManifest.xml:19:5-20
-MERGED from [com.google.android.gms:play-services-ads:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.3.0/AndroidManifest.xml:24:5-32:19
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-analytics:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/8.3.0/AndroidManifest.xml:24:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-appindexing:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/8.3.0/AndroidManifest.xml:19:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-appinvite:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/8.3.0/AndroidManifest.xml:20:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-appstate:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/8.3.0/AndroidManifest.xml:19:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-auth:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth/8.3.0/AndroidManifest.xml:20:5-25:19
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-cast:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/8.3.0/AndroidManifest.xml:19:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:mediarouter-v7:22.2.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/AndroidManifest.xml:22:5-20
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:15:5-98:19
 MERGED from [com.android.support:appcompat-v7:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-drive:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/8.3.0/AndroidManifest.xml:19:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-fitness:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/8.3.0/AndroidManifest.xml:19:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-location:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/8.3.0/AndroidManifest.xml:19:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-maps:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.3.0/AndroidManifest.xml:27:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-games:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/8.3.0/AndroidManifest.xml:19:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-drive:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/8.3.0/AndroidManifest.xml:19:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-gcm:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/8.3.0/AndroidManifest.xml:24:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:26:5-46:19
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-identity:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/8.3.0/AndroidManifest.xml:19:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-location:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/8.3.0/AndroidManifest.xml:19:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-maps:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.3.0/AndroidManifest.xml:27:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-maps:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.3.0/AndroidManifest.xml:27:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:26:5-46:19
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-nearby:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/8.3.0/AndroidManifest.xml:20:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-panorama:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/8.3.0/AndroidManifest.xml:19:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-plus:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/8.3.0/AndroidManifest.xml:19:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-safetynet:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/8.3.0/AndroidManifest.xml:19:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-vision:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-vision/8.3.0/AndroidManifest.xml:5:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-identity:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/8.3.0/AndroidManifest.xml:19:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-maps:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.3.0/AndroidManifest.xml:27:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-wearable:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/8.3.0/AndroidManifest.xml:19:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:appcompat-v7:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-ads:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.3.0/AndroidManifest.xml:24:5-32:19
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-identity:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/8.3.0/AndroidManifest.xml:19:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-gcm:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/8.3.0/AndroidManifest.xml:24:5-20
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:26:5-46:19
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:20:5-24:19
 MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
 	android:label
 		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:18:9-41
@@ -303,272 +49,155 @@ MERGED from [com.android.support:support-v4:23.1.1] /home/jcapiz/AndroidStudioPr
 		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:17:9-45
 	android:theme
 		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:19:9-52
-meta-data#com.google.android.gms.version
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:20:9-22:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/AndroidManifest.xml:21:9-23:69
-	android:value
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:22:13-66
-	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:21:13-58
 service#org.inspira.polivotoserver.MiServicio
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:24:9-47
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:21:9-47
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:24:18-44
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:21:18-44
 activity#org.inspira.polivoto.Activity.MensajeInformacion
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:26:9-29:59
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:23:9-26:59
 	android:label
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:28:13-45
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:25:13-45
 	android:theme
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:29:13-56
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:26:13-56
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:27:13-76
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:24:13-76
 activity#org.inspira.polivoto.Activity.InputDateAndTimeValuesActivity
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:27:9-29:48
+	android:label
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:29:13-45
+	android:name
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:28:13-88
+activity#org.inspira.polivoto.Activity.DataPickerActivity
 ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:30:9-32:48
 	android:label
 		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:32:13-45
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:31:13-88
-activity#org.inspira.polivoto.Activity.DataPickerActivity
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:31:13-76
+activity#org.inspira.polivoto.Activity.CargadorDeMatricula
 ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:33:9-35:48
 	android:label
 		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:35:13-45
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:34:13-76
-activity#org.inspira.polivoto.Activity.CargadorDeMatricula
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:36:9-38:48
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:34:13-77
+activity#org.inspira.polivotoserver.tul.PasswordPicker
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:36:9-38:43
 	android:label
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:38:13-45
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:38:13-40
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:37:13-77
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:37:13-47
+activity#org.inspira.polivotoserver.tul.Preferences
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:39:9-46:20
+	android:label
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:41:13-40
+	android:name
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:40:13-44
+intent-filter#.Preferences+android.intent.category.DEFAULT
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:42:13-45:29
+action#.Preferences
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:43:17-55
+	android:name
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:43:25-52
+category#android.intent.category.DEFAULT
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:44:17-76
+	android:name
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:44:27-73
 activity#org.inspira.polivoto.Activity.CambiaZonaPerfilesActivity
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:39:9-41:48
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:47:9-49:48
 	android:label
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:41:13-45
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:49:13-45
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:40:13-84
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:48:13-84
+activity#org.inspira.polivoto.Activity.StandByActivity
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:50:9-81
+	android:name
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:50:19-79
 activity#org.inspira.polivoto.Activity.VotacionesConf
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:42:9-44:48
-	android:label
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:44:13-45
-	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:43:13-72
-activity#org.inspira.polivoto.Activity.ListaContenido
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:45:9-47:48
-	android:label
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:47:13-45
-	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:46:13-72
-activity#org.inspira.polivoto.Activity.UnlockerActivity
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:48:9-50:48
-	android:label
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:50:13-45
-	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:49:13-74
-activity#org.inspira.polivoto.Activity.WelcomeActivity
 ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:51:9-53:48
 	android:label
 		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:53:13-45
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:52:13-73
-activity#org.inspira.polivoto.Activity.SelectorDeCredenciales
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:52:13-72
+activity#org.inspira.polivoto.Activity.ListaContenido
 ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:54:9-56:48
 	android:label
 		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:56:13-45
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:55:13-80
-activity#org.inspira.polivoto.Activity.ConfiguraParticipantesActivity
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:57:9-59:47
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:55:13-72
+activity#org.inspira.polivoto.Activity.UnlockerActivity
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:57:9-59:48
 	android:label
 		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:59:13-45
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:58:13-88
-activity#org.inspira.polivoto.Activity.SimplePromptActivity
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:60:9-62:48
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:58:13-74
+activity#org.inspira.polivoto.Activity.RemoteServerPickerActivity
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:60:9-62:47
 	android:label
 		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:62:13-45
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:61:13-78
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:61:13-84
+activity#org.inspira.polivoto.Activity.WelcomeActivity
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:63:9-65:48
+	android:label
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:65:13-45
+	android:name
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:64:13-73
+activity#org.inspira.polivoto.Activity.SelectorDeCredenciales
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:66:9-68:48
+	android:label
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:68:13-45
+	android:name
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:67:13-80
+activity#org.inspira.polivoto.Activity.ConfiguraParticipantesActivity
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:69:9-71:47
+	android:label
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:71:13-45
+	android:name
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:70:13-88
+activity#org.inspira.polivoto.Activity.SimplePromptActivity
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:72:9-74:48
+	android:label
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:74:13-45
+	android:name
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:73:13-78
 activity#org.inspira.polivoto.Activity.SplashActivity
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:63:9-66:74
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:75:9-78:74
 	android:label
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:65:13-29
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:77:13-29
 	android:theme
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:66:13-71
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:78:13-71
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:64:13-72
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:76:13-72
 activity#org.inspira.polivoto.Activity.Mensaje
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:67:9-70:59
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:79:9-82:59
 	android:label
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:69:13-40
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:81:13-40
 	android:theme
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:70:13-56
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:82:13-56
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:68:13-65
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:80:13-65
 activity#org.inspira.polivoto.Activity.TestDialog
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:71:9-75:59
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:83:9-87:59
 	android:screenOrientation
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:74:13-47
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:86:13-47
 	android:label
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:73:13-35
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:85:13-35
 	android:theme
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:75:13-56
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:87:13-56
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:72:13-68
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:84:13-68
 activity#org.inspira.polivoto.Activity.MainActivity
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:76:9-84:20
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:88:9-96:20
 	android:label
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:78:13-45
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:90:13-45
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:77:13-70
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:89:13-70
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:79:13-83:29
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:91:13-95:29
 action#android.intent.action.MAIN
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:80:17-69
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:92:17-69
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:80:25-66
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:92:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:82:17-77
+ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:94:17-77
 	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:82:27-74
-service#org.inspira.polivotoserver.FetchAddressIntentService
-ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:86:9-88:40
-	android:exported
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:88:13-37
-	android:name
-		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:87:13-54
-uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from [com.google.android.gms:play-services-ads:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.3.0/AndroidManifest.xml:21:5-78
-MERGED from [com.google.android.gms:play-services-analytics:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/8.3.0/AndroidManifest.xml:22:5-79
-MERGED from [com.google.android.gms:play-services-maps:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.3.0/AndroidManifest.xml:20:5-78
-MERGED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:22:5-79
-MERGED from [com.google.android.gms:play-services-maps:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.3.0/AndroidManifest.xml:20:5-78
-MERGED from [com.google.android.gms:play-services-maps:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.3.0/AndroidManifest.xml:20:5-78
-MERGED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:22:5-79
-MERGED from [com.google.android.gms:play-services-nearby:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/8.3.0/AndroidManifest.xml:19:5-79
-MERGED from [com.google.android.gms:play-services-maps:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.3.0/AndroidManifest.xml:20:5-78
-MERGED from [com.google.android.gms:play-services-ads:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.3.0/AndroidManifest.xml:21:5-78
-MERGED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:22:5-79
-	android:name
-		ADDED from [com.google.android.gms:play-services-ads:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.3.0/AndroidManifest.xml:21:22-76
-activity#com.google.android.gms.ads.AdActivity
-ADDED from [com.google.android.gms:play-services-ads:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.3.0/AndroidManifest.xml:26:9-29:64
-MERGED from [com.google.android.gms:play-services-ads:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.3.0/AndroidManifest.xml:26:9-29:64
-	android:configChanges
-		ADDED from [com.google.android.gms:play-services-ads:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.3.0/AndroidManifest.xml:28:13-122
-	android:theme
-		ADDED from [com.google.android.gms:play-services-ads:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.3.0/AndroidManifest.xml:29:13-61
-	android:name
-		ADDED from [com.google.android.gms:play-services-ads:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.3.0/AndroidManifest.xml:27:13-65
-activity#com.google.android.gms.ads.purchase.InAppPurchaseActivity
-ADDED from [com.google.android.gms:play-services-ads:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.3.0/AndroidManifest.xml:30:9-31:52
-MERGED from [com.google.android.gms:play-services-ads:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.3.0/AndroidManifest.xml:30:9-31:52
-	android:theme
-		ADDED from [com.google.android.gms:play-services-ads:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.3.0/AndroidManifest.xml:31:13-50
-	android:name
-		ADDED from [com.google.android.gms:play-services-ads:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.3.0/AndroidManifest.xml:30:19-91
-activity#com.google.android.gms.auth.api.signin.internal.SignInHubActivity
-ADDED from [com.google.android.gms:play-services-auth:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth/8.3.0/AndroidManifest.xml:21:9-24:46
-	android:excludeFromRecents
-		ADDED from [com.google.android.gms:play-services-auth:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth/8.3.0/AndroidManifest.xml:23:19-52
-	android:exported
-		ADDED from [com.google.android.gms:play-services-auth:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth/8.3.0/AndroidManifest.xml:24:19-43
-	android:theme
-		ADDED from [com.google.android.gms:play-services-auth:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth/8.3.0/AndroidManifest.xml:22:19-78
-	android:name
-		ADDED from [com.google.android.gms:play-services-auth:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth/8.3.0/AndroidManifest.xml:21:19-72
-uses-feature#0x00020000
-ADDED from [com.google.android.gms:play-services-maps:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.3.0/AndroidManifest.xml:22:5-24:33
-MERGED from [com.google.android.gms:play-services-maps:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.3.0/AndroidManifest.xml:22:5-24:33
-MERGED from [com.google.android.gms:play-services-maps:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.3.0/AndroidManifest.xml:22:5-24:33
-MERGED from [com.google.android.gms:play-services-maps:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.3.0/AndroidManifest.xml:22:5-24:33
-	android:glEsVersion
-		ADDED from [com.google.android.gms:play-services-maps:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.3.0/AndroidManifest.xml:23:8-40
-	android:required
-		ADDED from [com.google.android.gms:play-services-maps:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.3.0/AndroidManifest.xml:24:8-31
-uses-permission#com.google.android.c2dm.permission.RECEIVE
-ADDED from [com.google.android.gms:play-services-gcm:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/8.3.0/AndroidManifest.xml:21:5-82
-MERGED from [com.google.android.gms:play-services-gcm:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/8.3.0/AndroidManifest.xml:21:5-82
-	android:name
-		ADDED from [com.google.android.gms:play-services-gcm:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/8.3.0/AndroidManifest.xml:21:22-79
-uses-permission#android.permission.WAKE_LOCK
-ADDED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:24:5-67
-MERGED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:24:5-67
-MERGED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:24:5-67
-	android:name
-		ADDED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:24:22-65
-provider#com.google.android.gms.measurement.AppMeasurementContentProvider
-ADDED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:28:7-31:37
-MERGED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:28:7-31:37
-MERGED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:28:7-31:37
-	android:authorities
-		ADDED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:29:11-76
-	android:exported
-		ADDED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:31:11-35
-	android:name
-		ADDED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:30:11-90
-receiver#com.google.android.gms.measurement.AppMeasurementReceiver
-ADDED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:33:7-39:18
-MERGED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:33:7-39:18
-MERGED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:33:7-39:18
-	android:enabled
-		ADDED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:35:11-33
-	android:name
-		ADDED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:34:11-83
-intent-filter#com.google.android.gms.measurement.UPLOAD
-ADDED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:36:9-38:25
-action#com.google.android.gms.measurement.UPLOAD
-ADDED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:37:11-77
-	android:name
-		ADDED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:37:19-75
-service#com.google.android.gms.measurement.AppMeasurementService
-ADDED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:41:7-44:37
-MERGED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:41:7-44:37
-MERGED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:41:7-44:37
-	android:enabled
-		ADDED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:43:11-33
-	android:exported
-		ADDED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:44:11-35
-	android:name
-		ADDED from [com.google.android.gms:play-services-measurement:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/AndroidManifest.xml:42:11-82
-uses-permission#android.permission.GET_ACCOUNTS
-ADDED from [com.google.android.gms:play-services-wallet:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/8.3.0/AndroidManifest.xml:21:5-70
-	android:name
-		ADDED from [com.google.android.gms:play-services-wallet:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/8.3.0/AndroidManifest.xml:21:22-68
-uses-permission#android.permission.USE_CREDENTIALS
-ADDED from [com.google.android.gms:play-services-wallet:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/8.3.0/AndroidManifest.xml:22:5-73
-	android:name
-		ADDED from [com.google.android.gms:play-services-wallet:8.3.0] /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/8.3.0/AndroidManifest.xml:22:22-71
+		ADDED from /home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/src/main/AndroidManifest.xml:94:27-74

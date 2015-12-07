@@ -1,0 +1,49 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.testingsmthg.MainActivity" >
+
+    <item
+        android:id="@+id/detener_servicio"
+        android:orderInCategory="100"
+        android:title="@string/detener_servicio"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/iniciar_servicio"
+        android:orderInCategory="100"
+        android:title="@string/iniciar_servicio"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_last_server"
+        android:orderInCategory="100"
+        android:title="@string/ultimo_servicio"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/ver_participantes"
+        android:orderInCategory="100"
+        android:title="@string/ver_participantes"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/finalizar_votacion"
+        android:orderInCategory="100"
+        android:title="@string/finalizar_votacion"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/hacer_global"
+        android:orderInCategory="100"
+        android:title="@string/volver_global"
+        app:showAsAction="never"/>
+    <!--
+    <item
+        android:id="@+id/cambiar_contraseñas"
+        android:orderInCategory="100"
+        android:title="@string/cambiar_contraseñas"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/codigo_legalidad"
+        android:orderInCategory="100"
+        android:title="@string/Batton_Pass"
+        app:showAsAction="never"/>
+    -->
+
+</menu>

@@ -7,10 +7,11 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -84,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
 		((TextView)findViewById(R.id.Votaciones)).setTypeface(Typeface.createFromAsset(getAssets(), "RobotoCondensed-Bold.ttf"));
 		((TextView)findViewById(R.id.Perfiles)).setTypeface(Typeface.createFromAsset(getAssets(), "RobotoCondensed-Bold.ttf"));
 		((TextView)findViewById(R.id.Zonas)).setTypeface(Typeface.createFromAsset(getAssets(), "RobotoCondensed-Bold.ttf"));
-		((TextView)findViewById(R.id.Participantes)).setTypeface(Typeface.createFromAsset(getAssets(), "RobotoCondensed-Bold.ttf"));
 	}
 
 	@Override
@@ -93,7 +93,26 @@ public class MainActivity extends AppCompatActivity {
 		if (isFirstLaunched) {
 			launchSplash();
 		}
-	};
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main_menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.settings) {
+			settings();
+		}
+		return super.onOptionsItemSelected(item);
+	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -169,8 +188,23 @@ public class MainActivity extends AppCompatActivity {
         launchZonaChanger();
     }
 
-    public void participantes(View v){
-		launchPreferenceActivity();
+    public void settings(){
+		Votaciones db = new Votaciones(this);
+        /*
+        for( String par : db.obtenerParticipantes())
+            Log.d("TURARARARA",par);
+        try {
+            for (String st : db.consultaParticipantePreguntasTUL("2011640351", db.obtenerTituloVotacionActual()))
+                Log.d("M;ASDMSAD", st);
+        }catch(NullPointerException e){
+            e.printStackTrace();
+        }
+        */
+		if(db.obtenerFechaInicioVotacionActual() == null)
+			launchPreferenceActivity();
+		else {
+			Toast.makeText(this, "Ya hay un proceso de votación programado", Toast.LENGTH_SHORT).show();
+		}
         /*
         new Thread(){
             @Override

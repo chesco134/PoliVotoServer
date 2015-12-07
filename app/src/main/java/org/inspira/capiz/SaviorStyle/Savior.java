@@ -100,8 +100,8 @@ public class Savior {
 			for(String iter : values){
 				Log.e("Current Progress",iter + "\n");
 			}
-		};
-		
+		}
+
 		@Override
 		protected void onPostExecute(String result){
 			Toast.makeText(context, result, Toast.LENGTH_SHORT).show();

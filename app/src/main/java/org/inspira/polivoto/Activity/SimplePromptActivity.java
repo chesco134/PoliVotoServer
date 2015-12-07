@@ -18,11 +18,6 @@ public class SimplePromptActivity extends Activity {
 		try{
 			Bundle extras = getIntent().getExtras();
 			String[] rows = extras.getStringArray("rows");
-			if( rows == null ){
-				rows = new String[2];
-				rows[0] = "Hola";
-				rows[1] = "Mundo";
-			}
 			((TextView)findViewById(R.id.header)).setText(extras.getString("header"));
 			ListView list = (ListView)findViewById(R.id.usrs_list);
 			MyListAdapter adapter = new MyListAdapter(rows, this);

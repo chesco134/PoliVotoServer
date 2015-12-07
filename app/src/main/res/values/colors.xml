@@ -10,5 +10,6 @@
     <color name="emerald">#ffa6d9b5</color>
     <color name="fuente_2">#ff4d4d4d</color>
     <color name="actionbar_color">#ff86241f</color>
+    <color name="lienzo_encabezado">#f8540304</color>
 
 </resources>

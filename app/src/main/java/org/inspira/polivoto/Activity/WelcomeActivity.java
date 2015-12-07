@@ -42,16 +42,15 @@ public class WelcomeActivity extends AppCompatActivity {
 		submit = (Button) findViewById(R.id.next);
 		//submit = (ImageView) findViewById(R.id.next);
 		error = (TextView) findViewById(R.id.mensaje_de_error);
-		submit.setTypeface(Typeface.createFromAsset(getAssets(), "Roboto-Regular.ttf"));
 		error.setTypeface(Typeface.createFromAsset(getAssets(),"Roboto-Regular.ttf"));
 		((TextView)findViewById(R.id.first_time_tag)).setTypeface(Typeface.createFromAsset(getAssets(), "Roboto-Regular.ttf"));
-		((TextView)findViewById(R.id.greeting_tag)).setTypeface(Typeface.createFromAsset(getAssets(), "Roboto-Thin.ttf"));
+		((TextView)findViewById(R.id.greeting_tag)).setTypeface(Typeface.createFromAsset(getAssets(), "Roboto-Regular.ttf"));
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.welcome_menu, menu);
+		getMenuInflater().inflate(R.menu.main_menu, menu);
 		return true;
 	}
 

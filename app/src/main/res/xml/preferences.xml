@@ -11,5 +11,15 @@
         android:key="matricula_file_name_pref_key"
         android:title="Nombre de archivo"
         android:summary="@string/matricula_file_name_sum"/>
+    <CheckBoxPreference
+        android:key="participar_en_votacion_global"
+        android:title="@string/participar_en_votacion_global_sum"
+        android:defaultValue="false" />
+    <ListPreference
+        android:dialogTitle="@string/votaciones_abiertas"
+        android:title="@string/selecciona_server_label"
+        android:summary="@string/votaciones_abiertas_sum"
+        android:key="@string/servidor_global"
+        android:dependency="participar_en_votacion_global"/>
 
 </PreferenceScreen>

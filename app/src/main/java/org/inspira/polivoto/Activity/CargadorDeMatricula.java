@@ -24,8 +24,7 @@ public class CargadorDeMatricula extends Activity{
 		@Override
 		public void run(){
 			Votaciones bd = new Votaciones(activity);
-			if( !bd.checkMatricula() )
-				bd.insertaRegistro(titulos);
+			bd.insertaRegistro(bd.obtenerUltimaEscuela(),titulos);
 			setResult(RESULT_OK);
 			finish();
 		}

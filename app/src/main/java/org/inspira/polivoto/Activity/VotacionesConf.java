@@ -1,20 +1,17 @@
 package org.inspira.polivoto.Activity;
 
-import java.io.DataOutputStream;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
 import org.inspira.capiz.NeoSuperChunk.SuperChunk;
-import org.inspira.polivoto.Security.Cifrado;
 import org.inspira.polivoto.Fragment.MainFragment;
+import org.inspira.polivoto.Security.Cifrado;
+import org.inspira.polivoto.Threading.RegistraVotacionGlobal;
+import org.inspira.polivoto.Threading.TerminaVotacionGlobal;
 import org.inspira.polivotoserver.MiServicio;
 import org.inspira.polivoto.Adapter.MyFragmentStatePagerAdapter;
 import org.inspira.polivotoserver.R;
@@ -23,9 +20,12 @@ import DataBase.Votaciones;
 import Shared.Opcion;
 import Shared.Pregunta;
 import Shared.ResultadoVotacion;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -40,11 +40,15 @@ import android.widget.Toast;
 public class VotacionesConf extends AppCompatActivity implements
 		ActionBar.TabListener {
 
-	private Intent myService;
+    private static final int STAND_BY = 128;
+    private static final int REQUEST_GO_GLOBAL = 328;
+    private Intent myService;
+    public MiServicio service;
 	private MyFragmentStatePagerAdapter adapter;
 	private static LinkedList<MainFragment> fragmentitos;
 	private SuperChunk superChunk;
-	public static final String PARTICIPANTES_FILE = Environment.getExternalStorageDirectory().getAbsolutePath() + "/participantes.csv";
+	// We need to assign the file name entered in the settings.
+	public static final String PARTICIPANTES_FILE = Environment.getExternalStorageDirectory().getAbsolutePath() + "/settings.csv";
 	public static final String FILE_NAME = Environment.getExternalStorageDirectory().getAbsolutePath() + "/votaciones.conf";
 	public static final String RESULTS_FILE = Environment.getExternalStorageDirectory().getAbsolutePath() + "/resultados.polivoto";
 	public static final int FREE_CAMPAIGN = 703;
@@ -55,22 +59,56 @@ public class VotacionesConf extends AppCompatActivity implements
     private String fechaInicioVotacion;
     private String fechaFinVotacion;
 	private int counter = 0;
+    public boolean isServiceBound;
 
-	private void launchMensajeConfirmacion(){
+    /*
+    private ServiceConnection serviceConn = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName className, IBinder binder) {
+            Log.d("TAG", className.toString() + " service is bound");
+            isServiceBound = true;
+            service = ((MiServicio.LocalBinder) binder).getService();
+            service.setContext(VotacionesConf.this);
+            Log.d("TAG", "Starting live data");
+            try {
+                service.startService();
+                if (preRequisites)
+                    btStatusTextView.setText(getString(R.string.status_bluetooth_connected));
+            } catch (IOException ioe) {
+                Log.e(TAG, "Failure Starting live data");
+                btStatusTextView.setText(getString(R.string.status_bluetooth_error_connecting));
+                doUnbindService();
+            }
+        }
+
+        @Override
+        protected Object clone() throws CloneNotSupportedException {
+            return super.clone();
+        }
+
+        // This method is *only* called when the connection to the service is lost unexpectedly
+        // and *not* when the client unbinds (http://developer.android.com/guide/components/bound-services.html)
+        // So the isServiceBound attribute should also be set to false when we unbind from the service.
+        @Override
+        public void onServiceDisconnected(ComponentName className) {
+            Log.d(TAG, className.toString() + " service is unbound");
+            isServiceBound = false;
+        }
+    };
+    */
+
+	private void launchMensajeConfirmacion(String msj, boolean isChoice, int flag){
 		Intent i = new Intent(this,Mensaje.class);
-		i.putExtra("msj", getResources().getString(R.string.mensaje_alerta));
-		i.putExtra("isChoice", true);
-		startActivityForResult(i,FINISH_VOTING_PROCESS_REQUEST);
+		i.putExtra("msj", msj);// getResources().getString(R.string.mensaje_alerta));
+		i.putExtra("isChoice", isChoice);
+		startActivityForResult(i,flag);
 	}
 	
-	private void launchDataLoader(String label, Pregunta[] preguntas){
-		String[] titulos = new String[preguntas.length];
-		for(int i = 0; i < titulos.length; i++){
-			titulos[i] = preguntas[i].titulo;
-		}
+	private void launchDataLoader(String label){
+        Votaciones v = new Votaciones(this);
 		Bundle extras = new Bundle();
 		extras.putString("label", label);
-		extras.putStringArray("titulos", titulos);
+		extras.putStringArray("titulos", v.obtenerPreguntasVotacion(v.obtenerTituloVotacionActual()));
 		Intent dataLoader = new Intent(this,CargadorDeMatricula.class);
 		dataLoader.putExtras(extras);
 		//Toast.makeText(this, "Tul", Toast.LENGTH_LONG).show();
@@ -101,7 +139,7 @@ public class VotacionesConf extends AppCompatActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		if (savedInstanceState == null) {
+		if (fragmentitos == null || savedInstanceState == null) {
 			fragmentitos = new LinkedList<MainFragment>();
 			for (int arg0 = 0; arg0 < 5; arg0++) {
 				MainFragment newMainFragment = new MainFragment();
@@ -148,35 +186,41 @@ public class VotacionesConf extends AppCompatActivity implements
 		} 
 		//new Votaciones(this).selectPendingVotes();
 		myService = new Intent(this, MiServicio.class);
+        Votaciones v = new Votaciones(this);
+        Log.d("Loquito", "PREGUNTAS");
+        if(v.obtenerTituloVotacionActual() != null)
+            for(String itr : v.obtenerPreguntasVotacion(v.obtenerTituloVotacionActual()))
+                v.obtenerResultadosPorPregunta(itr,v.obtenerIdVotacionFromPregunta(itr));
 	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
+        Votaciones v = new Votaciones(this);
 		if(resultCode == RESULT_OK){
 			switch(requestCode){
+            case REQUEST_GO_GLOBAL:
+                launchStandByActivity("Sincronizando...");
+                new RegistraVotacionGlobal(this,v.grabLastUserIdAttmptSucceded("Consultor")).execute();
+                break;
 			case FINISH_VOTING_PROCESS_REQUEST:
-				Votaciones v = new Votaciones(this);
-				/*
 				if( data.getBooleanExtra("response", false) ){
-					Votaciones v = new Votaciones(this);
-					String[] rows;
-					rows = v.consultaVoto();
-					Log.d("Capiz","Tenemos " + rows.length + " votos.");
-					for(int i = 0; i < rows.length; i++){
-						Log.d("Capiz",rows[i]);
-					}
-					String[] participantes = v.consultaParticipantes();
+					String[] rows = v.consultaVoto();
+					String[] settings = v.consultaParticipantes();
 					String[] votando = v.consultaVotando();
 					Cifrado cipher = new Cifrado("MyPriceOfHistory");
 					byte[][] votosCifrados = new byte[rows.length][];
-					byte[][] participantesCifrados = new byte[participantes.length][];
+					byte[][] participantesCifrados = new byte[settings.length][];
 					byte[][] votandoCifrados = new byte[votando.length][];
+                    Log.d("Capiz","Tenemos " + rows.length + " votos.");
+                    for(int index = 0; index < rows.length; index++){
+                        Log.d("Capiz",rows[index]);
+                    }
 					for(int index = 0; index<rows.length; index++){
 						votosCifrados[index] = cipher.cipher(rows[index]);
 					}
-					for(int index = 0; index<participantes.length; index++){
-						participantesCifrados[index] = cipher.cipher(participantes[index]);
+					for(int index = 0; index<settings.length; index++){
+						participantesCifrados[index] = cipher.cipher(settings[index]);
 					}
 					for(int index = 0; index<votando.length; index++){
 						votandoCifrados[index] = cipher.cipher(votando[index]);
@@ -198,9 +242,15 @@ public class VotacionesConf extends AppCompatActivity implements
                     v.terminaUltimaVotacion();
 					stopService(myService);
 				}
-				*/
-				v.terminaUltimaVotacion();
-                stopService(myService);
+                if( data.getBooleanExtra("response", false) ) {
+                    if (v.isVotacionActualGlobal()) {
+                        launchStandByActivity("Terminando votación");
+                        new TerminaVotacionGlobal(this).execute();
+                    } else {
+                       v.terminaUltimaVotacion();
+                       stopService(myService);
+                    }
+                }
 				break;
 			case DATA_LOADER:
 				startService(myService);
@@ -295,12 +345,17 @@ public class VotacionesConf extends AppCompatActivity implements
                 if (pregs.size() == 0) {
                     Toast.makeText(this, "Error, al menos debes llenar una forma",
                             Toast.LENGTH_SHORT).show();
+                    db.revertLastVotacion();
                 }else{
                     superChunk = new SuperChunk(pregs);
                     myService.putExtra("SuperChunk", superChunk);
                     myService.putExtra("operating_mode",FREE_CAMPAIGN);
-                    startService(myService); // Debes iniciar el servicio cuando la aplicación haya devuelto adecuadamente.
-                    //launchDataLoader("Cargando matrícula", superChunk.getPreguntas().toArray(new Pregunta[0]));
+                    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+                    Boolean usarMatricula = sharedPref.getBoolean(ConfiguraParticipantesActivity.USAR_MATRICULA_KEY, false);
+                    if(!usarMatricula)
+                        startService(myService); // Debes iniciar el servicio cuando la aplicación haya devuelto adecuadamente.
+                    else
+                        launchDataLoader("Cargando matrícula");
                     try{
                         ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(FILE_NAME));
                         salida.writeObject(superChunk);
@@ -318,7 +373,7 @@ public class VotacionesConf extends AppCompatActivity implements
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.votaciones_conf_menu, menu);
 		return true;
 	}
 
@@ -329,16 +384,21 @@ public class VotacionesConf extends AppCompatActivity implements
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		Intent i;
-		Votaciones v;
-		String[] rows;
+		Votaciones v = new Votaciones(this);
 		if (id == R.id.iniciar_servicio) {
-            Votaciones db = new Votaciones(this);
-            if(db.obtenerFechaInicioVotacionActual() == null)
+            if(v.obtenerFechaInicioVotacionActual() == null)
                 launchIniciaVotacion(getString(R.string.define_fecha_inicio_votacion),STARTING_SERVICE_FOR_START_DATE,true);
-            else
-                Toast.makeText(this,"Ya hay un proceso de votación programado",Toast.LENGTH_SHORT).show();
+            else {
+                Toast.makeText(this, "Ya hay un proceso de votación programado", Toast.LENGTH_SHORT).show();
+            }
 		} else if (id == R.id.action_last_server) {
-            Toast.makeText(this,"Building... :)",Toast.LENGTH_SHORT).show();
+            if(v.obtenerFechaInicioVotacionActual() != null){
+                startService(myService); // Iniciar el servicio después de que la actividad haya terminado satisfactoriamente.
+                Toast.makeText(this,"Servicio Iniciado", Toast.LENGTH_SHORT)
+                    .show();
+            }else
+                Toast.makeText(this,"No hay votaciones pendientes", Toast.LENGTH_SHORT)
+                        .show();
             /*
 			try{
 				ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(FILE_NAME));
@@ -346,9 +406,6 @@ public class VotacionesConf extends AppCompatActivity implements
 				myService.putExtra("SuperChunk", superChunk);
 				myService.putExtra("operation_mode",FREE_CAMPAIGN);
 				//launchDataLoader("Cargando matrícula", superChunk.getPreguntas().toArray(new Pregunta[0]));
-				startService(myService); // Iniciar el servicio después de que la actividad haya terminado satisfactoriamente.
-				Toast.makeText(this,"Servicio Iniciado", Toast.LENGTH_SHORT)
-				.show();
 				entrada.close();
 			}catch(IOException | ClassNotFoundException e){
 				Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
@@ -393,13 +450,31 @@ public class VotacionesConf extends AppCompatActivity implements
                 i.putExtra("header", "Participantes Registrados");
                 startActivity(i);
 		} else  if (id == R.id.finalizar_votacion) {
-			try{
-				FileInputStream fis = new FileInputStream(RESULTS_FILE);
-				fis.close();
-				Toast.makeText(this, "Ya hemos finalizado n.n", Toast.LENGTH_LONG).show();
-			}catch(IOException e){
-				launchMensajeConfirmacion();
-			}
+            if(v.obtenerFechaInicioVotacionActual() != null){
+                try{
+                    FileInputStream fis = new FileInputStream(RESULTS_FILE);
+                    fis.close();
+                    Toast.makeText(this, "Ya hemos finalizado n.n", Toast.LENGTH_LONG).show();
+                }catch(IOException e){
+                    launchMensajeConfirmacion(getResources().getString(R.string.mensaje_alerta),true,FINISH_VOTING_PROCESS_REQUEST);
+                }
+            }else
+                Toast.makeText(this,"No hay votaciones inciadas", Toast.LENGTH_SHORT)
+                    .show();
+		} else if(id==R.id.hacer_global){
+            if(!v.isCurrentVotingProcessGlobal())
+            if(v.obtenerFechaInicioVotacionActual() == null)
+                Toast.makeText(this, "An no hay un proceso de votación programado", Toast.LENGTH_SHORT).show();
+            else {
+                int consultorIdAttempt;
+                if( (consultorIdAttempt = v.grabLastUserIdAttmptSucceded("Consultor") ) != -1){
+                    launchMensajeConfirmacion("¿Desea publicar ésta votación como global? Otros sitios podrán unirse antes de su fecha de comienzo y participar", true, REQUEST_GO_GLOBAL);
+                }else{
+                    Toast.makeText(this,"Aún no hay un consultor registrado",Toast.LENGTH_SHORT).show();
+                }
+            }
+            else
+                Toast.makeText(this,"Ya registramos la votación como global",Toast.LENGTH_SHORT).show();
 		}
 		
 		//else if(id == R.id.codigo_legalidad){
@@ -413,7 +488,7 @@ public class VotacionesConf extends AppCompatActivity implements
 			FragmentTransaction fragmentTransaction) {
 		// When the given tab is selected, switch to the corresponding page in
 		// the ViewPager. 
-		mViewPager.setCurrentItem(tab.getPosition());
+        mViewPager.setCurrentItem(tab.getPosition());
 	}
 
 	@Override
@@ -431,5 +506,15 @@ public class VotacionesConf extends AppCompatActivity implements
         i.putExtra("title",title);
         i.putExtra("requestTitle",requestTitle);
         startActivityForResult(i, requestCode);
+    }
+
+    private void launchStandByActivity(String message){
+        Intent i = new Intent(this,StandByActivity.class);
+        i.putExtra("message", message);
+        startActivityForResult(i, STAND_BY);
+    }
+
+    public void quitaActividad(){
+        finishActivity(STAND_BY);
     }
 }

@@ -5,13 +5,23 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.inspira.capiz.NeoSuperChunk.SuperChunk;
 import org.inspira.polivoto.Activity.VotacionesConf;
+import org.inspira.polivoto.Networking.soap.ServiceClient;
 import org.inspira.polivoto.Threading.AttendantHandler;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParserException;
 
+import android.app.Activity;
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -20,20 +30,63 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
+import DataBase.Votaciones;
+
 public class MiServicio extends Service {
 	private Looper mServiceLooper;
 	private ServiceHandler mServiceHandler;
 	private ServerSocket server;
 	private boolean finishedConnection = false;
-	//private final IBinder mBinder = new LocalBinder();
+    public static boolean isRunning = false;
+	private final IBinder mBinder = new LocalBinder();
+    private Activity ctx;
 
-	/*
-		public class LocalBinder extends Binder {
-			MiServicio getService() {
-				return MiServicio.this;
+    private TimerTask task = new TimerTask(){
+        @Override
+        public void run(){
+            try{
+                Votaciones db = new Votaciones(MiServicio.this);
+                wait(new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").parse(db.obtenerFechaFinVotacionActual()).getTime());
+                if(db.isVotacionActualGlobal()) {
+                    JSONObject json = new JSONObject();
+                    try {
+                        json.put("action",6);
+                        json.put("title",db.obtenerTituloVotacionActual());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    if("success".equals(new ServiceClient().sendAction(json.toString()))){
+                        db.terminaUltimaVotacion();
+                        Log.d("Finisher Task", "Votación terminada");
+                        Toast.makeText(MiServicio.this,"Votación terminada",Toast.LENGTH_LONG).show();
+                    }else{
+                        Log.d("Finisher Task", "Servicio no disponible");
+                        Toast.makeText(MiServicio.this,"Servicio no disponible",Toast.LENGTH_LONG).show();
+                    }
+                }else {
+                    db.terminaUltimaVotacion();
+                    Log.d("Finisher Task", "Votación terminada");
+                    Toast.makeText(MiServicio.this, "Votación terminada", Toast.LENGTH_LONG).show();
+                }
+            }catch(ParseException | InterruptedException e){
+                e.printStackTrace();
+                Log.d("Finisher Task","Error al esperar terminar la votación: " + e.getMessage());
+            } catch (XmlPullParserException | IOException e) {
+				e.printStackTrace();
+				Toast.makeText(MiServicio.this,"Servicio no disponible",Toast.LENGTH_LONG).show();
 			}
 		}
-	 */
+    };
+
+    public class LocalBinder extends Binder {
+        public MiServicio getService() {
+            return MiServicio.this;
+        }
+    }
+
+    public void setContext(Activity c) {
+        ctx = c;
+    }
 
 	// Handler that receives messages from the thread
 	private final class ServiceHandler extends Handler {
@@ -47,15 +100,18 @@ public class MiServicio extends Service {
 
 		@Override
 		public void handleMessage(Message msg) {
-			superChunk = (SuperChunk)msg.obj;
-			if(superChunk == null){
-				// You have to say: "We couldn't restart the service, do it manually please."
-				return;
-			}
 			try {
 				server = new ServerSocket(23543);
 				attendantHandler = new AttendantHandler(MiServicio.this,superChunk);
 				attendantHandler.start();
+                isRunning = true;
+                Log.d("ASMODIAN","We are about to begin");
+				// You need to set up a Timer to finish the voting process...
+				if(!isRunning) {
+                    isRunning = true;
+                    new Timer().schedule(task, 0);
+                    Toast.makeText(MiServicio.this,"Cuenta iniciada", Toast.LENGTH_SHORT).show();
+                }
 				while (true) {
 					Socket socket = server.accept();
 					Message attendantMsg = attendantHandler.attendantInnerHandler
@@ -109,7 +165,6 @@ public class MiServicio extends Service {
 		// Get the HandlerThread's Looper and use it for our Handler
 		mServiceLooper = thread.getLooper();
 		mServiceHandler = new ServiceHandler(mServiceLooper);
-
 	}
 
 	@Override
@@ -123,9 +178,13 @@ public class MiServicio extends Service {
 
 	@Override
 	public IBinder onBind(Intent intent) {
-		// return mBinder;
-		return null;
+		 return mBinder;
+		//return null;
 	}
+
+    public boolean isRunning(){
+        return isRunning;
+    }
 
 	public void hasFinished() {
 		while (!finishedConnection);

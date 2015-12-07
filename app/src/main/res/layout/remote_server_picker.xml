@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48sp"
+        android:layout_marginTop="20sp"
+        android:text="@string/selecciona_server_label"
+        android:paddingStart="12sp"
+        android:paddingLeft="12sp"
+        android:paddingTop="10sp"
+        android:paddingBottom="10sp"
+        android:background="@color/lienzo_encabezado"
+        android:textColor="@color/actionbar_text"
+        android:textSize="23sp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:layout_marginStart="12sp"
+        android:layout_marginLeft="12sp"
+        android:layout_marginRight="12sp"
+        android:layout_marginEnd="12sp">
+        <RadioGroup
+            android:id="@+id/lista_votaciones_globales"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:visibility="invisible"/>
+        <TextView
+            android:id="@+id/null_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:visibility="invisible"/>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:visibility="visible"/>
+    </RelativeLayout>
+
+</LinearLayout>

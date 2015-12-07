@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <EditTextPreference android:title="@string/host"
+        android:key="host" />
+    <EditTextPreference android:title="@string/schema"
+        android:key="schema" />
+    <EditTextPreference android:title="@string/user"
+        android:key="user" />
+    <ListPreference
+        android:dialogTitle="@string/votaciones_abiertas"
+        android:title="@string/password"
+        android:summary="@string/votaciones_abiertas_sum"
+        android:key="psswd"/>
+
+</PreferenceScreen>
