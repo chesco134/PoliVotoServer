@@ -12,6 +12,7 @@ import org.inspira.polivoto.Fragment.MainFragment;
 import org.inspira.polivoto.Security.Cifrado;
 import org.inspira.polivoto.Threading.RegistraVotacionGlobal;
 import org.inspira.polivoto.Threading.TerminaVotacionGlobal;
+import org.inspira.polivoto.Threading.TerminaVotacionLocal;
 import org.inspira.polivotoserver.MiServicio;
 import org.inspira.polivoto.Adapter.MyFragmentStatePagerAdapter;
 import org.inspira.polivotoserver.R;
@@ -46,7 +47,8 @@ public class VotacionesConf extends AppCompatActivity implements
     public MiServicio service;
 	private MyFragmentStatePagerAdapter adapter;
 	private static LinkedList<MainFragment> fragmentitos;
-	private SuperChunk superChunk;
+    private LinkedList<Pregunta> pregs;
+    private SuperChunk superChunk;
 	// We need to assign the file name entered in the settings.
 	public static final String PARTICIPANTES_FILE = Environment.getExternalStorageDirectory().getAbsolutePath() + "/settings.csv";
 	public static final String FILE_NAME = Environment.getExternalStorageDirectory().getAbsolutePath() + "/votaciones.conf";
@@ -189,7 +191,7 @@ public class VotacionesConf extends AppCompatActivity implements
         Votaciones v = new Votaciones(this);
         Log.d("Loquito", "PREGUNTAS");
         if(v.obtenerTituloVotacionActual() != null)
-            for(String itr : v.obtenerPreguntasVotacion(v.obtenerTituloVotacionActual()))
+            for(String itr : v.consultaVotando(v.obtenerTituloVotacionActual()))
                 v.obtenerResultadosPorPregunta(itr,v.obtenerIdVotacionFromPregunta(itr));
 	}
 
@@ -200,55 +202,19 @@ public class VotacionesConf extends AppCompatActivity implements
 		if(resultCode == RESULT_OK){
 			switch(requestCode){
             case REQUEST_GO_GLOBAL:
-                launchStandByActivity("Sincronizando...");
-                new RegistraVotacionGlobal(this,v.grabLastUserIdAttmptSucceded("Consultor")).execute();
+                if( data.getBooleanExtra("response", false) ) {
+                    launchStandByActivity("Sincronizando...");
+                    new RegistraVotacionGlobal(this, v.grabLastUserIdAttmptSucceded("Consultor")).execute();
+                }
                 break;
 			case FINISH_VOTING_PROCESS_REQUEST:
-				if( data.getBooleanExtra("response", false) ){
-					String[] rows = v.consultaVoto();
-					String[] settings = v.consultaParticipantes();
-					String[] votando = v.consultaVotando();
-					Cifrado cipher = new Cifrado("MyPriceOfHistory");
-					byte[][] votosCifrados = new byte[rows.length][];
-					byte[][] participantesCifrados = new byte[settings.length][];
-					byte[][] votandoCifrados = new byte[votando.length][];
-                    Log.d("Capiz","Tenemos " + rows.length + " votos.");
-                    for(int index = 0; index < rows.length; index++){
-                        Log.d("Capiz",rows[index]);
-                    }
-					for(int index = 0; index<rows.length; index++){
-						votosCifrados[index] = cipher.cipher(rows[index]);
-					}
-					for(int index = 0; index<settings.length; index++){
-						participantesCifrados[index] = cipher.cipher(settings[index]);
-					}
-					for(int index = 0; index<votando.length; index++){
-						votandoCifrados[index] = cipher.cipher(votando[index]);
-					}
-					ResultadoVotacion resultadoFinalVotos = new ResultadoVotacion(votosCifrados);
-					ResultadoVotacion resultadoFinalParticipantes = new ResultadoVotacion(participantesCifrados);
-					ResultadoVotacion resultadoFinalVotando = new ResultadoVotacion(votandoCifrados);
-					try{
-						ObjectOutputStream salidaArchivo = new ObjectOutputStream(new FileOutputStream(RESULTS_FILE));
-						salidaArchivo.writeObject(resultadoFinalVotos);
-						salidaArchivo.writeObject(resultadoFinalParticipantes);
-						salidaArchivo.writeObject(resultadoFinalVotando);
-						salidaArchivo.close();
-						Toast.makeText(this, "Éxito al finalizar la votación!", Toast.LENGTH_LONG).show();
-					}catch(IOException ex){
-						Toast.makeText(this, "Error al finalizar la votación:\n" + ex.toString(), Toast.LENGTH_LONG).show();
-					}
-					v.terminarVotaciones();
-                    v.terminaUltimaVotacion();
-					stopService(myService);
-				}
                 if( data.getBooleanExtra("response", false) ) {
                     if (v.isVotacionActualGlobal()) {
                         launchStandByActivity("Terminando votación");
                         new TerminaVotacionGlobal(this).execute();
                     } else {
-                       v.terminaUltimaVotacion();
-                       stopService(myService);
+                        launchStandByActivity("Terminando votación");
+                        new TerminaVotacionLocal(this).execute();
                     }
                 }
 				break;
@@ -256,6 +222,10 @@ public class VotacionesConf extends AppCompatActivity implements
 				startService(myService);
 				Toast.makeText(this,"Servicio iniciado", Toast.LENGTH_SHORT)
 				.show();
+                if(!v.existeLoginAttemptAdmin()) {
+                    int id = v.insertaLoginAttempt("Administrador", "localhost");
+                    v.insertaAttemptSucceded(id,new byte[]{(byte)(1&0xFF)});
+                }
 				break;
             case STARTING_SERVICE_FOR_START_DATE:
                 /** Aún no está validado el campo de fecha de inicio **/
@@ -269,20 +239,45 @@ public class VotacionesConf extends AppCompatActivity implements
                 launchIniciaVotacion(getString(R.string.define_fecha_fin_votacion),STARTING_SERVICE,false);
                 break;
             case STARTING_SERVICE:
-                /** Aún no está validado el campo de fecha de fin **/
-                year = data.getExtras().getInt("year");
-                month = data.getExtras().getInt("month");
-                day = data.getExtras().getInt("day");
-                hourOfDay = data.getExtras().getInt("hourOfDay");
-                minute = data.getExtras().getInt("minute");
-                fechaFinVotacion = day + "/" + month + "/" + year + ", " +
-                        hourOfDay + ":" + minute;
-                Votaciones db = new Votaciones(this);
-				String titVotacion = db.obtenerTituloVotacionActual();
-				//db.insertaVotacion(titVotacion,fechaInicioVotacion, fechaFinVotacion);
+                String titVotacion = v.obtenerTituloVotacionActual();
+                for(Pregunta preg : pregs){
+                    v.insertaPregunta(preg.titulo,titVotacion);
+                    for(Opcion op : preg.opciones){
+                        v.insertaOpcion(op.nombre);
+                        v.insertaPreguntaOpcion(preg.titulo,op.nombre);
+                    }
+                }
+                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+                Boolean usarMatricula = sharedPref.getBoolean(ConfiguraParticipantesActivity.USAR_MATRICULA_KEY, false);
+                if(!usarMatricula)
+                    startService(myService); // Debes iniciar el servicio cuando la aplicación haya devuelto adecuadamente.
+                else
+                    launchDataLoader("Cargando matrícula");
+                break;
+			}
+		}
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+            getMenuInflater().inflate(R.menu.votaciones_conf_menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		Intent i;
+		Votaciones v = new Votaciones(this);
+		if (id == R.id.iniciar_servicio) {
+            if(v.obtenerFechaInicioVotacionActual() == null) {
                 ListIterator<MainFragment> currentPregunta = fragmentitos
                         .listIterator();
-                LinkedList<Pregunta> pregs = new LinkedList<Pregunta>();
+                pregs = new LinkedList<Pregunta>();
                 String texto = new String();
                 int count = 0;
                 while (currentPregunta.hasNext()) {
@@ -315,11 +310,13 @@ public class VotacionesConf extends AppCompatActivity implements
                         Opcion opcion2 = new Opcion();
                         opcion2.nombre = op2;
                         opcion2.cantidad = 0;
+                        /*
                         db.insertaPregunta(titulo,titVotacion);
                         db.insertaOpcion(op1);
                         db.insertaPreguntaOpcion(titulo,op1);
                         db.insertaOpcion(op2);
                         db.insertaPreguntaOpcion(titulo,op2);
+                        */
                         opciones.add(opcion1);
                         opciones.add(opcion2);
                         ListIterator<View> currentRowView = mFragment
@@ -332,8 +329,10 @@ public class VotacionesConf extends AppCompatActivity implements
                                     .toString();
                             opi.cantidad = 0;
                             opciones.add(opi);
+                            /*
                             db.insertaOpcion(opi.nombre);
                             db.insertaPreguntaOpcion(titulo,opi.nombre);
+                            */
                             texto = texto.concat("\nopcion" + counter++ + ":" + opi.nombre);
                         }
                         pregunta.opciones = opciones;
@@ -345,50 +344,23 @@ public class VotacionesConf extends AppCompatActivity implements
                 if (pregs.size() == 0) {
                     Toast.makeText(this, "Error, al menos debes llenar una forma",
                             Toast.LENGTH_SHORT).show();
-                    db.revertLastVotacion();
+                    // db.revertLastVotacion();
                 }else{
                     superChunk = new SuperChunk(pregs);
                     myService.putExtra("SuperChunk", superChunk);
                     myService.putExtra("operating_mode",FREE_CAMPAIGN);
-                    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-                    Boolean usarMatricula = sharedPref.getBoolean(ConfiguraParticipantesActivity.USAR_MATRICULA_KEY, false);
-                    if(!usarMatricula)
-                        startService(myService); // Debes iniciar el servicio cuando la aplicación haya devuelto adecuadamente.
-                    else
-                        launchDataLoader("Cargando matrícula");
+                    launchIniciaVotacion(getString(R.string.define_fecha_inicio_votacion), STARTING_SERVICE_FOR_START_DATE, true);
                     try{
                         ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(FILE_NAME));
                         salida.writeObject(superChunk);
                         salida.close();
-						Toast.makeText(this, "Servicio iniciado correctamente", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "Servicio iniciado correctamente", Toast.LENGTH_LONG).show();
                     }catch(IOException e){
                         Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
                     }
                 }
-                break;
-			}
-		}
-	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.votaciones_conf_menu, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		Intent i;
-		Votaciones v = new Votaciones(this);
-		if (id == R.id.iniciar_servicio) {
-            if(v.obtenerFechaInicioVotacionActual() == null)
-                launchIniciaVotacion(getString(R.string.define_fecha_inicio_votacion),STARTING_SERVICE_FOR_START_DATE,true);
-            else {
+            }else {
                 Toast.makeText(this, "Ya hay un proceso de votación programado", Toast.LENGTH_SHORT).show();
             }
 		} else if (id == R.id.action_last_server) {
@@ -423,7 +395,10 @@ public class VotacionesConf extends AppCompatActivity implements
             v = new Votaciones(this);
             String titulo = v.obtenerTituloVotacionActual();
             String[] participaron = null;
-            if( titulo != null )
+            if( titulo == null )
+                titulo = v.obtenerTituloVotacionFromId(v.obtenerIdUltimaVotacionHecha());
+            if( titulo == null )
+                titulo = "";
                 participaron = v.quienesHanParticipado(titulo);
             /*
 			v = new Votaciones(this);
@@ -466,8 +441,7 @@ public class VotacionesConf extends AppCompatActivity implements
             if(v.obtenerFechaInicioVotacionActual() == null)
                 Toast.makeText(this, "An no hay un proceso de votación programado", Toast.LENGTH_SHORT).show();
             else {
-                int consultorIdAttempt;
-                if( (consultorIdAttempt = v.grabLastUserIdAttmptSucceded("Consultor") ) != -1){
+                if( v.grabLastUserIdAttmptSucceded("Consultor") != -1){
                     launchMensajeConfirmacion("¿Desea publicar ésta votación como global? Otros sitios podrán unirse antes de su fecha de comienzo y participar", true, REQUEST_GO_GLOBAL);
                 }else{
                     Toast.makeText(this,"Aún no hay un consultor registrado",Toast.LENGTH_SHORT).show();
@@ -514,6 +488,9 @@ public class VotacionesConf extends AppCompatActivity implements
         startActivityForResult(i, STAND_BY);
     }
 
+    public void detenServicio(){
+        stopService(myService);
+    }
     public void quitaActividad(){
         finishActivity(STAND_BY);
     }

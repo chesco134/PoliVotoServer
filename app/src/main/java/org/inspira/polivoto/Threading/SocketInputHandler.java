@@ -433,15 +433,12 @@ public class SocketInputHandler extends Thread {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         Boolean usarMatricula = sharedPref.getBoolean(ConfiguraParticipantesActivity.USAR_MATRICULA_KEY, false);
         String boleta = json.getString("boleta");
+        Log.d("Dragon Slayer","Estamos por comprobar una boleta extragera! La boleta es: " + boleta);
         if(db.consultaRemotaExistenciaBoleta(boleta, db.obtenerTituloVotacionActual())){
             resp = 1;
         }else{
             resp = 0;
         }
-        if(resp == 0 && !usarMatricula){
-            action9(json);
-        }
-        // Termina proceso de validación local.
         chunk = cip.doFinal(String.valueOf(resp).getBytes());
         salida.write(chunk.length);
         salida.write(chunk);

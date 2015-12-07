@@ -464,7 +464,7 @@ public class Votaciones extends SQLiteOpenHelper{
         long id = -1;
         String[] args = {pregunta};
         Cursor c = getReadableDatabase().rawQuery("select idPregunta from Pregunta where Pregunta = ?", args);
-        Log.d("Marakeru","We've been asked to insert: " + pregunta + " for " + boleta);
+        Log.d("Marakeru", "We've been asked to insert: " + pregunta + " for " + boleta);
         if(c.moveToFirst()){
             ContentValues values = new ContentValues();
             values.put("Boleta",boleta);
@@ -491,6 +491,16 @@ public class Votaciones extends SQLiteOpenHelper{
                 success = true;
         }
         return success;
+    }
+
+    public String obtenerTituloVotacionFromId(int idVotacion){
+        Cursor c = getReadableDatabase().rawQuery("select Titulo from Votacion where idVotacion = CAST(? as INTEGER)",new String[]{String.valueOf(idVotacion)});
+        String titulo = null;
+        if(c.moveToFirst())
+            titulo = c.getString(c.getColumnIndex("Titulo"));
+        c.close();
+        close();
+        return titulo;
     }
 
     public int obtenerIdVotacionFromPregunta(String pregunta){
@@ -602,6 +612,16 @@ public class Votaciones extends SQLiteOpenHelper{
         close();
     }
 
+    public String obtenerPerfilDeUsuario(String boleta){
+        String perfil = null;
+        Cursor c = getReadableDatabase().rawQuery("select perfil from Perfil join Participante using(idPerfil) where Boleta = ?", new String[]{boleta});
+        if(c.moveToFirst())
+            perfil = c.getString(c.getColumnIndex("perfil"));
+        c.close();
+        close();
+        return perfil;
+    }
+
     public String[] obtenerPerfiles(){
         Cursor c = getReadableDatabase().rawQuery("select perfil from Perfil",null);
         String[] perfiles = new String[c.getCount()];
@@ -624,6 +644,19 @@ public class Votaciones extends SQLiteOpenHelper{
         return uName;
     }
 
+    public String[] obtenerLog(){
+        String[] logRows;
+        Cursor c = getReadableDatabase().rawQuery("select * from UserAction",null);
+        logRows = new String[c.getCount()];
+        int i = 0;
+        while(c.moveToNext()){
+            logRows[i++] = c.getInt(c.getColumnIndex("idUserAction")) + "@" + c.getInt(c.getColumnIndex("idLoginAttempt")) + "@" + c.getString(c.getColumnIndex("Action")) + "@" + c.getString(c.getColumnIndex("Action_Timestamp"));
+        }
+        c.close();
+        close();
+        return logRows;
+    }
+
     public boolean consultaExistenciaBoleta(String boleta, String votacion){
         boolean existe = false;
         Cursor c = getReadableDatabase().rawQuery("select * from Participante where Boleta = ?", new String[]{boleta});
@@ -643,7 +676,7 @@ public class Votaciones extends SQLiteOpenHelper{
 
     public boolean consultaRemotaExistenciaBoleta(String boleta, String votacion){
         boolean existe = false;
-        Cursor c = getReadableDatabase().rawQuery("select * from Participante where BoletaHash = ?", new String[]{boleta});
+        Cursor c = getReadableDatabase().rawQuery("select * from Participante where BoletaHash = CAST(? as BLOB)", new String[]{boleta});
         if(c.getCount() > 0){
             Cursor c2 = getReadableDatabase().rawQuery("select idVotacion from Votacion where Titulo = ?",new String[]{votacion});
             if(c2.moveToFirst()){
@@ -656,6 +689,16 @@ public class Votaciones extends SQLiteOpenHelper{
         c.close();
         close();
         return existe;
+    }
+
+    public int obtenerIdUltimaVotacionHecha(){
+        Cursor c = getReadableDatabase().rawQuery("select idVotacion from Votacion where Fecha_Fin is not null or Fecha_Fin != '---' order by Fecha_Fin",null);
+        int idVotacion = -1;
+        if(c.moveToLast())
+            idVotacion = c.getInt(c.getColumnIndex("idVotacion"));
+        c.close();
+        close();
+        return idVotacion;
     }
 
     public int obtenerIdPregunta(String pregunta){
@@ -671,13 +714,11 @@ public class Votaciones extends SQLiteOpenHelper{
 
     public LinkedList<String> obtenerResultadosPorPregunta(String pregunta, int idVotacion){
         LinkedList<String> resultados = new LinkedList<>();
-        Log.d("Mayunia","Quering over " + pregunta);
+        Log.d("Mayunia","Quering over " + pregunta + " and votacion #" + idVotacion);
         //Cursor c = getReadableDatabase().rawQuery("select voto,c from Pregunta join (select voto,c,idPregunta from Pregunta_Opcion join (select voto,idOpcion,count(*) c from Opcion join Voto on Opcion.Reactivo = Voto.voto where idVotacion = CAST(? as INTEGER) group by voto) r using(idOpcion)) s using(idPregunta) where Pregunta = ?", new String[]{pregunta, String.valueOf(idVotacion)});
-        Cursor c = getReadableDatabase().rawQuery(
-                "select Pregunta,Reactivo, count(*) c from (select idVotacion,Pregunta,Reactivo from (select idVotacion,idOpcion, Pregunta from (select * from Pregunta where Pregunta = ?) r join Pregunta_Opcion using(idPregunta)) s join Opcion using(idOpcion)) t join Voto on voto = Reactivo group by Reactivo"
-                ,new String[]{pregunta});
+        Cursor c = getReadableDatabase().rawQuery("select Voto.idVotacion id, Pregunta,Reactivo, count(*) c from (select idVotacion,Pregunta,Reactivo from (select idVotacion, idOpcion, Pregunta from (select * from Pregunta where Pregunta = ?) r join Pregunta_Opcion using(idPregunta)) s join Opcion using(idOpcion)) t join Voto on voto = Reactivo where Voto.idVotacion = CAST(? as INTEGER) group by Reactivo",new String[]{pregunta,String.valueOf(idVotacion)});
         while(c.moveToNext()){
-            Log.d("Mayunia",c.getString(c.getColumnIndex("Pregunta"))+","+c.getString(c.getColumnIndex("Reactivo"))+","+c.getInt(c.getColumnIndex("c")));
+            Log.d("Mayunia",c.getInt(c.getColumnIndex("id"))+", "+c.getString(c.getColumnIndex("Pregunta"))+","+c.getString(c.getColumnIndex("Reactivo"))+","+c.getInt(c.getColumnIndex("c")));
             resultados.add(c.getString(c.getColumnIndex("Reactivo")) + "@" + c.getInt(c.getColumnIndex("c")));
             //Log.d("Mayunia",c.getString(c.getColumnIndex("voto"))+"@"+c.getInt(c.getColumnIndex("c")));
 
@@ -964,6 +1005,7 @@ public class Votaciones extends SQLiteOpenHelper{
 				try{
                     values = new ContentValues();
                     values.put("Boleta", elements[0]);
+                    values.put("BoletaHash",new MD5Hash().makeHashForSomeBytes(elements[0]));
                     values.put("idEscuela",c.getInt(c.getColumnIndex("idEscuela")));
                     Cursor x = getReadableDatabase().rawQuery("select idPerfil from Perfil where perfil = ?", new String[]{elements[4]});
                     if(!x.moveToFirst()) {
@@ -974,7 +1016,7 @@ public class Votaciones extends SQLiteOpenHelper{
                     x = getReadableDatabase().rawQuery("select idPerfil from Perfil where perfil = ?", new String[]{elements[4]});
                     x.moveToNext();
                     values.put("idPerfil", x.getInt(x.getColumnIndex("idPerfil")));
-                    values.put("Fecha_Registro",new SimpleDateFormat("hh:mm:ss").format(new Date()));
+                    values.put("Fecha_Registro", new SimpleDateFormat("hh:mm:ss").format(new Date()));
                     db.insert("Participante","---",values);
 
 					values = new ContentValues();
@@ -983,10 +1025,14 @@ public class Votaciones extends SQLiteOpenHelper{
                     values.put("ApPaterno",elements[1]);
                     values.put("ApMaterno",elements[2]);
 					id = db.insert("NombreParticipante", "---", values);
-					for(String pregunta : preguntas){
-						values = new ContentValues();
+                    for(String pregunta : preguntas){
+                        x.close();
+                        x = getReadableDatabase().rawQuery("select idPregunta from Pregunta where Pregunta = ?",new String[]{pregunta});
+						x.moveToFirst();
+                        values = new ContentValues();
 						values.put("Boleta", elements[0]);
-						values.put("Pregunta", pregunta);
+						values.put("idPregunta", x.getInt(x.getColumnIndex("idPregunta")));
+                        values.put("Hora_Registro",new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date()));
                         db.insert("Participante_Pregunta","---",values);
 					}
                     Log.d("EL MAN","" + count++);
@@ -1184,7 +1230,9 @@ public class Votaciones extends SQLiteOpenHelper{
 	
 	public String[] consultaParticipantes(){
 		SQLiteDatabase db = getReadableDatabase();
-		Cursor c = db.query("Participantin", null, null, null, null, null, null);
+		Cursor c = db.rawQuery(
+                "select Boleta from Pregunta_Opcion join (select idVotacion from Votacion where Fecha_Fin is null or Fecha_Fin = '---') r using(idVotacion)"
+                ,null);
 		String rows[] = new String[c.getCount()];
 		int index = 0;
 		while(c.moveToNext())
@@ -1193,28 +1241,37 @@ public class Votaciones extends SQLiteOpenHelper{
 		return rows;
 	}
 	
-	public String[] consultaVotando(){
-		SQLiteDatabase db = getReadableDatabase();
-		String[] columns = {"null"};
-		String selection = "Hora_Voto!=?";
-		String selArgs[] = {"null"};
-		Cursor c = db.query("Participantin", null, selection, selArgs, null, null, "Hora_Voto");
-		String rows[] = new String[c.getCount()];
-		int index = 0;
-		while(c.moveToNext())
-			rows[index++] = c.getString(c.getColumnIndex("Boleta")) + ", Hora Registro: " + c.getString(c.getColumnIndex("Hora_Registro")) + ", Hora Voto: " + c.getString(c.getColumnIndex("Hora_Voto"));
-		db.close(); 
-		return rows;
+	public String[] consultaVotando(String titulo){
+        Cursor c0 = getReadableDatabase().rawQuery("select idVotacion from Votacion where Titulo = ?", new String[]{titulo});
+        String[] participantes = null;
+        if( c0.moveToFirst()) {
+            int idVotacion = c0.getInt(c0.getColumnIndex("idVotacion"));
+            Cursor c = getReadableDatabase().rawQuery("select Boleta, idPregunta,Pregunta, Hora_Registro, Hora_Participacion from (select * from Preguntas_Votacion where idVotacion = CAST(? as INTEGER)) a join (select Boleta,Pregunta,r.idPregunta,Hora_Registro,Hora_Participacion,count(*) cuenta from Participante_Pregunta join (select idPregunta,Pregunta from Pregunta where idVotacion = CAST(? as INTEGER)) r on Participante_Pregunta.idPregunta = r.idPregunta where Hora_Participacion is not null or Hora_Participacion != '---' group by Boleta) s on (a.Preguntas > s.cuenta and s.cuenta > 0)", new String[]{String.valueOf(idVotacion),String.valueOf(idVotacion)});
+            participantes = new String[c.getCount()];
+            int count = 0;
+            while (c.moveToNext()) {
+                //participantes[count++] = c.getString(c.getColumnIndex("Boleta"))+", Pregunta: "+ c.getString(c.getColumnIndex("Pregunta")) +", HR: "+c.getString(c.getColumnIndex("Hora_Registro"))+", HP: "+c.getString(c.getColumnIndex("Hora_Participacion"));
+                participantes[count++] = c.getString(c.getColumnIndex("Boleta"))+","+ c.getInt(c.getColumnIndex("idPregunta"))+","+ c.getString(c.getColumnIndex("Pregunta"));
+            }
+            c.close();
+        }
+        c0.close();
+        close();
+        return participantes;
 	}
 	
-	public String[] consultaVoto(){
+	public String[] consultaVoto(String votacion){
+        Cursor cursor = getReadableDatabase().rawQuery("select idVotacion from Votacion where Titulo = ?",new String[]{votacion});
+        cursor.moveToFirst();
+        int idVotacion = cursor.getInt(cursor.getColumnIndex("idVotacion"));
 		SQLiteDatabase db = getReadableDatabase();
-		String[] columns = {"Voto"};
-		Cursor c = db.query("VotoLibre", columns, null, null, null, null, null);
+		Cursor c = db.query("Voto", null, "idVotacion = CAST(? as INTEGER)", new String[]{String.valueOf(idVotacion)}, null, null, null);
 		String rows[] = new String[c.getCount()];
 		int index = 0;
 		while(c.moveToNext())
-			rows[index++] = c.getString(c.getColumnIndex("Voto"));
+			rows[index++] = Hasher.bytesToString(c.getBlob(c.getColumnIndex("idVoto")))+"@Votacion: "+c.getInt(c.getColumnIndex("idVotacion"))
+                    +"@idPerfil: "+c.getInt(c.getColumnIndex("idPerfil"))+"@Voto: "+c.getString(c.getColumnIndex("Voto"))
+                    +"@idLoginAttempt: "+c.getInt(c.getColumnIndex("idLoginAttempt"))+"@idPregunta: "+c.getInt(c.getColumnIndex("idPregunta"));
 		db.close();
 		return rows;
 	}
