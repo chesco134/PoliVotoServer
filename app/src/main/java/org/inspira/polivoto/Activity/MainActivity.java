@@ -200,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         */
+		launchPreferenceActivity();
 		if(db.obtenerFechaInicioVotacionActual() == null)
 			launchPreferenceActivity();
 		else {

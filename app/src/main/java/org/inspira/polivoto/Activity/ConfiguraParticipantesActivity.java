@@ -31,6 +31,7 @@ public class ConfiguraParticipantesActivity extends PreferenceActivity implement
 
     public static final String USAR_MATRICULA_KEY = "usar_matricula_pref_key";
     public static final String NOMBRE_ARCHIVO_MATRICULA_KEY = "matricula_file_name_pref_key";
+    public static final String ENTER_SOMETHING_KEY = "another_server_url";
 
     private ListPreference votacionesDisponibles;
     private JSONArray jarr;
@@ -187,8 +188,8 @@ public class ConfiguraParticipantesActivity extends PreferenceActivity implement
                     JSONArray opciones = js.getJSONArray("opciones");
                     v.insertaPregunta(pregunta,title);
                     for(int j=0; j<opciones.length();j++){
-                        v.insertaOpcion(opciones.getString(i));
-                        v.insertaPreguntaOpcion(pregunta,opciones.getString(i));
+                        v.insertaOpcion(opciones.getString(j));
+                        v.insertaPreguntaOpcion(pregunta,opciones.getString(j));
                     }
                 }
                 json = new JSONObject();

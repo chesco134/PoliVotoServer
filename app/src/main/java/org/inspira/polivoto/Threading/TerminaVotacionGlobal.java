@@ -93,6 +93,7 @@ public class TerminaVotacionGlobal extends AsyncTask<CharSequence,String,String>
                         v.insertaVoto(new MD5Hash().makeHashForSomeBytes(tmp[0]),v.obtenerIdVotacionFromPregunta(pregunta),perfil,voto,v.grabAdminLoginAttempt(),idPregunta);
                     }
                     response = v.terminaUltimaVotacion() ? "Hecho" : ":/";
+                    v.terminarProceso();
                     Log.d("Finisher Task", "Votación terminada");
                 }catch(IOException ex){
                     response =  "Error al finalizar la votación:\n" + ex.toString();

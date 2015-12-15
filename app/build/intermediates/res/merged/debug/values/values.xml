@@ -326,6 +326,7 @@
     <string name="mensaje_cambio_perfiles">Aquí puede editar los perfiles existentes.</string>
     <string name="mensaje_seleccion_escuela">Nos gustaría saber el lugar en el cual usará PoliVoto (institución)</string>
     <string name="mensaje_seleccion_perfiles">Casi terminamos, por favor, especifique los grupos bajo los cuales serán registrados los participantes.</string>
+    <string name="merge_results">Merge results</string>
     <string name="next">SIGUIENTE</string>
     <string name="no_address_found">Lo sentimos, la dirección no existe, favor de verificarla x.X</string>
     <string name="no_geocoder_available">El dispositivo no tiene un codificador geográfico =)</string>

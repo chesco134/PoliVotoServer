@@ -1,9 +1,15 @@
 package org.inspira.polivoto.Activity;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
@@ -16,6 +22,9 @@ import org.inspira.polivoto.Threading.TerminaVotacionLocal;
 import org.inspira.polivotoserver.MiServicio;
 import org.inspira.polivoto.Adapter.MyFragmentStatePagerAdapter;
 import org.inspira.polivotoserver.R;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import DataBase.Votaciones;
 import Shared.Opcion;
@@ -24,6 +33,8 @@ import Shared.ResultadoVotacion;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
@@ -190,9 +201,28 @@ public class VotacionesConf extends AppCompatActivity implements
 		myService = new Intent(this, MiServicio.class);
         Votaciones v = new Votaciones(this);
         Log.d("Loquito", "PREGUNTAS");
-        if(v.obtenerTituloVotacionActual() != null)
-            for(String itr : v.consultaVotando(v.obtenerTituloVotacionActual()))
-                v.obtenerResultadosPorPregunta(itr,v.obtenerIdVotacionFromPregunta(itr));
+        if(v.obtenerTituloVotacionActual() != null) {
+            SQLiteDatabase db = v.getReadableDatabase();
+            Cursor c = db.rawQuery("select * from Pregunta",null);
+            while(c.moveToNext()){
+                Log.d("Piccolo",c.getInt(c.getColumnIndex("idVotacion")) + ", ->> " + c.getString(c.getColumnIndex("Pregunta")));
+            }
+            c.close();
+            c = db.rawQuery("select Pregunta,Reactivo from Opcion join (select * from Pregunta_Opcion join Pregunta using(idPregunta)) r using(idOpcion)",null);
+            while(c.moveToNext()){
+                Log.d("Piccolo",c.getString(c.getColumnIndex("Pregunta")) + " ->> " + c.getString(c.getColumnIndex("Reactivo")));
+            }
+            c.close();
+            c = db.rawQuery("select Reactivo from Opcion",null);
+            while(c.moveToNext()){
+                Log.d("Piccolo",c.getString(0));
+            }
+            c.close();
+            db.close();
+            for (String itr : v.consultaVotando(v.obtenerTituloVotacionActual())) {
+                Log.d("TEST", itr);
+            }//v.obtenerResultadosPorPregunta(itr,v.obtenerIdVotacionFromPregunta(itr));
+        }
 	}
 
 	@Override
@@ -365,9 +395,21 @@ public class VotacionesConf extends AppCompatActivity implements
             }
 		} else if (id == R.id.action_last_server) {
             if(v.obtenerFechaInicioVotacionActual() != null){
-                startService(myService); // Iniciar el servicio después de que la actividad haya terminado satisfactoriamente.
-                Toast.makeText(this,"Servicio Iniciado", Toast.LENGTH_SHORT)
-                    .show();
+                String str = v.obtenerFechaFinVotacionActual();
+                Date d = new Date();
+                try {
+                    Date fd = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").parse(str);
+                    if((fd.getTime() - d.getTime()) > 0){
+                        startService(myService); // Iniciar el servicio después de que la actividad haya terminado satisfactoriamente.
+                        Toast.makeText(this,"Servicio Iniciado", Toast.LENGTH_SHORT)
+                                .show();
+                    }else{
+                        Toast.makeText(this,"El tiempo para la votación ha concluido", Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                }catch(ParseException e){
+                    e.printStackTrace();
+                }
             }else
                 Toast.makeText(this,"No hay votaciones pendientes", Toast.LENGTH_SHORT)
                         .show();
@@ -449,7 +491,63 @@ public class VotacionesConf extends AppCompatActivity implements
             }
             else
                 Toast.makeText(this,"Ya registramos la votación como global",Toast.LENGTH_SHORT).show();
-		}
+		} else if (id == R.id.merge_results) {
+            new Thread(){
+                @Override
+                public void run(){
+                    Votaciones v = new Votaciones(VotacionesConf.this);
+                    JSONArray jarr;
+                    try {
+                        jarr = new JSONArray(v.grabVotosForVotacion(v.obtenerTituloVotacionActual()));
+                        JSONObject json = new JSONObject();
+                        json.put("action",1);
+                        json.put("content",jarr);
+                        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(VotacionesConf.this);
+                        String something = sharedPref.getString(ConfiguraParticipantesActivity.ENTER_SOMETHING_KEY, "");
+                        try {
+                            Socket socket = new Socket(something,23543);
+                            DataOutputStream sal = new DataOutputStream(socket.getOutputStream());
+                            sal.write((byte) 254);
+                            DataInputStream in = new DataInputStream(socket.getInputStream());
+                            Log.d("SANDER","We are about to send " + json.toString().getBytes().length + " bytes\n"+json
+                            .toString());
+                            byte[] chunk = json.toString().getBytes();
+                            for(int i = 0; i < (chunk.length/64); i++){
+                                sal.write(64);
+                                sal.write(chunk,i*64,64);
+                                in.read();
+                            }
+                            int blocks = (int)(chunk.length/64);
+                            int remaining = chunk.length - 64*blocks;
+                            if(remaining > 0) {
+                                sal.write(remaining);
+                                sal.write(chunk, blocks*64, remaining);
+                                in.read();
+                            }
+                            sal.write(0);
+                            sal.flush();
+                            in.read();
+                            jarr = new JSONArray(v.grabParticipantes());
+                            json.put("action", 2);
+                            json.put("content", jarr);
+                            socket = new Socket(something,23543);
+                            sal = new DataOutputStream(socket.getOutputStream());
+                            sal.write((byte)254);
+                            sal.write(json.toString().getBytes().length);
+                            sal.write(json.toString().getBytes());
+                            sal.flush();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch(IllegalArgumentException e){
+                        //Toast.makeText(VotacionesConf.this,"No hay resultados qué migrar",Toast.LENGTH_SHORT).show();
+                        // Debería simplemente aparecer habilitada o deshabilitada.
+                    }
+                }
+            }.start();
+        }
 		
 		//else if(id == R.id.codigo_legalidad){
 			//new Savior(this, myService).rescueRemoteServer();

@@ -21,5 +21,8 @@
         android:summary="@string/votaciones_abiertas_sum"
         android:key="@string/servidor_global"
         android:dependency="participar_en_votacion_global"/>
+    <EditTextPreference
+        android:key="another_server_url"
+        android:title="Enter something"/>
 
 </PreferenceScreen>

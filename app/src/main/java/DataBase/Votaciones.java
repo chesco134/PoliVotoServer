@@ -16,6 +16,8 @@ import org.inspira.polivoto.Activity.ConfiguraParticipantesActivity;
 import org.inspira.polivoto.Security.Hasher;
 import org.inspira.polivoto.Security.MD5Hash;
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import Shared.Pregunta;
 import android.content.ContentValues;
@@ -58,27 +60,27 @@ public class Votaciones extends SQLiteOpenHelper{
 	@Override
 	public void onCreate(SQLiteDatabase dataBase) {
         dataBase.execSQL("create table Perfil(idPerfil INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, perfil text not null)");
-        dataBase.execSQL("create table SubPerfil(idSubPerfil INTEGER NOT NULL, idPerfil INTEGER NOT NULL, SubPerfil text not null, primary key(idSubPerfil), foreign key(idPerfil) references Perfil(idPerfil))");
+        dataBase.execSQL("create table SubPerfil(idSubPerfil INTEGER NOT NULL, idPerfil INTEGER NOT NULL, SubPerfil text not null, primary key(idSubPerfil), foreign key(idPerfil) references Perfil(idPerfil) ON DELETE CASCADE ON UPDATE CASCADE)");
 		dataBase.execSQL("create table Escuela(idEscuela INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Nombre text not null, latitud real, longitud real)");
-		dataBase.execSQL("create table Participante(Boleta TEXT, idPerfil INTEGER NOT NULL, idEscuela INTEGER NOT NULL, Fecha_Registro TEXT, BoletaHash BLOB not null, PRIMARY KEY(Boleta), foreign key(idPerfil) references Perfil(idPerfil), foreign key(idEscuela) references Escuela(idEscuela));");
-        dataBase.execSQL("create table NombreParticipante(Boleta TEXT NOT NULL, Nombre TEXT NOT NULL, ApPaterno TEXT NOT NULL, ApMaterno TEXT NOT NULL, primary key(Boleta), foreign key(Boleta) references Participante(Boleta))");
+		dataBase.execSQL("create table Participante(Boleta TEXT, idPerfil INTEGER NOT NULL, idEscuela INTEGER NOT NULL, Fecha_Registro TEXT, BoletaHash BLOB not null, PRIMARY KEY(Boleta), foreign key(idPerfil) references Perfil(idPerfil) ON DELETE CASCADE ON UPDATE CASCADE, foreign key(idEscuela) references Escuela(idEscuela) ON DELETE CASCADE ON UPDATE CASCADE);");
+        dataBase.execSQL("create table NombreParticipante(Boleta TEXT NOT NULL, Nombre TEXT NOT NULL, ApPaterno TEXT NOT NULL, ApMaterno TEXT NOT NULL, primary key(Boleta), foreign key(Boleta) references Participante(Boleta) ON DELETE CASCADE ON UPDATE CASCADE)");
 
         dataBase.execSQL("create table Votacion(idVotacion INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Titulo text not null, Fecha_Inicio DATE NOT NULL, Fecha_Fin DATE, isGlobal INTEGER DEFAULT 0)");
-        dataBase.execSQL("create table VotacionFechaFin(idVotacion INTEGER NOT NULL PRIMARY KEY, Fecha_Fin DATE not null, foreign key(idVotacion) references Votacion(idVotacion));");
+        dataBase.execSQL("create table VotacionFechaFin(idVotacion INTEGER NOT NULL PRIMARY KEY, Fecha_Fin DATE not null, foreign key(idVotacion) references Votacion(idVotacion) ON DELETE CASCADE ON UPDATE CASCADE)");
 		// Debo preguntar acerca de tener un idPregunta como entero. ¿Podría sólo dejar como pk a Pregunta y hacer que idVotacion forme parte de la pk? (Relación identificadora)
-        dataBase.execSQL("create table Pregunta(idPregunta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Pregunta TEXT not null, idVotacion INTEGER NOT NULL, FOREIGN KEY(idVotacion) REFERENCES Votacion(idVotacion));");
-		dataBase.execSQL("create table Opcion(idOpcion INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Reactivo TEXT not null);");
-		dataBase.execSQL("create table Pregunta_Opcion(idPregunta INTEGER NOT NULL, idOpcion INTEGER NOT NULL, PRIMARY KEY(idPregunta,idOpcion), FOREIGN KEY(idPregunta) REFERENCES Pregunta(idPregunta), FOREIGN KEY(idOpcion) REFERENCES Opcion(idOpcion));");
+        dataBase.execSQL("create table Pregunta(idPregunta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Pregunta TEXT not null, idVotacion INTEGER NOT NULL, FOREIGN KEY(idVotacion) REFERENCES Votacion(idVotacion))");
+		dataBase.execSQL("create table Opcion(idOpcion INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Reactivo TEXT not null)");
+		dataBase.execSQL("create table Pregunta_Opcion(idPregunta INTEGER NOT NULL, idOpcion INTEGER NOT NULL, PRIMARY KEY(idPregunta,idOpcion), FOREIGN KEY(idPregunta) REFERENCES Pregunta(idPregunta) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY(idOpcion) REFERENCES Opcion(idOpcion) ON DELETE CASCADE ON UPDATE CASCADE)");
 
 		dataBase.execSQL("create table Usuario(idUsuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Name text not null, Psswd blob not null)");
 		dataBase.execSQL("create table LoginAttempt(idLoginAttempt INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER NOT NULL, Attempt_Timestamp text not null, Host text not null, foreign key(idUsuario) references Usuario(idUsuario))");
-		dataBase.execSQL("create table AttemptSucceded(idLoginAttempt not null, secretKey BLOB not null, primary key(idLoginAttempt), foreign key(idLoginAttempt) references LoginAttempt(idLoginAttempt))");
-		dataBase.execSQL("create table UserAction(idUserAction INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, idLoginAttempt INTEGER NOT NULL, Action text not null, Action_Timestamp text not null, foreign key(idLoginAttempt) references AttemptSucceded(idLoginAttempt))");
-        dataBase.execSQL("create table ActiveUsers(idLoginAttempt INTEGER NOT NULL,  text not null, Action_Timestamp text not null, foreign key(idLoginAttempt) references AttemptSucceded(idLoginAttempt))");
+		dataBase.execSQL("create table AttemptSucceded(idLoginAttempt not null, secretKey BLOB not null, primary key(idLoginAttempt), foreign key(idLoginAttempt) references LoginAttempt(idLoginAttempt) ON DELETE CASCADE ON UPDATE CASCADE)");
+		dataBase.execSQL("create table UserAction(idUserAction INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, idLoginAttempt INTEGER NOT NULL, Action text not null, Action_Timestamp text not null, foreign key(idLoginAttempt) references AttemptSucceded(idLoginAttempt) ON DELETE CASCADE ON UPDATE CASCADE)");
+        dataBase.execSQL("create table ActiveUsers(idLoginAttempt INTEGER NOT NULL,  text not null, Action_Timestamp text not null, foreign key(idLoginAttempt) references AttemptSucceded(idLoginAttempt) ON DELETE CASCADE ON UPDATE CASCADE)");
 
         // Recuerda que el "null hack" son tres guiones. Sólo insertas registros de quienes son capturados al momento de validación.
-		dataBase.execSQL("create table Participante_Pregunta(Boleta TEXT not null, idPregunta INTEGER NOT NULL, Hora_Registro text not null, Hora_Participacion text, PRIMARY KEY(Boleta,idPregunta), FOREIGN KEY(Boleta) REFERENCES Participante(Boleta), FOREIGN KEY(idPregunta) REFERENCES Pregunta(idPregunta));");
-		dataBase.execSQL("create table Voto(idVoto blob not null, idVotacion INTEGER NOT NULL, idPerfil INTEGER NOT NULL, Voto text not null, idLoginAttempt INTEGER NOT NULL, idPregunta INTEGER NOT NULL, primary key(idVoto), FOREIGN KEY(idVotacion) REFERENCES Votacion(idVotacion), foreign key(idPerfil) references Perfil(idPerfil), foreign key(idLoginAttempt) references AttemptSucceded(idLoginAttempt), foreign key(idPregunta) references Pregunta(idPregunta));");
+		dataBase.execSQL("create table Participante_Pregunta(Boleta TEXT not null, idPregunta INTEGER NOT NULL, Hora_Registro text not null, Hora_Participacion text, PRIMARY KEY(Boleta,idPregunta), FOREIGN KEY(Boleta) REFERENCES Participante(Boleta) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY(idPregunta) REFERENCES Pregunta(idPregunta) ON DELETE CASCADE ON UPDATE CASCADE)");
+		dataBase.execSQL("create table Voto(idVoto blob not null, idVotacion INTEGER NOT NULL, idPerfil INTEGER NOT NULL, Voto text not null, idLoginAttempt INTEGER NOT NULL, idPregunta INTEGER NOT NULL, primary key(idVoto), FOREIGN KEY(idVotacion) REFERENCES Votacion(idVotacion) ON DELETE CASCADE ON UPDATE CASCADE, foreign key(idPerfil) references Perfil(idPerfil) ON DELETE CASCADE ON UPDATE CASCADE, foreign key(idLoginAttempt) references AttemptSucceded(idLoginAttempt) ON DELETE CASCADE ON UPDATE CASCADE, foreign key(idPregunta) references Pregunta(idPregunta) ON DELETE CASCADE ON UPDATE CASCADE)");
 
         // Vista que sirve para tener a la mano las preguntas totales de cada votación.
         dataBase.execSQL("create view if not exists Preguntas_Votacion as select idVotacion,count(*) as Preguntas from Pregunta group by idVotacion");
@@ -309,6 +311,15 @@ public class Votaciones extends SQLiteOpenHelper{
         c.close();
         close();
         return fechaInicio;
+    }
+
+    public int cantidadUsuariosRegistradosVotacionActual(){
+        Cursor c = getReadableDatabase().rawQuery("select count(*) from (select Boleta from (select Boleta,idPregunta from Participante_Pregunta join Pregunta using(idPregunta)) r join Votacion using(idVotacion) where Fecha_Fin is null or Fecha_Fin = '---') s group by Boleta",null);
+        c.moveToFirst();
+        int cantidad = c.getInt(0);
+        c.close();
+        close();
+        return cantidad;
     }
 
     public String obtenerTituloVotacionActual(){
@@ -562,6 +573,31 @@ public class Votaciones extends SQLiteOpenHelper{
         return id;
     }
 
+    public long insertaVoto2(byte[] idVoto, int idPerfil, String voto, String pregunta){
+        long id = -1;
+        ContentValues va = new ContentValues();
+        va.put("Pregunta","Con relación al servicio de la cafetería de la UPIITA:");
+        getWritableDatabase().update("Pregunta",va,"Pregunta = ?",new String[]{"Con relación al servicio de la cafetería de la upiita:"});
+        Cursor c = getReadableDatabase().rawQuery("select idVotacion,idPregunta from Pregunta " +
+                "where Pregunta = ?", new String[]{pregunta.trim()});
+        Cursor c2 = getReadableDatabase().rawQuery("select idLoginAttempt from " +
+                "AttemptSucceded",null);
+        c2.moveToLast();
+        c.moveToFirst();
+        ContentValues values = new ContentValues();
+        values.put("idVoto",idVoto);
+        values.put("idVotacion",c.getInt(c.getColumnIndex("idVotacion")));
+        values.put("idPerfil",idPerfil);
+        values.put("Voto",voto);
+        values.put("idLoginAttempt",c2.getInt(0));
+        values.put("idPregunta", c.getInt(c.getColumnIndex("idPregunta")));
+        id = getWritableDatabase().insert("Voto", "---", values);
+        c.close();
+        c2.close();
+        close();
+        return id;
+    }
+
 	public boolean consultaUsuario(String usrName, byte[] psswd){
 		boolean result = false;
 		String[] args = {usrName};
@@ -604,6 +640,22 @@ public class Votaciones extends SQLiteOpenHelper{
         c.close();
         close();
         return result;
+    }
+
+    public int obtenerCantidadParticipantes(String titulo){
+        int cant = 0;
+        Cursor c0 = getReadableDatabase().rawQuery("select idVotacion from Votacion where Titulo = ?",new String[]{titulo});
+        if( c0.moveToFirst()) {
+            int idVotacion = c0.getInt(c0.getColumnIndex("idVotacion"));
+            Cursor c = getReadableDatabase().rawQuery("select count(*) from (select * from Preguntas_Votacion where idVotacion = CAST(? as INTEGER)) a join (select Boleta,Hora_Registro,Hora_Participacion,count(*) cuenta from Participante_Pregunta join (select idPregunta from Pregunta where idVotacion = CAST(? as INTEGER)) r on Participante_Pregunta.idPregunta = r.idPregunta where Hora_Participacion is not null or Hora_Participacion != '---' group by Boleta) s on a.Preguntas = s.cuenta", new String[]{String.valueOf(idVotacion),String.valueOf(idVotacion)});
+            if (c.moveToNext()) {
+                cant = c.getInt(0);
+            }
+            c.close();
+        }
+        c0.close();
+        close();
+        return cant;
     }
 
     public void borraPerfil(String perfil){
@@ -663,7 +715,7 @@ public class Votaciones extends SQLiteOpenHelper{
         if(c.getCount() > 0){
             Cursor c2 = getReadableDatabase().rawQuery("select idVotacion from Votacion where Titulo = ?",new String[]{votacion});
             if(c2.moveToFirst()){
-                Cursor c3 = getReadableDatabase().rawQuery("select * from Participante_Pregunta join (select * from Pregunta where Pregunta.idVotacion = CAST(? as INTEGER)) r on r.idPregunta = Participante_Pregunta.idPregunta where Boleta = ?", new String[]{String.valueOf(c2.getInt(c2.getColumnIndex("idVotacion"))),boleta});
+                Cursor c3 = getReadableDatabase().rawQuery("select * from Participante_Pregunta join (select * from Pregunta where Pregunta.idVotacion = CAST(? as INTEGER)) r using(idPregunta) where Boleta = ?", new String[]{String.valueOf(c2.getInt(c2.getColumnIndex("idVotacion"))),boleta});
                 existe = c3.getCount() > 0;
                 c3.close();
             }
@@ -764,7 +816,7 @@ public class Votaciones extends SQLiteOpenHelper{
     }
 
     public boolean isCurrentVotingProcessGlobal(){
-        Cursor c = getReadableDatabase().rawQuery("select isGlobal from Votacion where Fecha_Fin is null or Fecha_Fin = '---'",null);
+        Cursor c = getReadableDatabase().rawQuery("select isGlobal from Votacion where Fecha_Fin is null or Fecha_Fin = '---'", null);
         boolean result = false;
         if(c.moveToFirst()) {
             result = c.getInt(c.getColumnIndex("isGlobal")) == 1;
@@ -1146,7 +1198,7 @@ public class Votaciones extends SQLiteOpenHelper{
         String sql = "Select voto, count(*) as votox from (Voto join (select Reactivo from ( Opcion join (select idOpcion from (Pregunta_Opcion join (select idPregunta from (Pregunta join (select idVotacion " +
                 "from Votacion where Titulo = ?) t on Pregunta.idVotacion = t.idVotacion)) r on " +
                 "Pregunta_Opcion.idPregunta = r.idPregunta)) z on Opcion.idOpcion = z.idOpcion group by Reactivo)) w on Voto.voto = w.Reactivo group by voto";
-        Cursor c = getReadableDatabase().rawQuery(sql,args);
+        Cursor c = getReadableDatabase().rawQuery(sql, args);
         String[] votos = new String[c.getCount()];
         int i = 0;
         while(c.moveToNext()){
@@ -1240,8 +1292,39 @@ public class Votaciones extends SQLiteOpenHelper{
 		db.close();
 		return rows;
 	}
+
+    public String grabParticipantes(){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery(
+                "select n.Boleta bol,idEscuela,idPerfil from Participante join (select Boleta from Participante_Pregunta join (select idPregunta from Pregunta_Opcion join (select idPregunta from Pregunta join (select idVotacion from Votacion where Fecha_Fin is null or Fecha_Fin = '---') r using(idVotacion)) g using(idPregunta)) m  using(idPregunta)) n using(Boleta)"
+                , null);
+        JSONArray jarr = new JSONArray();
+        JSONObject row;
+        while(c.moveToNext()){
+            row = new JSONObject();
+            Cursor x = getReadableDatabase().rawQuery("select Nombre from Escuela where idEscuela = CAST(? as INTEGER)",
+                    new String[]{String.valueOf(c.getInt(c.getColumnIndex("idEscuela")))});
+            try {
+                x.moveToNext();
+                row.put("escuela", x.getString(0));
+                x.close();
+                x = getReadableDatabase().rawQuery("select perfil from Perfil where idPerfil = CAST(? as INTEGER)",
+                        new String[]{String.valueOf(c.getInt(c.getColumnIndex("idPerfil")))});
+                x.moveToNext();
+                row.put("perfil", x.getString(0));
+                x.close();
+                row.put("boleta",c.getString(c.getColumnIndex("bol")));
+                jarr.put(row);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        c.close();
+        db.close();
+        return jarr.toString();
+    }
 	
-	public String[] consultaVotando(String titulo){
+	public String[] consultaVotando(String titulo) {
         Cursor c0 = getReadableDatabase().rawQuery("select idVotacion from Votacion where Titulo = ?", new String[]{titulo});
         String[] participantes = null;
         if( c0.moveToFirst()) {
@@ -1260,8 +1343,8 @@ public class Votaciones extends SQLiteOpenHelper{
         return participantes;
 	}
 	
-	public String[] consultaVoto(String votacion){
-        Cursor cursor = getReadableDatabase().rawQuery("select idVotacion from Votacion where Titulo = ?",new String[]{votacion});
+	public String[] consultaVoto(String votacion) {
+        Cursor cursor = getReadableDatabase().rawQuery("select idVotacion from Votacion where Titulo = ?", new String[]{votacion});
         cursor.moveToFirst();
         int idVotacion = cursor.getInt(cursor.getColumnIndex("idVotacion"));
 		SQLiteDatabase db = getReadableDatabase();
@@ -1275,6 +1358,36 @@ public class Votaciones extends SQLiteOpenHelper{
 		db.close();
 		return rows;
 	}
+
+    public String grabVotosForVotacion(String votacion) throws IllegalArgumentException{
+        Cursor cursor = getReadableDatabase().rawQuery("select idVotacion from Votacion where Titulo = ?", new String[]{votacion});
+        cursor.moveToFirst();
+        int idVotacion = cursor.getInt(cursor.getColumnIndex("idVotacion"));
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.query("Voto", null, "idVotacion = CAST(? as INTEGER)", new String[]{String.valueOf(idVotacion)}, null, null, null);
+        JSONArray jarr = new JSONArray();
+        JSONObject row;
+        int counter = 0;
+        while(c.moveToNext()){
+            row = new JSONObject();
+            try {
+                row.put("idVoto", Hasher.bytesToString(c.getBlob(c.getColumnIndex("idVoto"))));
+                row.put("idPerfil", c.getInt(c.getColumnIndex("idPerfil")));
+                row.put("voto", c.getString(c.getColumnIndex("Voto")));
+                Cursor x = getReadableDatabase().rawQuery("select Pregunta from Pregunta where idPregunta = CAST(? as INTEGER)",new String[]{String.valueOf(c.getInt(c.getColumnIndex("idPregunta")))});
+                x.moveToFirst();
+                row.put("pregunta",x.getString(0));
+                x.close();
+                jarr.put(row);
+                Log.d("Mayunia","#" + counter++ + " " + row.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        c.close();
+        db.close();
+        return jarr.toString();
+    }
 	
 	public void registraVotacion(byte[] TEXT, String nombre, String fechaIni, String fechaFin){
 		SQLiteDatabase db = getWritableDatabase();
@@ -1287,15 +1400,54 @@ public class Votaciones extends SQLiteOpenHelper{
 		db.close();
 	}
 	
-	public int[] terminarVotaciones(){
+	public void terminarProceso(){
 		SQLiteDatabase db = getWritableDatabase();
-		int votosCount = db.delete("VotoLibre", "1", null);
-		int limboCount = db.delete("VotandoLibre", "1", null);
-		int participantesCount = db.delete("Participantin", "1", null);
-		int results[] = {votosCount, participantesCount, limboCount};
+		db.delete("Voto", "1", null);
+		db.delete("Participante", "1", null);
+        db.delete("LoginAttempt", "1", null);
 		db.close();
-		return results;
 	}
+
+    public JSONArray mergeResults(String titulo){
+        Cursor c = getReadableDatabase().rawQuery("select idVotacion from Votacion where Titulo = ?", new String[]{titulo});
+        c.moveToNext();
+        int idVotacion = c.getInt(c.getColumnIndex("idVotacion"));
+        c.close();
+        c = getReadableDatabase().rawQuery("select * from Voto where idVotacion = CAST(? as INTEGER)",new String[]{String.valueOf(idVotacion)});
+        JSONArray jarr = new JSONArray();
+        JSONObject json;
+        while(c.moveToNext()){
+            json = new JSONObject();
+            for(int i=0; i < c.getColumnCount(); i++)
+                switch(c.getType(i)) {
+                    case Cursor.FIELD_TYPE_BLOB:
+                        try {
+                            json.put(c.getColumnName(i), Hasher.bytesToString(c.getBlob(i)));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    case Cursor.FIELD_TYPE_INTEGER:
+                        try{
+                            json.put(c.getColumnName(i),c.getInt(i));
+                        }catch(JSONException e){
+                            e.printStackTrace();
+                        }
+                        break;
+                    case Cursor.FIELD_TYPE_STRING:
+                        try{
+                            json.put(c.getColumnName(i),c.getString(i));
+                        }catch(JSONException e){
+                            e.printStackTrace();
+                        }
+                        break;
+                }
+            jarr.put(json);
+        }
+        c.close();
+        close();
+        return jarr;
+    }
 	
 	/*********
 	 * 

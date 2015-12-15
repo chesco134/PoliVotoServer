@@ -111,5 +111,6 @@
     <string name="votaciones_abiertas_sum">Muestra votaciones globales disponibles</string>
     <string name="servidor_global">Servidor Global</string>
     <string name="volver_global">Volver global</string>
+    <string name="merge_results">Merge results</string>
 
 </resources>

@@ -80,6 +80,7 @@ public class TerminaVotacionLocal extends AsyncTask<String,String,String> {
                 v.insertaVoto(new MD5Hash().makeHashForSomeBytes(tmp[0]),v.obtenerIdVotacionFromPregunta(pregunta),perfil,voto,v.grabAdminLoginAttempt(),idPregunta);
             }
             v.terminaUltimaVotacion();
+            v.terminarProceso();
             result = "Éxito al finalizar la votación!";
         }catch(IOException ex){
             result = "Error al finalizar la votación:\n" + ex.toString();
