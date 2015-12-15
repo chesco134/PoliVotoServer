@@ -117,17 +117,18 @@ public class SocketInputHandler extends Thread {
                     e.printStackTrace();
                 }
             }
-            if( cByte == Byte.parseByte(String.valueOf((byte) (-1 & 0xFF))) ) {
+            if( cByte == -1 ) {
                 try {
                     KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
                     kpg.initialize(1024);
                     KeyPair kp = kpg.genKeyPair();
                     Key publicKey = kp.getPublic();
                     Key privateKey = kp.getPrivate();
+                    // Sending the public key
                     ioHandler.sendMessage(publicKey.getEncoded()); //** Successfuly sent public key **//
-                    byte[] cipheredAESKey; // = new byte[128];
-                    cipheredAESKey = ioHandler.handleIncommingMessage();
-                    System.out.println("**********************************" + cipheredAESKey.length);
+                    Log.d("Toröl","Public key sent (" + publicKey.getEncoded().length + ")");
+                    byte[] cipheredAESKey = ioHandler.handleIncommingMessage();
+                    System.out.println("********************************** " + cipheredAESKey.length);
                     cip = Cipher.getInstance("RSA/ECB/PKCS1Padding"); // That String is needed in ANDROID
                     cip.init(Cipher.DECRYPT_MODE, privateKey);
                     byte[] encodedAESKey = cip.doFinal(cipheredAESKey);

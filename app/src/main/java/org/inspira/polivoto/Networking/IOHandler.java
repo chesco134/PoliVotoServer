@@ -30,25 +30,24 @@ public class IOHandler {
         ByteArrayOutputStream temp;
         // Anticipa cuantos bytes mandará el emisor, para luego leer por bloques antes de
         // esperar a que la nueva trama llegue.
-        while ((toRead = entrada.read()) != 0) {
+        while ((toRead = readInt()) > 0) {
             temp = new ByteArrayOutputStream();
             Log.d("Stranger", "Laugh " + toRead);
             int times = toRead/block.length;
-            Log.d("This is stpd", "---> " + times);
             for ( int i=0; i<times; i++ ) {
                 entrada.read(block);
                 temp.write(block,0,block.length);
             }
-            int remaining = times*block.length - toRead;
+            int remaining = toRead - times*block.length;
             if( remaining > 0 ){
-                entrada.read(chunk);
-                temp.write(chunk, 0, remaining);
+                entrada.read(block);
+                temp.write(block, 0, remaining);
             }
             baos.write(temp.toByteArray(), 0, temp.size());
-            salida.write(1);
+            Log.d("Aaahaha", "Llevamos: " + baos.size() + " bytes.");
+            writeInt(1);
         }
-        salida.write(0);
-        salida.flush();
+        Log.d("Greeza","Done reading " + baos.size() + " bytes");
         chunk = baos.toByteArray();
         baos.close();
         return chunk;
@@ -56,14 +55,23 @@ public class IOHandler {
 
     public void sendMessage(byte[] message) throws IOException {
         int times = message.length/rate;
+        Log.d("Cyndy","Writing " + times + " blocks from " + message.length + " bytes.");
         for( int i=0; i<times; i++ ){
-            salida.write(message,i*rate,rate);
+            writeInt(rate);
+            salida.write(message, i * rate, rate);
+            Log.d("Cyndi", "Sent something");
+            readInt();
+            Log.d("Cyndi","Confirmed");
         }
         int remaining = message.length - times*rate;
         if(remaining > 0){
-            salida.writeInt(remaining);
+            writeInt(remaining);
             salida.write(message,times*rate,remaining);
+            Log.d("Cyndia", "Sent " + remaining + " bytes");
+            readInt();
+            Log.d("Cyndia", "Confirmed");
         }
+        writeInt(0);
     }
 
     public int readInt() throws IOException{
