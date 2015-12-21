@@ -471,7 +471,7 @@ public class VotacionesConf extends AppCompatActivity implements
                 try{
                     FileInputStream fis = new FileInputStream(RESULTS_FILE);
                     fis.close();
-                    Toast.makeText(this, "Ya hemos finalizado n.n", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Ya hemos finalizado, extraiga el archivo de resultados", Toast.LENGTH_LONG).show();
                 }catch(IOException e){
                     launchMensajeConfirmacion(getResources().getString(R.string.mensaje_alerta),true,FINISH_VOTING_PROCESS_REQUEST);
                 }

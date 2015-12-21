@@ -60,7 +60,7 @@ public class ServiceClient {
     }
 
     private final HttpTransportSE getHttpTransportSE() {
-        HttpTransportSE ht = new HttpTransportSE(MAIN_REQUEST_URL);//"http://"+grabServerURL()+":5001/PTServer/services/ServicioWeb.ServicioWebHttpSoap11Endpoint/");
+        HttpTransportSE ht = new HttpTransportSE("http://"+grabServerURL()+":5001/PTServer/services/ServicioWeb.ServicioWebHttpSoap11Endpoint/");
         ht.debug = true;
         ht.setXmlVersionTag("<!--?xml version=\"1.0\" encoding= \"UTF-8\" ?-->");
         return ht;
@@ -69,7 +69,7 @@ public class ServiceClient {
     private String grabServerURL(){
         String url = "189.232.88.212";
         try{
-            URL serverURL = new URL("http://votacionesipn.com/services/?tag=gimmeAddr");
+            URL serverURL = new URL("http://votacionesipn.com/services/?tag=rmtAddr");
             HttpURLConnection con = (HttpURLConnection)serverURL.openConnection();
             DataInputStream entrada = new DataInputStream(con.getInputStream());
             byte[] bytesChunk = new byte[512];
