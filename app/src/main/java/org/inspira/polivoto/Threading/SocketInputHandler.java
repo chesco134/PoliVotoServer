@@ -2,10 +2,14 @@ package org.inspira.polivoto.Threading;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
 import org.inspira.polivoto.Activity.ConfiguraParticipantesActivity;
+import org.inspira.polivoto.Activity.Lobby;
 import org.inspira.polivoto.Networking.IOHandler;
 import org.inspira.polivoto.Networking.soap.ServiceClient;
 import org.inspira.polivoto.Security.Hasher;
@@ -47,10 +51,6 @@ import DataBase.Votaciones;
 public class SocketInputHandler extends Thread {
 
     private IOHandler ioHandler;
-    private int cByte;
-    private byte b;
-    private List<Byte> bytes;
-    private List<String> messages;
     private Context context;
     private String rHost;
     private static volatile List<String> hostsPostulados;
@@ -63,8 +63,6 @@ public class SocketInputHandler extends Thread {
 
     public SocketInputHandler(InputStream entrada, OutputStream salida){
         ioHandler = new IOHandler(new DataInputStream(entrada), new DataOutputStream(salida));
-        bytes = new ArrayList<>();
-        messages = new ArrayList<>();
         if(hostsPostulados == null)
             hostsPostulados = new ArrayList<>();
     }
@@ -81,10 +79,10 @@ public class SocketInputHandler extends Thread {
     public void run(){
         try{
             // Wait for the first byte and analyse it.
-            cByte = ioHandler.readInt();
+            int cByte = ioHandler.readInt();
             Log.d("SocketHandler", "Guten tag2 " + rHost + "\t" + cByte);
             db = new Votaciones(context);
-            // Make key Exchange.
+            // Data collector.
             if(cByte == -2){
                 JSONObject json;
                 try {
@@ -334,9 +332,10 @@ public class SocketInputHandler extends Thread {
         int idVotacion = db.obtenerIdVotacionFromPregunta(pregunta);
         String perfil = json.getString("perfil");
         String voto = json.getString("voto");
-        if(db.insertaVoto(idVoto,idVotacion,perfil,voto,idAttempt,db.obtenerIdPregunta(pregunta))!=-1)
+        if (db.insertaVoto(idVoto, idVotacion, perfil, voto, idAttempt, db.obtenerIdPregunta(pregunta)) != -1){
+            ((Lobby)context).updateCount(db.obtenerCantidadParticipantes(db.obtenerTituloVotacionActual()));
             resp = 1;
-        else
+        }else
             resp = 0;
         chunk = cip.doFinal(String.valueOf(resp).getBytes());
         ioHandler.sendMessage(chunk);
@@ -478,7 +477,7 @@ public class SocketInputHandler extends Thread {
 
     public void action15() throws IOException, BadPaddingException, IllegalBlockSizeException {
         int cantidad = db.obtenerCantidadParticipantes(db.obtenerTituloVotacionActual());
-        // Actualmente el criterio para la decisión es que la hora actual sea distinta de la de fin.
+        // Actualmente el criterio para la decisión es que la hora actual sea menor a la de fin.
         String lugar = db.obtenerUltimaEscuela();
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         Boolean usarMatricula = sharedPref.getBoolean(ConfiguraParticipantesActivity.USAR_MATRICULA_KEY, false);
@@ -487,10 +486,10 @@ public class SocketInputHandler extends Thread {
         if(usarMatricula)
             poblacion = db.cantidadUsuariosRegistradosVotacionActual();
         else
-            poblacion = null;
+            poblacion = 0;
         JSONObject json = new JSONObject();
         try{
-            json.put("poblacion",poblacion);
+            json.put("poblacion",poblacion.intValue());
             json.put("votos",cantidad);
             json.put("lugar",lugar);
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
@@ -498,9 +497,9 @@ public class SocketInputHandler extends Thread {
             Date fFin = sdf.parse(fechaFin);
             Calendar cF = Calendar.getInstance();
             long tul = (fFin.getTime()-new Date().getTime());
-            Log.d("48435468432468", "" + tul);
+            Log.d("chuchín", "" + tul);
             if( tul > 0) {
-                cF.setTime(new Date(fFin.getTime() - new Date().getTime()));
+                cF.setTimeInMillis(tul);
                 int horas = cF.get(Calendar.HOUR);
                 int minutos = cF.get(Calendar.MINUTE);
                 int segundos = cF.get(Calendar.SECOND);

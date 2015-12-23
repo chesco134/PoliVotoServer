@@ -112,5 +112,9 @@
     <string name="servidor_global">Servidor Global</string>
     <string name="volver_global">Volver global</string>
     <string name="merge_results">Merge results</string>
+    <string name="votaciones_en_progreso">Tiempo restante: </string>
+    <string name="lobby_second_header">Fecha fin</string>
+    <string name="lobby_counter_label">Participantes</string>
+    <string name="lobby_upper_right_label">Fin:</string>
 
 </resources>

@@ -199,30 +199,6 @@ public class VotacionesConf extends AppCompatActivity implements
 		} 
 		//new Votaciones(this).selectPendingVotes();
 		myService = new Intent(this, MiServicio.class);
-        Votaciones v = new Votaciones(this);
-        Log.d("Loquito", "PREGUNTAS");
-        if(v.obtenerTituloVotacionActual() != null) {
-            SQLiteDatabase db = v.getReadableDatabase();
-            Cursor c = db.rawQuery("select * from Pregunta",null);
-            while(c.moveToNext()){
-                Log.d("Piccolo",c.getInt(c.getColumnIndex("idVotacion")) + ", ->> " + c.getString(c.getColumnIndex("Pregunta")));
-            }
-            c.close();
-            c = db.rawQuery("select Pregunta,Reactivo from Opcion join (select * from Pregunta_Opcion join Pregunta using(idPregunta)) r using(idOpcion)",null);
-            while(c.moveToNext()){
-                Log.d("Piccolo",c.getString(c.getColumnIndex("Pregunta")) + " ->> " + c.getString(c.getColumnIndex("Reactivo")));
-            }
-            c.close();
-            c = db.rawQuery("select Reactivo from Opcion",null);
-            while(c.moveToNext()){
-                Log.d("Piccolo",c.getString(0));
-            }
-            c.close();
-            db.close();
-            for (String itr : v.consultaVotando(v.obtenerTituloVotacionActual())) {
-                Log.d("TEST", itr);
-            }//v.obtenerResultadosPorPregunta(itr,v.obtenerIdVotacionFromPregunta(itr));
-        }
 	}
 
 	@Override
@@ -279,9 +255,10 @@ public class VotacionesConf extends AppCompatActivity implements
                 }
                 SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
                 Boolean usarMatricula = sharedPref.getBoolean(ConfiguraParticipantesActivity.USAR_MATRICULA_KEY, false);
-                if(!usarMatricula)
+                if(!usarMatricula) {
                     startService(myService); // Debes iniciar el servicio cuando la aplicación haya devuelto adecuadamente.
-                else
+                    Toast.makeText(this, "Servicio iniciado correctamente", Toast.LENGTH_LONG).show();
+                }else
                     launchDataLoader("Cargando matrícula");
                 break;
 			}
@@ -384,7 +361,6 @@ public class VotacionesConf extends AppCompatActivity implements
                         ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(FILE_NAME));
                         salida.writeObject(superChunk);
                         salida.close();
-                        Toast.makeText(this, "Servicio iniciado correctamente", Toast.LENGTH_LONG).show();
                     }catch(IOException e){
                         Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
                     }

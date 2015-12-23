@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/lobby_upper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20sp"
+        android:text="@string/votaciones_en_progreso"
+        android:textSize="22sp"/>
+
+    <TextView
+        android:id="@+id/lobby_fecha_inicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_below="@+id/lobby_upper"
+        android:layout_marginStart="20sp"
+        android:layout_marginLeft="20sp"
+        android:layout_marginTop="20sp"
+        android:textStyle="bold"
+        android:textSize="23sp"/>
+    <TextView
+        android:id="@+id/counter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textStyle="bold"
+        android:textSize="58sp"/>
+
+    <TextView
+        android:id="@+id/lobby_center_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/counter"
+        android:layout_centerHorizontal="true"
+        android:textSize="42sp"
+        android:text="@string/lobby_counter_label"/>
+
+</RelativeLayout>

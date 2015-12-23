@@ -315,6 +315,9 @@
     <string name="keys_insert_error">Error al actualizar credenciales.</string>
     <string name="keys_insert_success">Credenciales actualizadas con éxito.</string>
     <string name="load_password">Cargar Contraseñas</string>
+    <string name="lobby_counter_label">Participantes</string>
+    <string name="lobby_second_header">Fecha fin</string>
+    <string name="lobby_upper_right_label">Fin:</string>
     <string name="login">Ingresar</string>
     <string name="logo_splash_description">PoliVoto es una marca registrada.</string>
     <string name="mas_info">Más Info</string>
@@ -371,6 +374,7 @@
     <string name="volver_global">Volver global</string>
     <string name="votaciones_abiertas">Votaciones Abiertas</string>
     <string name="votaciones_abiertas_sum">Muestra votaciones globales disponibles</string>
+    <string name="votaciones_en_progreso">Tiempo restante: </string>
     <!-- From: file:/home/jcapiz/AndroidStudioProjects/PoliVotoServer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
     <eat-comment/>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
